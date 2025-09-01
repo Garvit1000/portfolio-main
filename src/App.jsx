@@ -12,9 +12,9 @@ import Footer from "./components/Footer";
 
 const Portfolio = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground gpu-accelerated smooth-scroll ultra-wide">
       <Header />
-      <main>
+      <main className="section-spacing">
         <Hero />
         <Projects />
         <About />

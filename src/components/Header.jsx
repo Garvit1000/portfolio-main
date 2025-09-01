@@ -17,8 +17,8 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 gpu-accelerated">
+      <div className="container-xl">
         <div className="flex items-center justify-between h-16">
           {/* Logo with tech styling */}
           <div className="flex-shrink-0">
@@ -32,7 +32,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation with tech styling */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8 lg:space-x-12 xl:space-x-16">
             <button 
               onClick={() => scrollToSection('projects')}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
@@ -57,17 +57,18 @@ const Header = () => {
           </nav>
 
           {/* Theme Toggle & Mobile Menu with sharp edges */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 lg:space-x-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="w-9 h-9 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10"
+              className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
-                <Moon className="h-4 w-4" />
+                <Moon className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
               ) : (
-                <Sun className="h-4 w-4" />
+                <Sun className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
               )}
             </Button>
 
@@ -75,8 +76,9 @@ const Header = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden w-9 h-9 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10"
+              className="md:hidden w-9 h-9 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? (
                 <X className="h-4 w-4" />
@@ -89,7 +91,7 @@ const Header = () => {
 
         {/* Mobile Navigation with tech styling */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-primary/20 bg-background/95 backdrop-blur">
+          <div className="md:hidden border-t border-primary/20 bg-background/95 backdrop-blur gpu-accelerated">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <button
                 onClick={() => scrollToSection('projects')}

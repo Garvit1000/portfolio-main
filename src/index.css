@@ -5,15 +5,32 @@
 /* Import Google Fonts - Robotic/Tech fonts */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
+/* Fast theme switching with hardware acceleration */
+:root {
+  --theme-transition: all 0.15s ease-in-out;
+}
+
+* {
+  transition: var(--theme-transition);
+  transform: translateZ(0); /* Enable hardware acceleration */
+  backface-visibility: hidden;
+}
+
 body {
     margin: 0;
     font-family: 'JetBrains Mono', 'Space Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    will-change: background-color, color;
 }
 
 code {
     font-family: 'JetBrains Mono', 'Space Mono', monospace;
+}
+
+/* Prevent flash of unstyled content */
+html {
+  color-scheme: light dark;
 }
 
 @layer base {
@@ -75,8 +92,151 @@ code {
 @layer base {
   * {
     @apply border-border;
-    }
+  }
+  
   body {
     @apply bg-background text-foreground;
-    }
+  }
+}
+
+/* Large screen optimizations */
+@layer utilities {
+  /* Container improvements for large screens */
+  .container-xl {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
+  }
+  
+  /* Ultra-wide screen support */
+  .ultra-wide {
+    @apply max-w-[1920px] mx-auto;
+  }
+  
+  /* Better spacing for large screens */
+  .section-spacing {
+    @apply py-16 sm:py-20 lg:py-24 xl:py-32;
+  }
+  
+  /* Grid improvements for large screens */
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5;
+  }
+  
+  /* Typography scaling for large screens */
+  .text-hero {
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl;
+  }
+  
+  .text-section {
+    @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl;
+  }
+  
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Smooth scrolling performance */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Better button scaling */
+  .btn-responsive {
+    @apply px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 xl:px-10 xl:py-5;
+  }
+}
+
+/* Theme transition optimizations */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --theme-transition: background-color 0.1s ease-out,
+                       color 0.1s ease-out,
+                       border-color 0.1s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --theme-transition: none;
+  }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Tech styling effects */
+@layer utilities {
+  .tech-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  
+  .tech-text-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+  
+  .straight-line {
+    border-radius: 0;
+  }
+  
+  .angular-card {
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    border-radius: 0;
+  }
+  
+  .mono-numbers {
+    font-variant-numeric: tabular-nums;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .tech-section {
+    position: relative;
+  }
+  
+  .tech-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 49%, rgba(59, 130, 246, 0.03) 49%, rgba(59, 130, 246, 0.03) 51%, transparent 51%);
+    pointer-events: none;
+  }
+}
+
+/* Ultra-wide screen media queries */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    max-width: 2400px;
+  }
+  
+  /* Larger font sizes for ultra-wide */
+  .text-hero {
+    font-size: 6rem;
+    line-height: 1.1;
+  }
+}
+
+/* Performance optimizations for theme switching */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
 }
