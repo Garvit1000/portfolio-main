@@ -67,7 +67,7 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100"
+              className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
@@ -81,7 +81,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden w-9 h-9 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100"
+              className="md:hidden w-9 h-9 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -100,19 +100,19 @@ const Header = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <button
                 onClick={() => scrollToSection('projects')}
-                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono straight-line"
+                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
               >
                 <span className="text-primary">$ </span>cd ./projects
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono straight-line"
+                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
               >
                 <span className="text-primary">$ </span>cd ./about
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono straight-line"
+                className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
               >
                 <span className="text-primary">$ </span>cd ./contact
               </button>

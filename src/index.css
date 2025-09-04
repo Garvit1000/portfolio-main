@@ -241,6 +241,78 @@ html {
   }
 }
 
+/* Global theme radius application */
+@layer base {
+  /* Apply theme radius to all common UI elements */
+  button:not(.straight-line):not(.angular-card),
+  input:not(.straight-line):not(.angular-card),
+  textarea:not(.straight-line):not(.angular-card),
+  select:not(.straight-line):not(.angular-card),
+  .card:not(.straight-line):not(.angular-card),
+  .dropdown:not(.straight-line):not(.angular-card),
+  .modal:not(.straight-line):not(.angular-card),
+  .tooltip:not(.straight-line):not(.angular-card),
+  .popover:not(.straight-line):not(.angular-card),
+  .sheet:not(.straight-line):not(.angular-card),
+  .dialog:not(.straight-line):not(.angular-card),
+  .alert:not(.straight-line):not(.angular-card),
+  .badge:not(.straight-line):not(.angular-card),
+  .avatar:not(.straight-line):not(.angular-card),
+  .progress:not(.straight-line):not(.angular-card),
+  .slider:not(.straight-line):not(.angular-card),
+  .switch:not(.straight-line):not(.angular-card),
+  .checkbox:not(.straight-line):not(.angular-card),
+  .radio:not(.straight-line):not(.angular-card),
+  .tabs:not(.straight-line):not(.angular-card),
+  .accordion:not(.straight-line):not(.angular-card),
+  .collapsible:not(.straight-line):not(.angular-card),
+  .navigation-menu:not(.straight-line):not(.angular-card),
+  .menubar:not(.straight-line):not(.angular-card),
+  .context-menu:not(.straight-line):not(.angular-card),
+  .command:not(.straight-line):not(.angular-card),
+  .separator:not(.straight-line):not(.angular-card),
+  .skeleton:not(.straight-line):not(.angular-card),
+  .table:not(.straight-line):not(.angular-card),
+  .calendar:not(.straight-line):not(.angular-card),
+  .date-picker:not(.straight-line):not(.angular-card),
+  .form:not(.straight-line):not(.angular-card),
+  .label:not(.straight-line):not(.angular-card),
+  [data-radix-collection-item]:not(.straight-line):not(.angular-card),
+  [role="button"]:not(.straight-line):not(.angular-card),
+  [role="menuitem"]:not(.straight-line):not(.angular-card),
+  [role="option"]:not(.straight-line):not(.angular-card),
+  [role="tab"]:not(.straight-line):not(.angular-card),
+  [role="tabpanel"]:not(.straight-line):not(.angular-card),
+  [role="dialog"]:not(.straight-line):not(.angular-card),
+  [role="alertdialog"]:not(.straight-line):not(.angular-card) {
+    border-radius: var(--radius) !important;
+  }
+  
+  /* Apply smaller radius for nested elements */
+  button button:not(.straight-line):not(.angular-card),
+  .card .card:not(.straight-line):not(.angular-card),
+  .dropdown .dropdown:not(.straight-line):not(.angular-card) {
+    border-radius: calc(var(--radius) - 2px) !important;
+  }
+  
+  /* Special handling for font families from themes */
+  body {
+    font-family: var(--font-sans), 'JetBrains Mono', 'Space Mono', monospace;
+  }
+  
+  .font-sans {
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+  
+  .font-serif {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+  
+  .font-mono {
+    font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  }
+}
+
 /* Ultra-wide screen media queries */
 @media (min-width: 1920px) {
   .container {

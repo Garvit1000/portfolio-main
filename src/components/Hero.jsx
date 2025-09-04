@@ -31,7 +31,7 @@ const Hero = () => {
         <div className="space-y-8">
           {/* Terminal-style Badge */}
           <div className="flex justify-center">
-            <Badge variant="secondary" className="px-4 py-2 text-sm straight-line border border-primary/20 bg-primary/5">
+            <Badge variant="secondary" className="px-4 py-2 text-sm rounded-lg border border-primary/20 bg-primary/5">
               <Terminal className="mr-2 h-3 w-3" />
               $ status --available
             </Badge>
@@ -56,7 +56,7 @@ const Hero = () => {
 
           {/* Bio with tech styling */}
           <div className="relative max-w-3xl mx-auto">
-            <div className="angular-card p-6 bg-card/50 backdrop-blur-sm">
+            <div className="rounded-lg p-6 bg-card/50 backdrop-blur-sm border border-primary/10">
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed font-mono">
                 <span className="text-primary">{'// '}</span>
                 {personalInfo.bio}
@@ -69,7 +69,7 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={() => scrollToSection('projects')}
-              className="group straight-line tech-glow hover:tech-glow font-mono btn-responsive gpu-accelerated transition-all duration-100"
+              className="group rounded-lg tech-glow hover:tech-glow font-mono btn-responsive gpu-accelerated transition-all duration-100"
             >
               <Terminal className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
               ./view-projects
@@ -79,7 +79,7 @@ const Hero = () => {
               variant="outline"
               size="lg"
               onClick={() => scrollToSection('contact')}
-              className="straight-line border-primary/50 hover:border-primary font-mono btn-responsive gpu-accelerated transition-all duration-100"
+              className="rounded-lg border-primary/50 hover:border-primary font-mono btn-responsive gpu-accelerated transition-all duration-100"
             >
               <Download className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
               download-resume.pdf
@@ -94,7 +94,7 @@ const Hero = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-all duration-100 p-3 lg:p-4 xl:p-5 border border-primary/20 hover:border-primary straight-line hover:tech-glow gpu-accelerated"
+                className="text-muted-foreground hover:text-primary transition-all duration-100 p-3 lg:p-4 xl:p-5 border border-primary/20 hover:border-primary rounded-lg hover:tech-glow gpu-accelerated"
                 aria-label={social.name}
               >
                 {getSocialIcon(social.icon)}
@@ -104,7 +104,7 @@ const Hero = () => {
 
           {/* Stats with monospace numbers and tech design */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 xl:gap-16 pt-12 max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">
-            <div className="text-center angular-card p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm gpu-accelerated">
+            <div className="text-center rounded-lg p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm border border-primary/10 gpu-accelerated">
               <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mono-numbers">
                 {personalInfo.yearsOfExperience}
               </div>
@@ -112,7 +112,7 @@ const Hero = () => {
                 Years Experience
               </div>
             </div>
-            <div className="text-center angular-card p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm gpu-accelerated">
+            <div className="text-center rounded-lg p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm border border-primary/10 gpu-accelerated">
               <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mono-numbers">
                 25+
               </div>
@@ -120,7 +120,7 @@ const Hero = () => {
                 Projects Deployed
               </div>
             </div>
-            <div className="text-center angular-card p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm gpu-accelerated">
+            <div className="text-center rounded-lg p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm border border-primary/10 gpu-accelerated">
               <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mono-numbers">
                 100%
               </div>

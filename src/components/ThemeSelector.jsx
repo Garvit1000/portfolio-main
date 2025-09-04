@@ -34,15 +34,15 @@ const ThemeSelector = () => {
         <Button
           variant="ghost"
           size="sm"
-          className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 straight-line border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100"
+          className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
           aria-label="Select theme"
         >
           <Palette className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        align="end" 
-        className="w-48 straight-line border-primary/20 bg-background/95 backdrop-blur"
+      <DropdownMenuContent
+        align="end"
+        className="w-48 border-primary/20 bg-background/95 backdrop-blur rounded-lg"
       >
         <div className="p-2">
           <div className="text-xs font-mono text-muted-foreground mb-2 px-2">

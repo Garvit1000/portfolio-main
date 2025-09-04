@@ -82,7 +82,7 @@ const Contact = () => {
               Contact
             </span>
           </h2>
-          <div className="max-w-2xl mx-auto angular-card p-4 bg-card/30 backdrop-blur-sm">
+          <div className="max-w-2xl mx-auto rounded-lg p-4 bg-card/30 backdrop-blur-sm border border-primary/10">
             <p className="text-lg sm:text-xl text-muted-foreground font-mono">
               <span className="text-primary">{'// '}</span>
               Ready to collaborate? Let's establish a secure connection and discuss your project requirements.
@@ -94,7 +94,7 @@ const Contact = () => {
           {/* Contact Info with tech styling */}
           <div className="lg:col-span-1">
             <div className="space-y-8">
-              <div className="angular-card p-6 bg-card/50 backdrop-blur-sm border-primary/20">
+              <div className="rounded-lg p-6 bg-card/50 backdrop-blur-sm border border-primary/20">
                 <h3 className="text-2xl font-bold mb-6 font-mono flex items-center">
                   <Terminal className="mr-2 h-5 w-5 text-primary" />
                   ./connection-info
@@ -107,7 +107,7 @@ const Contact = () => {
               </div>
 
               {/* Contact Details with tech styling */}
-              <div className="angular-card p-6 bg-card/50 backdrop-blur-sm border-primary/20">
+              <div className="rounded-lg p-6 bg-card/50 backdrop-blur-sm border border-primary/20">
                 <h4 className="font-semibold mb-4 font-mono flex items-center">
                   <Server className="mr-2 h-4 w-4 text-primary" />
                   Network Endpoints
@@ -130,7 +130,7 @@ const Contact = () => {
               </div>
 
               {/* Social Links with tech styling */}
-              <div className="angular-card p-6 bg-card/50 backdrop-blur-sm border-primary/20">
+              <div className="rounded-lg p-6 bg-card/50 backdrop-blur-sm border border-primary/20">
                 <h4 className="font-semibold mb-4 font-mono flex items-center">
                   <Database className="mr-2 h-4 w-4 text-primary" />
                   Social Protocols
@@ -142,7 +142,7 @@ const Contact = () => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 border border-primary/20 hover:border-primary transition-colors straight-line hover:bg-primary/10"
+                      className="p-3 border border-primary/20 hover:border-primary transition-colors rounded-lg hover:bg-primary/10"
                       aria-label={social.name}
                     >
                       {getSocialIcon(social.icon)}
@@ -155,7 +155,7 @@ const Contact = () => {
 
           {/* Contact Form with tech styling */}
           <div className="lg:col-span-2">
-            <Card className="angular-card bg-card/50 backdrop-blur-sm border-primary/20">
+            <Card className="rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20">
               <CardHeader>
                 <CardTitle className="font-mono flex items-center">
                   <Terminal className="mr-2 h-5 w-5 text-primary" />
@@ -174,7 +174,7 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         placeholder="your_name"
-                        className="straight-line border-primary/20 focus:border-primary font-mono"
+                        className="rounded-lg border-primary/20 focus:border-primary font-mono"
                       />
                     </div>
                     <div className="space-y-2">
@@ -187,7 +187,7 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         placeholder="user@domain.com"
-                        className="straight-line border-primary/20 focus:border-primary font-mono"
+                        className="rounded-lg border-primary/20 focus:border-primary font-mono"
                       />
                     </div>
                   </div>
@@ -201,7 +201,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="project_inquiry || collaboration"
-                      className="straight-line border-primary/20 focus:border-primary font-mono"
+                      className="rounded-lg border-primary/20 focus:border-primary font-mono"
                     />
                   </div>
                   
@@ -215,7 +215,7 @@ const Contact = () => {
                       required
                       placeholder="/* Tell me about your project requirements, timeline, and technical specifications */"
                       rows={8}
-                      className="straight-line border-primary/20 focus:border-primary font-mono"
+                      className="rounded-lg border-primary/20 focus:border-primary font-mono"
                     />
                   </div>
                   
@@ -223,7 +223,7 @@ const Contact = () => {
                     type="submit" 
                     size="lg" 
                     disabled={isSubmitting}
-                    className="w-full straight-line tech-glow font-mono"
+                    className="w-full rounded-lg tech-glow font-mono"
                   >
                     {isSubmitting ? (
                       <>

@@ -27,7 +27,7 @@ const Projects = () => {
               Projects
             </span>
           </h2>
-          <div className="max-w-2xl mx-auto angular-card p-4 bg-card/30 backdrop-blur-sm">
+          <div className="max-w-2xl mx-auto rounded-lg p-4 bg-card/30 backdrop-blur-sm border border-primary/10">
             <p className="text-lg sm:text-xl text-muted-foreground font-mono">
               <span className="text-primary">{'// '}</span>
               A collection of projects showcasing modern web development with cutting-edge technologies.
@@ -40,7 +40,7 @@ const Projects = () => {
           <Button
             variant={filter === 'all' ? 'default' : 'outline'}
             onClick={() => setFilter('all')}
-            className="transition-all straight-line font-mono border-primary/50"
+            className="transition-all rounded-lg font-mono border-primary/50"
           >
             <Terminal className="mr-2 h-4 w-4" />
             --all
@@ -48,7 +48,7 @@ const Projects = () => {
           <Button
             variant={filter === 'featured' ? 'default' : 'outline'}
             onClick={() => setFilter('featured')}
-            className="transition-all straight-line font-mono border-primary/50"
+            className="transition-all rounded-lg font-mono border-primary/50"
           >
             <Star className="mr-2 h-4 w-4" />
             --featured
@@ -58,7 +58,7 @@ const Projects = () => {
         {/* Projects Grid with tech styling */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
-            <Card key={project.id} className="group hover:tech-glow transition-all duration-300 hover:-translate-y-1 angular-card bg-card/50 backdrop-blur-sm border-primary/20">
+            <Card key={project.id} className="group hover:tech-glow transition-all duration-300 hover:-translate-y-1 rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20">
               <div className="relative overflow-hidden">
                 <img
                   src={project.image}
@@ -67,13 +67,13 @@ const Projects = () => {
                   loading="lazy"
                 />
                 {project.featured && (
-                  <Badge className="absolute top-3 right-3 straight-line bg-primary text-primary-foreground">
+                  <Badge className="absolute top-3 right-3 rounded-md bg-primary text-primary-foreground">
                     <Star className="mr-1 h-3 w-3" />
                     featured
                   </Badge>
                 )}
                 <div className="absolute top-3 left-3">
-                  <div className="flex items-center space-x-1 text-primary bg-background/80 backdrop-blur-sm px-2 py-1 straight-line">
+                  <div className="flex items-center space-x-1 text-primary bg-background/80 backdrop-blur-sm px-2 py-1 rounded-md">
                     <Folder className="h-3 w-3" />
                     <span className="text-xs font-mono">./project</span>
                   </div>
@@ -96,7 +96,7 @@ const Projects = () => {
                   {/* Technologies with tech styling */}
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs straight-line bg-primary/10 text-primary border border-primary/20 font-mono">
+                      <Badge key={index} variant="secondary" className="text-xs rounded-sm bg-primary/10 text-primary border border-primary/20 font-mono">
                         {tech}
                       </Badge>
                     ))}
@@ -104,7 +104,7 @@ const Projects = () => {
                   
                   {/* Action Buttons with sharp edges */}
                   <div className="flex gap-2">
-                    <Button size="sm" asChild className="flex-1 straight-line font-mono">
+                    <Button size="sm" asChild className="flex-1 rounded-lg font-mono">
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -114,7 +114,7 @@ const Projects = () => {
                         deploy
                       </a>
                     </Button>
-                    <Button size="sm" variant="outline" asChild className="straight-line border-primary/50 hover:border-primary font-mono">
+                    <Button size="sm" variant="outline" asChild className="rounded-lg border-primary/50 hover:border-primary font-mono">
                       <a
                         href={project.githubUrl}
                         target="_blank"
@@ -132,7 +132,7 @@ const Projects = () => {
 
         {/* View More Button with tech styling */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="straight-line border-primary/50 hover:border-primary font-mono hover:tech-glow">
+          <Button variant="outline" size="lg" className="rounded-lg border-primary/50 hover:border-primary font-mono hover:tech-glow">
             <Github className="mr-2 h-4 w-4" />
             git clone --all-repos
           </Button>
