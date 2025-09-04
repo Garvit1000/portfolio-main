@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Sun, Moon, Menu, X, Terminal } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { useState } from 'react';
+import ThemeSelector from './ThemeSelector';
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
@@ -56,8 +57,12 @@ const Header = () => {
             </button>
           </nav>
 
-          {/* Theme Toggle & Mobile Menu with sharp edges */}
+          {/* Theme Selector, Theme Toggle & Mobile Menu with sharp edges */}
           <div className="flex items-center space-x-2 lg:space-x-3">
+            {/* Theme Selector */}
+            <ThemeSelector />
+            
+            {/* Light/Dark Mode Toggle */}
             <Button
               variant="ghost"
               size="sm"
