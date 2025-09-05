@@ -31,10 +31,11 @@ const Hero = () => {
         <div className="space-y-8">
           {/* Terminal-style Badge */}
           <div className="flex justify-center">
-            <Badge variant="secondary" className="px-4 py-2 text-sm rounded-lg border border-primary/20 bg-primary/5">
-              <Terminal className="mr-2 h-3 w-3" />
-              $ status --available
-            </Badge>
+              <Badge variant="secondary" className="px-4 py-2 text-sm rounded-lg">
+                  <Terminal className="mr-2 h-3 w-3" />
+                  $ status --available
+              </Badge>
+
           </div>
 
           {/* Main Heading with Tech styling */}
@@ -57,8 +58,7 @@ const Hero = () => {
           {/* Bio with tech styling */}
           <div className="relative max-w-3xl mx-auto">
             <div className="rounded-lg p-6 bg-card/50 backdrop-blur-sm border border-primary/10">
-              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed font-mono">
-                <span className="text-primary">{'// '}</span>
+              <p className="text-lg sm:text-xl text-primary leading-relaxed font-mono">
                 {personalInfo.bio}
               </p>
             </div>
@@ -122,10 +122,10 @@ const Hero = () => {
             </div>
             <div className="text-center rounded-lg p-4 lg:p-6 xl:p-8 bg-card/30 backdrop-blur-sm border border-primary/10 gpu-accelerated">
               <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mono-numbers">
-                100%
+                30+
               </div>
               <div className="text-sm lg:text-base xl:text-lg text-muted-foreground mt-1 font-mono">
-                Uptime Record
+                Hackathons
               </div>
             </div>
           </div>

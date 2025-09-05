@@ -1,12 +1,12 @@
 // Mock data for Garvit's Portfolio
 
 export const personalInfo = {
-  name: "Garvit",
+  name: "Garvit Joshi",
   title: "Frontend Developer",
-  email: "abc@gmail.com",
+  email: "garvitjoshi543@gmail.com",
   bio: "I'm a passionate frontend developer who loves creating beautiful, responsive web applications. I specialize in React, JavaScript, and modern web technologies to build user-friendly digital experiences.",
   location: "India",
-  yearsOfExperience: "3+",
+  yearsOfExperience: "1+",
   skills: [
     "React.js",
     "JavaScript",
@@ -101,17 +101,17 @@ export const experience = [
 export const socialLinks = [
   {
     name: "GitHub",
-    url: "https://github.com/garvit",
+    url: "https://github.com/Garvit1000",
     icon: "github"
   },
   {
     name: "LinkedIn", 
-    url: "https://linkedin.com/in/garvit",
+    url: "https://linkedin.com/in/garvit-joshi1",
     icon: "linkedin"
   },
   {
     name: "Twitter",
-    url: "https://twitter.com/garvit",
+    url: "https://tx.com/Garvit1000",
     icon: "twitter"
   }
 ];
