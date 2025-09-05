@@ -24,11 +24,11 @@ export const personalInfo = {
 export const projects = [
   {
     id: 1,
-    title: "E-Commerce Dashboard",
-    description: "A comprehensive admin dashboard for managing e-commerce operations with real-time analytics and inventory management.",
+    title: "FreshStart AI",
+    description: "a SaaS platform delivering AI-powered resume optimization with 80%+ ATS score targets. Integrated LinkedIn headline & About-section optimizers to boost recruiter visibility.and Developed edit suggestions and PDF export workflows for user-customized resumes.",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
-    liveUrl: "https://demo-dashboard.example.com",
-    githubUrl: "https://github.com/garvit/ecommerce-dashboard",
+    liveUrl: "freshstartai-1.onrender.com/",
+    githubUrl: "https://github.com/Garvit1000/freshstartAI",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     featured: true
   },
