@@ -74,7 +74,7 @@ const Footer = () => {
               <span className="text-primary"> && </span>
               available on{' '}
               <a 
-                href="https://github.com/garvit/portfolio" 
+                href="https://github.com/Garvit1000/portfolio-main" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-primary hover:underline transition-colors"

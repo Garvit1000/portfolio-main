@@ -10,14 +10,12 @@ export const personalInfo = {
   skills: [
     "React.js",
     "JavaScript",
-    "TypeScript", 
     "HTML5",
     "CSS3",
     "Tailwind CSS",
     "Node.js",
     "Git",
     "Responsive Design",
-    "UI/UX Design"
   ]
 };
 
@@ -26,8 +24,8 @@ export const projects = [
     id: 1,
     title: "FreshStart AI",
     description: "a SaaS platform delivering AI-powered resume optimization with 80%+ ATS score targets. Integrated LinkedIn headline & About-section optimizers to boost recruiter visibility.and Developed edit suggestions and PDF export workflows for user-customized resumes.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
-    liveUrl: "freshstartai-1.onrender.com/",
+    technologies: ["React", "JavaScript", "Tailwind CSS", "Node.js", "Express"],
+    liveUrl: "https://freshstartai-1.onrender.com/",
     githubUrl: "https://github.com/Garvit1000/freshstartAI",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     featured: true
