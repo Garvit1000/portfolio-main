@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from './ui/dropdown-menu';
 import { Palette, Check } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { getThemeNames } from '../data/themes';
@@ -13,9 +7,42 @@ import { getThemeNames } from '../data/themes';
 const ThemeSelector = () => {
     const { currentTheme, changeTheme, availableThemes } = useTheme();
     const themeNames = getThemeNames();
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    // Close dropdown on scroll to prevent positioning issues
+    useEffect(() => {
+        const handleScroll = () => {
+            if (isOpen) {
+                setIsOpen(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isOpen]);
+
+    // Handle click outside to close dropdown
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
 
     const handleThemeChange = (themeName) => {
         changeTheme(themeName);
+        setIsOpen(false);
     };
 
     // Get primary color for preview (using light mode for consistency)
@@ -29,73 +56,60 @@ const ThemeSelector = () => {
     };
 
     return (
-        <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild>
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
-                    aria-label="Select theme"
-                >
-                    <Palette className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-                align="end"
-                side="bottom"
-                sideOffset={8}
-                alignOffset={0}
-                avoidCollisions={true}
-                className="w-48 border-primary/20 bg-background/95 backdrop-blur rounded-lg z-[9999] shadow-lg"
-                forceMount={false}
-                portal={true}
+        <div className="relative" ref={dropdownRef}>
+            <Button
+                ref={buttonRef}
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                aria-label="Select theme"
             >
-                <div className="p-2">
-                    <div className="text-xs font-mono text-muted-foreground mb-2 px-2">
-                        $ select --theme
-                    </div>
-                    {themeNames.map((themeName) => {
-                        const theme = availableThemes[themeName];
-                        const isSelected = currentTheme === themeName;
+                <Palette className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
+            </Button>
 
-                        return (
-                            <DropdownMenuItem
-                                key={themeName}
-                                onClick={() => handleThemeChange(themeName)}
-                                className="flex items-center justify-between p-2 hover:bg-primary/10 cursor-pointer font-mono text-sm rounded-md"
-                            >
-                                <div className="flex items-center space-x-3">
-                                    {/* Theme color preview */}
-                                    <div
-                                        className="w-4 h-4 rounded-sm border border-border flex-shrink-0"
-                                        style={{
-                                            backgroundColor: getThemePreviewColor(themeName),
-                                            boxShadow: isSelected ? `0 0 0 2px ${getThemePreviewColor(themeName)}40` : 'none'
-                                        }}
-                                    />
-                                    <div className="flex flex-col min-w-0">
-                    <span className="text-foreground capitalize truncate">
-                      {theme.name}
-                    </span>
-                                        <span className="text-xs text-muted-foreground truncate">
-                      {theme.description}
-                    </span>
+            {/* Custom Dropdown */}
+            {isOpen && (
+                <div
+                    className="absolute right-0 top-full mt-2 w-44 bg-background border border-primary/20 rounded-lg shadow-lg z-[999999]"
+                >
+                    <div className="p-1.5">
+                        <div className="text-xs font-mono text-muted-foreground mb-1.5 px-2">
+                            $ select --theme
+                        </div>
+                        {themeNames.map((themeName) => {
+                            const theme = availableThemes[themeName];
+                            const isSelected = currentTheme === themeName;
+
+                            return (
+                                <div
+                                    key={themeName}
+                                    onClick={() => handleThemeChange(themeName)}
+                                    className="flex items-center justify-between p-1.5 hover:bg-primary/10 cursor-pointer font-mono text-sm rounded-md transition-colors"
+                                >
+                                    <div className="flex items-center space-x-2">
+                                        {/* Theme color preview */}
+                                        <div
+                                            className="w-3 h-3 rounded-sm border border-border flex-shrink-0"
+                                            style={{
+                                                backgroundColor: getThemePreviewColor(themeName),
+                                                boxShadow: isSelected ? `0 0 0 1px ${getThemePreviewColor(themeName)}60` : 'none'
+                                            }}
+                                        />
+                                        <span className="text-foreground capitalize truncate text-xs">
+                                            {theme.name}
+                                        </span>
                                     </div>
+                                    {isSelected && (
+                                        <Check className="h-3 w-3 text-primary flex-shrink-0" />
+                                    )}
                                 </div>
-                                {isSelected && (
-                                    <Check className="h-4 w-4 text-primary flex-shrink-0 ml-2" />
-                                )}
-                            </DropdownMenuItem>
-                        );
-                    })}
-                </div>
-                <div className="border-t border-primary/20 px-4 py-2 bg-muted/20">
-                    <div className="text-xs font-mono text-muted-foreground">
-                        Theme: <span className="text-primary">{availableThemes[currentTheme]?.name}</span>
+                            );
+                        })}
                     </div>
                 </div>
-            </DropdownMenuContent>
-        </DropdownMenu>
+            )}
+        </div>
     );
 };
 
