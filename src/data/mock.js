@@ -16,6 +16,9 @@ export const personalInfo = {
     "Node.js",
     "Git",
     "Responsive Design",
+    "RESTful APIs",
+    "Express.js",
+    "MongoDB"
   ]
 };
 
@@ -65,7 +68,7 @@ export const projects = [
     title: "Recipe Finder App",
     description: "A culinary exploration app where users can discover recipes based on ingredients they have at home.",
     technologies: ["React", "REST API", "CSS Modules"],
-    liveUrl: "https://recipe-finder.example.com", 
+    liveUrl: "https://recipe-finder.example.com",
     githubUrl: "https://github.com/garvit/recipe-finder",
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
     featured: false
@@ -74,26 +77,29 @@ export const projects = [
 
 export const experience = [
   {
-    id: 1,
-    company: "TechCorp Solutions",
-    position: "Senior Frontend Developer",
-    period: "2022 - Present",
-    description: "Leading frontend development for multiple client projects, mentoring junior developers, and implementing modern React patterns."
-  },
-  {
-    id: 2,
-    company: "StartupXYZ",
-    position: "Frontend Developer",
-    period: "2021 - 2022", 
-    description: "Developed responsive web applications using React and TypeScript, collaborated with design teams to implement pixel-perfect UIs."
-  },
-  {
-    id: 3,
-    company: "Digital Agency",
-    position: "Junior Frontend Developer",
-    period: "2020 - 2021",
-    description: "Built interactive websites for clients, learned modern development practices, and contributed to open-source projects."
-  }
+  id: 1,
+  company: "Founder Flow",
+  position: "Founding Web Developer",
+  period: "June 2025 - Present",
+  description: `• Developed and launched the company website, including a modern onboarding and landing page .
+• Built and deployed the site — hosted and managed production infrastructure to ensure high availability.
+• Built an admin panel to monitor user signups and engagement.
+• Integrated front-end with database and authentication systems to enable reliable data flow.
+• Translated Figma designs into pixel-perfect, responsive UI and iterated on UX with the design team.
+• Led the initial development team, prioritized features, and supported MVP delivery.`
+},
+ {
+  id: 1,
+  company: "Dtodstint Services Pvt Ltd",
+  position: "Frontend Developer",
+  period: "Dec 2024 - March 2025",
+  description: `• Developed and launched the company website, including a modern onboarding and landing page .
+• Implemented “Add to Cart” functionality for an e-commerce module, increasing conversion readiness.
+• Designed and developed a dynamic services page to enhance user engagement and interaction.
+• Built the admin panel, enabling seamless client management of services.
+• Improved site responsiveness across devices; diagnosed and fixed critical frontend bugs.`
+},
+
 ];
 
 export const socialLinks = [
@@ -103,7 +109,7 @@ export const socialLinks = [
     icon: "github"
   },
   {
-    name: "LinkedIn", 
+    name: "LinkedIn",
     url: "https://linkedin.com/in/garvit-joshi1",
     icon: "linkedin"
   },

@@ -13,7 +13,7 @@ const About = () => {
     },
     {
       icon: <Monitor className="h-5 w-5" />,
-      title: "UI/UX Focus", 
+      title: "UI/UX Focus",
       description: "Creating intuitive interfaces with pixel-perfect design and seamless user experiences."
     },
     {
@@ -51,7 +51,7 @@ const About = () => {
 
         {/* Minimalistic About List */}
         <div className="space-y-12">
-          
+
           {/* Bio Section */}
           <div className="group">
             <div className="flex items-center gap-4 mb-3">
@@ -60,7 +60,7 @@ const About = () => {
                 <User className="inline ml-2 h-5 w-5 text-primary" />
               </h3>
             </div>
-            
+
             <div className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4 space-y-2">
               <p>
                 <span className="text-primary">{'// '}</span>
@@ -85,12 +85,12 @@ const About = () => {
                 <Terminal className="inline ml-2 h-5 w-5 text-primary" />
               </h3>
             </div>
-            
+
             <p className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4">
               <span className="text-primary">{'// '}</span>
               Technologies and frameworks I work with on a daily basis.
             </p>
-            
+
             <div className="flex flex-wrap gap-2">
               {personalInfo.skills.map((skill, index) => (
                 <span
@@ -142,17 +142,17 @@ const About = () => {
                 <Briefcase className="inline ml-2 h-5 w-5 text-primary" />
               </h3>
             </div>
-            
+
             <p className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4">
               <span className="text-primary">{'// '}</span>
               Professional journey and key contributions across different organizations.
             </p>
-            
+
             <div className="space-y-6">
               {experience.map((exp, index) => (
                 <div key={exp.id} className="border-l-2 border-primary/30 pl-4 relative">
                   <div className="absolute -left-1.5 top-1 w-3 h-3 bg-primary rounded-full"></div>
-                  
+
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2">
                     <div>
                       <h4 className="font-bold font-mono text-lg">{exp.position}</h4>
@@ -162,11 +162,17 @@ const About = () => {
                       {exp.period}
                     </span>
                   </div>
-                  
-                  <p className="text-muted-foreground font-mono text-sm leading-relaxed">
+
+                  <div className="text-muted-foreground font-mono text-sm leading-relaxed">
                     <span className="text-primary">{'// '}</span>
-                    {exp.description}
-                  </p>
+                    <div className="ml-4">
+                      {exp.description.split('\n').map((line, lineIndex) => (
+                        <div key={lineIndex} className="mb-1">
+                          {line}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -177,7 +183,7 @@ const About = () => {
         <div className="text-center mt-16">
           <Button variant="outline" size="lg" className="rounded-lg border-primary/50 hover:border-primary font-mono hover:tech-glow">
             <Github className="mr-2 h-4 w-4" />
-            git clone --connect
+            git clone --about-me
           </Button>
         </div>
       </div>
