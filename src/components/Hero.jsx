@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
-import { personalInfo, socialLinks } from '../data/mock';
+import {personalInfo, projects, socialLinks} from '../data/mock';
+import {Link} from 'react-router-dom';
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -296,15 +297,16 @@ const Hero = () => {
                             ./view-projects
                             <ArrowRight className="ml-1.5 h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-100 group-hover:translate-x-1" />
                         </Button>
+                        <Link to="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing">
                         <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => scrollToSection('contact')}
                             className="rounded-lg border-primary/50 hover:border-primary font-mono gpu-accelerated transition-all duration-100 w-full sm:w-auto text-xs sm:text-sm md:text-base px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3"
                         >
                             <Download className="mr-1.5 h-3 w-3 sm:h-4 sm:w-4" />
-                            download-resume.pdf
+                            View-resume.pdf
                         </Button>
+                        </Link>
                     </div>
 
                     {/* Social Links */}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Github, Star, Terminal, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { projects } from '../data/mock';
+import {Link} from 'react-router-dom';
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
@@ -158,10 +159,12 @@ const Projects = () => {
 
                 {/* View More Button */}
                 <div className="text-center mt-16">
+                    <Link to="https://github.com/Garvit1000">
                     <Button variant="outline" size="lg" className="rounded-lg border-primary/50 hover:border-primary font-mono hover:tech-glow">
                         <Github className="mr-2 h-4 w-4" />
                         git clone --all-repos
                     </Button>
+                    </Link>
                 </div>
             </div>
         </section>
