@@ -1,7 +1,3 @@
-# TweakCN-Style Theme System Implementation
-
-This document outlines the implementation of a dynamic theme switching system inspired by TweakCN for the portfolio project.
-
 ## Overview
 
 The theme system allows users to switch between different color themes while maintaining light/dark mode functionality. It's built using CSS variables and React context, providing smooth transitions and persistence.
