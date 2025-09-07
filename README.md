@@ -1,245 +1,234 @@
-## Overview
+# Portfolio Website - TweakCN Inspired
 
-The theme system allows users to switch between different color themes while maintaining light/dark mode functionality. It's built using CSS variables and React context, providing smooth transitions and persistence.
+A modern, responsive portfolio website for **Garvit Joshi** built with React, Vite, and TailwindCSS. Features a comprehensive theming system inspired by TweakCN with multiple theme variants and seamless dark/light mode switching.
 
-## Architecture
+## 🚀 Live Demo
 
-### Core Components
+Visit the live portfolio at [https://www.garvit.me/](#)
 
-1. **ThemeProvider** (`src/components/ThemeProvider.jsx`)
-   - Manages both theme selection and light/dark mode
-   - Handles localStorage persistence
-   - Dynamically applies CSS variables
-   - Provides smooth transitions
+## ✨ Features
 
-2. **ThemeSelector** (`src/components/ThemeSelector.jsx`)
-   - Dropdown component for theme selection
-   - Shows theme previews with color indicators
-   - Integrates with existing tech/monospace design
+### 🎨 Advanced Theming System
+- **8 Unique Themes**: Default, Amber-Minimal, Supabase, Darkmatter, Soft Pop, Candyland, and Twitter
+- **Dark/Light Mode**: Automatic system preference detection with manual toggle
+- **Dynamic CSS Variables**: Real-time theme switching without page refresh
+- **TweakCN Integration**: Complete shadcn/ui component library with custom theme variants
 
-3. **Theme Data** (`src/data/themes.js`)
-   - Contains 6 predefined themes: Default, Blue, Green, Purple, Orange, Red
-   - Each theme includes complete CSS variable definitions
-   - Supports both light and dark variants
+### 📱 Modern Design
+- **Fully Responsive**: Mobile-first design with optimized layouts for all devices
+- **GPU Accelerated Animations**: Smooth transitions and hover effects
+- **Tech-Inspired UI**: Terminal-style elements, monospace fonts, and developer aesthetics
+- **Glass Morphism Effects**: Modern backdrop blur and transparency effects
 
-## Features
+### 🔧 Developer Features
+- **GitHub Integration**: Live contribution graph from GitHub API
+- **Project Showcase**: Dynamic project cards with live links and technologies
+- **Skills Display**: Organized skill categorization with visual indicators
 
-### ✅ Implemented Features
+### 🏗️ Technical Stack
+- **Frontend**: React 19, Vite, TailwindCSS
+- **UI Components**: shadcn/ui (complete component library)
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Animations**: TailwindCSS Animate
+- **Theme Management**: Context API with localStorage persistence
 
-- **7 Predefined Themes**: Default, Blue, Green, Purple, Orange, Red, Twitter
-- **Dual Mode Support**: Each theme works in both light and dark modes
-- **Distinct Visual Personalities**: Each theme has unique fonts, border radius, and shadows
-- **Dynamic Styling**: Buttons and components adapt to theme-specific border radius
-- **Smooth Transitions**: Hardware-accelerated transitions with no visual flashing
-- **Persistence**: Both theme choice and light/dark mode saved to localStorage
-- **Responsive Design**: Theme dropdown adapts to different screen sizes
-- **Complete CSS Variables**: All TweakCN-style variables including shadows, fonts, charts, sidebar
+## 📂 Project Structure
 
-### Theme Personalities
-
-Each theme now has a distinct visual personality:
-
-- **Default**: Sharp edges (`0rem` radius), JetBrains Mono fonts - Tech/Terminal aesthetic
-- **Blue**: Slightly rounded (`0.75rem` radius), Inter fonts - Professional look
-- **Green**: Small radius (`0.375rem` radius), Inter fonts - Clean and natural
-- **Purple**: Rounded (`1rem` radius), Fira Sans fonts - Creative and modern
-- **Orange**: Very rounded (`2rem` radius), Nunito fonts - Warm and friendly
-- **Red**: Sharp (`0.25rem` radius), Roboto fonts - Bold and precise
-- **Twitter**: Curved (`1.3rem` radius), Open Sans fonts - Social media inspired
-
-### Theme Structure
-
-Each theme includes these CSS variable categories:
-
-```javascript
-{
-  // Core colors
-  background, foreground, card, popover, primary, secondary, muted, accent,
-  
-  // Interactive elements
-  destructive, border, input, ring,
-  
-  // Data visualization
-  "chart-1" through "chart-5",
-  
-  // Sidebar components
-  sidebar, "sidebar-foreground", "sidebar-primary", etc.,
-  
-  // Typography
-  "font-sans", "font-serif", "font-mono",
-  
-  // Layout
-  radius, spacing, "tracking-normal",
-  
-  // Shadows
-  "shadow-2xs" through "shadow-2xl"
-}
+```
+portfolio-main/
+├── src/
+│   ├── components/          # Reusable React components
+│   │   ├── ui/             # shadcn/ui component library
+│   │   ├── Header.jsx      # Navigation header with theme selector
+│   │   ├── Hero.jsx        # Main hero section with GitHub integration
+│   │   ├── About.jsx       # About section with skills
+│   │   ├── Projects.jsx    # Project showcase grid
+│   │   ├── Contact.jsx     # Contact form
+│   │   ├── Footer.jsx      # Footer with social links
+│   │   ├── ThemeProvider.jsx # Theme context provider
+│   │   └── ThemeSelector.jsx # Theme switching component
+│   ├── data/
+│   │   ├── mock.js         # Portfolio data (projects, experience, etc.)
+│   │   └── themes.js       # Complete theme definitions
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utility functions
+│   ├── App.jsx             # Main application component
+│   └── index.jsx           # Application entry point
+├── public/                 # Static assets
+├── components.json         # shadcn/ui configuration
+├── tailwind.config.js      # TailwindCSS configuration
+├── vite.config.js         # Vite build configuration
+└── package.json           # Dependencies and scripts
 ```
 
-## Usage
+## 🛠️ Installation & Setup
 
-### Basic Theme Switching
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Git
 
-```jsx
-import { useTheme } from './components/ThemeProvider';
+### Clone & Install
+```bash
+# Clone the repository
+git clone https://github.com/Garvit1000/portfolio-main.git
+cd portfolio-main
 
-function MyComponent() {
-  const { currentTheme, changeTheme, theme, toggleTheme } = useTheme();
-  
-  // Change theme
-  changeTheme('blue');
-  
-  // Toggle light/dark mode
-  toggleTheme();
-}
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-### Adding New Themes
+### Environment Configuration
+Create a `.env` file in the root directory:
 
-1. Add theme definition to `src/data/themes.js`:
+```env
+VITE_GITHUB_TOKEN=your_github_personal_access_token
+```
+
+**Note**: GitHub token is required for the contribution graph feature. Generate one at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+
+## 🎨 Theme System
+
+### Available Themes
+1. **Default** - Clean and minimal
+2. **Amber-Minimal** - Warm amber accents
+3. **Supabase** - Green-inspired professional
+4. **Darkmatter** - Creative and modern purple
+5. **Soft Pop** - Warm and energetic orange
+6. **Candyland** - Soft and elegant pastels
+7. **Twitter** - Social media inspired with curved elements
+
+### Adding Custom Themes
+Add new themes to [`src/data/themes.js`](src/data/themes.js):
 
 ```javascript
 export const themes = {
-  // ... existing themes
-  
-  newTheme: {
-    name: "New Theme",
-    description: "Description here",
+  customTheme: {
+    name: "Custom Theme",
+    description: "Your theme description",
     light: {
       background: "0 0% 100%",
       foreground: "0 0% 0%",
-      // ... all other CSS variables
+      primary: "your-hsl-values",
+      // ... other CSS variables
     },
     dark: {
-      background: "0 0% 0%",
-      foreground: "0 0% 100%",
-      // ... all other CSS variables
+      // Dark mode variants
     }
   }
-};
-```
-
-2. The theme will automatically appear in the dropdown
-
-## Integration Points
-
-### Header Component
-- Theme selector integrated next to navigation items
-- Positioned before the light/dark mode toggle
-- Maintains existing spacing and responsive behavior
-
-### CSS Variables
-- All themes override the same CSS variable names
-- Seamless integration with Tailwind CSS configuration
-- Variables applied to `:root` and `.dark` selectors
-
-## Performance Optimizations
-
-1. **Hardware Acceleration**: Uses `transform: translateZ(0)` for smooth transitions
-2. **Batched Updates**: CSS variables applied atomically to prevent flashing
-3. **Transition Management**: Temporarily disables transitions during theme switches
-4. **Efficient Storage**: Minimal localStorage usage with fallback handling
-
-## Expansion Roadmap
-
-### Phase 2: Full TweakCN Integration (42 Themes)
-- Expand to complete TweakCN theme collection
-- Add theme categories (Professional, Creative, Nature, etc.)
-- Implement theme search/filtering
-- Import Google Fonts dynamically based on theme selection
-
-### Phase 3: Advanced Features
-- Custom theme creation tools
-- Theme import/export functionality
-- Real-time theme preview
-- Theme sharing system
-
-### Phase 4: Integration Enhancements
-- Component-specific theme overrides
-- Theme-aware animations
-- Advanced color manipulation tools
-
-## Technical Details
-
-### State Management
-```javascript
-// Theme Provider state structure
-{
-  theme: 'light' | 'dark',           // Light/dark mode
-  currentTheme: 'default' | 'blue' | ..., // Current theme name
-  availableThemes: { ... }           // All available themes
 }
 ```
 
-### CSS Variable Application
-```javascript
-// Dynamic CSS variable injection
-const applyThemeVariables = (themeName, mode) => {
-  const root = document.documentElement;
-  const themeColors = getThemeColors(themeName, mode);
-  
-  Object.entries(themeColors).forEach(([key, value]) => {
-    root.style.setProperty(`--${key}`, value);
-  });
-};
+## 📊 Features Breakdown
+
+### GitHub Integration
+- **Live Contribution Graph**: Fetches real-time data from GitHub API
+- **Repository Stats**: Shows total repositories, followers, and following
+- **Dynamic Visualization**: Interactive contribution calendar
+
+### Project Showcase
+- **Featured Projects**: Highlighted projects with detailed descriptions
+- **Technology Stack**: Visual technology badges for each project
+- **Live Links**: Direct links to deployed projects and GitHub repositories
+- **Responsive Grid**: Adaptive layout for different screen sizes
+
+### Contact System
+- **Multiple Contact Methods**: Email, social links
+- **Social Integration**: LinkedIn, GitHub, and Twitter links
+
+## 🔧 Development Scripts
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Run tests
+npm run test
 ```
 
-### Persistence Strategy
-```javascript
-// localStorage keys
-localStorage.setItem('theme', 'light|dark');
-localStorage.setItem('currentTheme', 'themeName');
-```
+## 📱 Responsive Design
 
-## Browser Support
+- **Mobile First**: Optimized for mobile devices (320px+)
+- **Tablet Support**: Enhanced layouts for tablet sizes (768px+)
+- **Desktop Optimization**: Full desktop experience (1024px+)
+- **Ultra-wide Support**: Support for ultra-wide monitors (1920px+)
 
-- ✅ Modern browsers with CSS custom property support
-- ✅ Graceful fallback for unsupported features
-- ✅ Respects `prefers-color-scheme` media query
-- ✅ Supports `prefers-reduced-motion` accessibility
+## 🎯 Performance Features
 
-## File Structure
+- **Code Splitting**: Lazy loading of components
+- **Optimized Assets**: Compressed images and fonts
+- **Fast Refresh**: Hot module replacement during development
+- **Tree Shaking**: Eliminated unused code in production builds
 
-```
-src/
-├── components/
-│   ├── ThemeProvider.jsx     # Main theme management
-│   ├── ThemeSelector.jsx     # Theme selection UI
-│   └── Header.jsx           # Integration point
-├── data/
-│   └── themes.js            # Theme definitions
-└── index.css               # Base CSS variables
-```
+## 🌟 Key Components
 
-## Testing
+### ThemeProvider
+Advanced theme management with:
+- Context-based state management
+- Local storage persistence
+- System theme detection
+- Smooth theme transitions
 
-### Manual Testing Checklist
-- [ ] Theme switching works in both light and dark modes
-- [ ] Themes persist across browser refreshes
-- [ ] Smooth transitions without visual flashing
-- [ ] Responsive behavior on mobile devices
-- [ ] Accessibility compliance (reduced motion support)
-- [ ] Performance on theme switches
+### Hero Section
+- Terminal-style animations
+- Dynamic typing effects
+- GitHub contribution visualization
+- Responsive social links
 
-### Browser Testing
-- [ ] Chrome/Chromium
-- [ ] Firefox
-- [ ] Safari
-- [ ] Edge
 
-## Contributing
+## 🔒 Security Features
 
-When adding new themes:
+- **Environment Variables**: Secure API key management
+- **Input Validation**: Client-side form validation
+- **External Link Safety**: `rel="noopener noreferrer"` on external links
 
-1. Follow the existing theme structure exactly
-2. Include all required CSS variables
-3. Test in both light and dark modes
-4. Ensure color contrast accessibility
-5. Provide meaningful theme names and descriptions
+## 📈 Future Enhancements
 
-## Dependencies
+- [ ] Blog integration with markdown support
+- [ ] Advanced animations with Framer Motion
+- [ ] Progressive Web App (PWA) features
+- [ ] Multi-language support (i18n)
+- [ ] Analytics integration
+- [ ] SEO optimization with meta tags
 
-- React 19+ (Context API, Hooks)
-- Tailwind CSS (CSS variable integration)
-- shadcn/ui components (Dropdown menu)
-- Lucide React (Icons)
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **shadcn/ui** - For the comprehensive component library
+- **TweakCN** - For theming inspiration and CSS variable system
+- **Lucide React** - For beautiful, consistent icons
+- **Tailwind CSS** - For utility-first CSS framework
+- **Radix UI** - For accessible, unstyled UI primitives
+
+## 📞 Contact
+
+**Garvit Joshi**
+- Email: [garvitjoshi543@gmail.com](mailto:garvitjoshi543@gmail.com)
+- LinkedIn: [linkedin.com/in/garvit-joshi1](https://linkedin.com/in/garvit-joshi1)
+- GitHub: [github.com/Garvit1000](https://github.com/Garvit1000)
+- Portfolio: [https://www.garvit.me/](#)
+
+---
+
+Built with ❤️ by [Garvit Joshi](https://github.com/Garvit1000)
