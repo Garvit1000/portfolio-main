@@ -32,8 +32,8 @@ const Projects = () => {
     };
 
     return (
-        <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 tech-section">
-            <div className="max-w-4xl mx-auto">
+        <section id="projects" className="py-20 tech-section">
+            <div className="container-xl">
                 <div className="text-center mb-16">
                     <div className="mb-4">
                         <span className="text-primary font-mono text-lg">{'>'} ls -la ~/projects</span>
@@ -72,89 +72,91 @@ const Projects = () => {
                     </Button>
                 </div>
 
-                {/* Minimalistic Projects List */}
-                <div className="space-y-12">
-                    {filteredProjects.map((project) => {
-                        const expanded = isExpanded(project.id);
-                        const needsTruncation = project.description.length > 120;
-                        
-                        return (
-                            <div key={project.id} className="group">
-                                {/* Project Title with underline and italic */}
-                                <div className="flex items-center gap-4 mb-3">
-                                    <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                                        {project.title}
-                                        {project.featured && (
-                                            <Star className="inline ml-2 h-5 w-5 text-primary fill-primary" />
-                                        )}
-                                    </h3>
-                                    <div className="flex items-center gap-3">
-                                        {/* Live Link */}
-                                        {project.liveUrl && (
+                {/* Minimalistic Projects List - Left aligned within centered container */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="space-y-12">
+                        {filteredProjects.map((project) => {
+                            const expanded = isExpanded(project.id);
+                            const needsTruncation = project.description.length > 120;
+                            
+                            return (
+                                <div key={project.id} className="group text-left">
+                                    {/* Project Title with underline and italic */}
+                                    <div className="flex items-center justify-between mb-3">
+                                        <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
+                                            {project.title}
+                                            {project.featured && (
+                                                <Star className="inline ml-2 h-5 w-5 text-primary fill-primary" />
+                                            )}
+                                        </h3>
+                                        <div className="flex items-center gap-3">
+                                            {/* Live Link */}
+                                            {project.liveUrl && (
+                                                <a
+                                                    href={project.liveUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-muted-foreground hover:text-primary transition-colors"
+                                                    title="View Live Demo"
+                                                >
+                                                    <ExternalLink className="h-5 w-5" />
+                                                </a>
+                                            )}
+                                            {/* GitHub Link */}
                                             <a
-                                                href={project.liveUrl}
+                                                href={project.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-muted-foreground hover:text-primary transition-colors"
-                                                title="View Live Demo"
+                                                title="View Source Code"
                                             >
-                                                <ExternalLink className="h-5 w-5" />
+                                                <Github className="h-5 w-5" />
                                             </a>
+                                        </div>
+                                    </div>
+
+                                    {/* Project Description with Show More/Less */}
+                                    <div className="mb-4">
+                                        <p className="text-muted-foreground font-mono text-sm leading-relaxed">
+                                            <span className="text-primary">{'// '}</span>
+                                            {expanded ? project.description : truncateText(project.description)}
+                                        </p>
+                                        
+                                        {needsTruncation && (
+                                            <button
+                                                onClick={() => toggleExpanded(project.id)}
+                                                className="mt-2 text-xs font-mono text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
+                                            >
+                                                {expanded ? (
+                                                    <>
+                                                        <ChevronUp className="h-3 w-3" />
+                                                        show less
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <ChevronDown className="h-3 w-3" />
+                                                        show more
+                                                    </>
+                                                )}
+                                            </button>
                                         )}
-                                        {/* GitHub Link */}
-                                        <a
-                                            href={project.githubUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-muted-foreground hover:text-primary transition-colors"
-                                            title="View Source Code"
-                                        >
-                                            <Github className="h-5 w-5" />
-                                        </a>
+                                    </div>
+
+                                    {/* Technologies */}
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.technologies.map((tech, index) => (
+                                            <span
+                                                key={index}
+                                                className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
                                     </div>
                                 </div>
-
-                                {/* Project Description with Show More/Less */}
-                                <div className="mb-4">
-                                    <p className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl">
-                                        <span className="text-primary">{'// '}</span>
-                                        {expanded ? project.description : truncateText(project.description)}
-                                    </p>
-                                    
-                                    {needsTruncation && (
-                                        <button
-                                            onClick={() => toggleExpanded(project.id)}
-                                            className="mt-2 text-xs font-mono text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
-                                        >
-                                            {expanded ? (
-                                                <>
-                                                    <ChevronUp className="h-3 w-3" />
-                                                    show less
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <ChevronDown className="h-3 w-3" />
-                                                    show more
-                                                </>
-                                            )}
-                                        </button>
-                                    )}
-                                </div>
-
-                                {/* Technologies */}
-                                <div className="flex flex-wrap gap-2">
-                                    {project.technologies.map((tech, index) => (
-                                        <span
-                                            key={index}
-                                            className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                 </div>
 
                 {/* View More Button */}

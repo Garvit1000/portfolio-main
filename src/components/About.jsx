@@ -29,8 +29,8 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 tech-section">
-      <div className="max-w-4xl mx-auto">
+    <section id="about" className="py-20 bg-muted/30 tech-section">
+      <div className="container-xl">
         <div className="text-center mb-16">
           <div className="mb-4">
             <span className="text-primary font-mono text-lg">{'>'} cat ~/about.md</span>
@@ -49,59 +49,60 @@ const About = () => {
           </div>
         </div>
 
-        {/* Minimalistic About List */}
-        <div className="space-y-12">
+        {/* Minimalistic About List - Left aligned within centered container */}
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-12 text-left">
 
-          {/* Bio Section */}
-          <div className="group">
-            <div className="flex items-center gap-4 mb-3">
-              <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                Developer Story
-                <User className="inline ml-2 h-5 w-5 text-primary" />
-              </h3>
+            {/* Bio Section */}
+            <div className="group">
+              <div className="flex items-center gap-4 mb-3">
+                <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
+                  Developer Story
+                  <User className="inline ml-2 h-5 w-5 text-primary" />
+                </h3>
+              </div>
+
+              <div className="text-muted-foreground font-mono text-sm leading-relaxed mb-4 space-y-2">
+                <p>
+                  <span className="text-primary">{'// '}</span>
+                  {personalInfo.yearsOfExperience} years of experience crafting digital solutions with modern technologies.
+                </p>
+                <p>
+                  <span className="text-primary">{'// '}</span>
+                  Specialized in React.js, JavaScript frameworks, and creating intuitive user interfaces.
+                </p>
+                <p>
+                  <span className="text-primary">{'// '}</span>
+                  Passionate about clean code architecture, performance optimization, and open-source contributions.
+                </p>
+              </div>
             </div>
 
-            <div className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4 space-y-2">
-              <p>
+            {/* Skills Section */}
+            <div className="group">
+              <div className="flex items-center gap-4 mb-3">
+                <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
+                  Technical Skills
+                  <Terminal className="inline ml-2 h-5 w-5 text-primary" />
+                </h3>
+              </div>
+
+              <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-4">
                 <span className="text-primary">{'// '}</span>
-                {personalInfo.yearsOfExperience} years of experience crafting digital solutions with modern technologies.
+                Technologies and frameworks I work with on a daily basis.
               </p>
-              <p>
-                <span className="text-primary">{'// '}</span>
-                Specialized in React.js, JavaScript frameworks, and creating intuitive user interfaces.
-              </p>
-              <p>
-                <span className="text-primary">{'// '}</span>
-                Passionate about clean code architecture, performance optimization, and open-source contributions.
-              </p>
-            </div>
-          </div>
 
-          {/* Skills Section */}
-          <div className="group">
-            <div className="flex items-center gap-4 mb-3">
-              <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                Technical Skills
-                <Terminal className="inline ml-2 h-5 w-5 text-primary" />
-              </h3>
+              <div className="flex flex-wrap gap-2">
+                {personalInfo.skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-
-            <p className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4">
-              <span className="text-primary">{'// '}</span>
-              Technologies and frameworks I work with on a daily basis.
-            </p>
-
-            <div className="flex flex-wrap gap-2">
-              {personalInfo.skills.map((skill, index) => (
-                <span
-                  key={index}
-                  className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
 
           {/* What I Do Section */}
           {/* <div className="group">
@@ -134,47 +135,48 @@ const About = () => {
             </div>
           </div> */}
 
-          {/* Experience Section */}
-          <div className="group">
-            <div className="flex items-center gap-4 mb-3">
-              <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                Work Experience
-                <Briefcase className="inline ml-2 h-5 w-5 text-primary" />
-              </h3>
-            </div>
+            {/* Experience Section */}
+            <div className="group">
+              <div className="flex items-center gap-4 mb-3">
+                <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
+                  Work Experience
+                  <Briefcase className="inline ml-2 h-5 w-5 text-primary" />
+                </h3>
+              </div>
 
-            <p className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4">
-              <span className="text-primary">{'// '}</span>
-              Professional journey and key contributions across different organizations.
-            </p>
+              <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-4">
+                <span className="text-primary">{'// '}</span>
+                Professional journey and key contributions across different organizations.
+              </p>
 
-            <div className="space-y-6">
-              {experience.map((exp, index) => (
-                <div key={exp.id} className="border-l-2 border-primary/30 pl-4 relative">
-                  <div className="absolute -left-1.5 top-1 w-3 h-3 bg-primary rounded-full"></div>
+              <div className="space-y-6">
+                {experience.map((exp, index) => (
+                  <div key={exp.id} className="border-l-2 border-primary/30 pl-4 relative">
+                    <div className="absolute -left-1.5 top-1 w-3 h-3 bg-primary rounded-full"></div>
 
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2">
-                    <div>
-                      <h4 className="font-bold font-mono text-lg">{exp.position}</h4>
-                      <div className="text-primary font-medium font-mono text-sm">{exp.company}</div>
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2">
+                      <div>
+                        <h4 className="font-bold font-mono text-lg">{exp.position}</h4>
+                        <div className="text-primary font-medium font-mono text-sm">{exp.company}</div>
+                      </div>
+                      <span className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20 w-fit mt-1 sm:mt-0">
+                        {exp.period}
+                      </span>
                     </div>
-                    <span className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20 w-fit mt-1 sm:mt-0">
-                      {exp.period}
-                    </span>
-                  </div>
 
-                  <div className="text-muted-foreground font-mono text-sm leading-relaxed">
-                    <span className="text-primary">{'// '}</span>
-                    <div className="ml-4">
-                      {exp.description.split('\n').map((line, lineIndex) => (
-                        <div key={lineIndex} className="mb-1">
-                          {line}
-                        </div>
-                      ))}
+                    <div className="text-muted-foreground font-mono text-sm leading-relaxed">
+                      <span className="text-primary">{'// '}</span>
+                      <div className="ml-4">
+                        {exp.description.split('\n').map((line, lineIndex) => (
+                          <div key={lineIndex} className="mb-1">
+                            {line}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

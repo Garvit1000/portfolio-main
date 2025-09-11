@@ -12,10 +12,10 @@ const Footer = () => {
 
   return (
     <footer className="border-t border-primary/20 bg-muted/30 tech-section">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
+      <div className="container-xl py-12">
+        <div className="flex flex-col items-center justify-center space-y-6 md:flex-row md:space-y-0 relative">
           {/* Left Side - Copyright with tech styling */}
-          <div className="flex flex-col items-center md:items-start space-y-2">
+          <div className="absolute left-0 hidden md:flex flex-col items-start space-y-2">
             <div className="text-sm text-muted-foreground font-mono">
               <span className="text-primary">© </span>
               {currentYear} {personalInfo.name}.toUpperCase() 
@@ -32,7 +32,7 @@ const Footer = () => {
           </div>
 
           {/* Center - Quick Links with tech styling */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-6 md:space-x-8 lg:space-x-12">
             <button 
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
@@ -54,15 +54,45 @@ const Footer = () => {
           </div>
 
           {/* Right Side - Back to Top with tech styling */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={scrollToTop}
-            className="group straight-line border-primary/50 hover:border-primary font-mono"
-          >
-            <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
-            sudo top
-          </Button>
+          <div className="absolute right-0 hidden md:block">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={scrollToTop}
+              className="group straight-line border-primary/50 hover:border-primary font-mono"
+            >
+              <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
+              sudo top
+            </Button>
+          </div>
+
+          {/* Mobile Layout - Stack items vertically */}
+          <div className="md:hidden flex flex-col items-center space-y-4">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="text-sm text-muted-foreground font-mono text-center">
+                <span className="text-primary">© </span>
+                {currentYear} {personalInfo.name}.toUpperCase()
+                <span className="text-primary"> // </span>
+                All rights reserved.
+              </div>
+              <div className="flex items-center text-sm text-muted-foreground font-mono">
+                Made with
+                <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" />
+                using
+                <Code2 className="h-4 w-4 mx-1 text-primary" />
+                React && Tailwind CSS
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={scrollToTop}
+              className="group straight-line border-primary/50 hover:border-primary font-mono"
+            >
+              <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
+              sudo top
+            </Button>
+          </div>
         </div>
 
         {/* Bottom Section with tech styling */}

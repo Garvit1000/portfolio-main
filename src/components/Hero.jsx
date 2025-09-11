@@ -167,8 +167,8 @@ const Hero = () => {
         if (!contributions || !contributions.weeks) return null;
 
         return (
-            <div className="mt-6 p-4 bg-card/30 rounded-lg border border-primary/10">
-                <div className="flex items-center justify-between mb-4">
+            <div className="mt-6 p-4 bg-card/30 rounded-lg border border-primary/10 text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
                     <h3 className="text-sm font-mono text-muted-foreground flex items-center">
                         <GitCommit className="mr-2 h-4 w-4" />
                         GitHub Activity
@@ -178,11 +178,11 @@ const Hero = () => {
                     </div>
                 </div>
                 
-                <div className="flex gap-1 overflow-x-auto pb-2">
+                <div className="flex gap-1 overflow-x-auto pb-2 justify-center sm:justify-start">
                     {contributions.weeks.map((week, weekIndex) => (
-                        <div key={weekIndex} className="flex flex-col gap-1">
+                        <div key={weekIndex} className="flex flex-col gap-1 flex-shrink-0">
                             {week.contributionDays.map((day, dayIndex) => {
-                                const level = day.contributionLevel === 'NONE' ? 0 : 
+                                const level = day.contributionLevel === 'NONE' ? 0 :
                                            day.contributionLevel === 'FIRST_QUARTILE' ? 1 :
                                            day.contributionLevel === 'SECOND_QUARTILE' ? 2 :
                                            day.contributionLevel === 'THIRD_QUARTILE' ? 3 : 4;
@@ -199,7 +199,7 @@ const Hero = () => {
                     ))}
                 </div>
                 
-                <div className="flex items-center justify-between mt-4 text-xs text-muted-foreground font-mono">
+                <div className="flex items-center justify-center sm:justify-start mt-4 text-xs text-muted-foreground font-mono">
                     <div className="flex items-center gap-4">
                         <span>Less</span>
                         <div className="flex gap-1">
@@ -234,8 +234,8 @@ const Hero = () => {
     };
 
     return (
-        <section id="hero" className="pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 tech-section gpu-accelerated">
-            <div className="max-w-3xl lg:max-w-4xl mx-auto text-center">
+        <section id="hero" className="pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-8 sm:pb-12 md:pb-16 tech-section gpu-accelerated">
+            <div className="container-xl text-center">
                 <div className="space-y-4 sm:space-y-6 md:space-y-8">
                     {/* Terminal Badge */}
                     <Badge variant="secondary" className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-lg inline-flex items-center">
@@ -271,20 +271,22 @@ const Hero = () => {
                     </div>
 
                     {/* GitHub Contributions Graph */}
-                    {loading && (
-                        <div className="flex items-center justify-center p-8">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                            <span className="ml-3 text-sm text-muted-foreground font-mono">Loading contributions...</span>
-                        </div>
-                    )}
-                    
-                    {error && (
-                        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                            <p className="text-sm text-red-500 font-mono">Error: {error}</p>
-                        </div>
-                    )}
+                    <div className="max-w-4xl mx-auto">
+                        {loading && (
+                            <div className="flex items-center justify-center p-8">
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                                <span className="ml-3 text-sm text-muted-foreground font-mono">Loading contributions...</span>
+                            </div>
+                        )}
+                        
+                        {error && (
+                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                                <p className="text-sm text-red-500 font-mono">Error: {error}</p>
+                            </div>
+                        )}
 
-                    {contributions && renderContributionGraph()}
+                        {contributions && renderContributionGraph()}
+                    </div>
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4">
