@@ -13,63 +13,11 @@ const Footer = () => {
   return (
     <footer className="border-t border-primary/20 bg-muted/30 tech-section">
       <div className="container-xl py-12">
-        <div className="flex flex-col items-center justify-center space-y-6 md:flex-row md:space-y-0 relative">
-          {/* Left Side - Copyright with tech styling */}
-          <div className="absolute left-0 hidden md:flex flex-col items-start space-y-2">
-            <div className="text-sm text-muted-foreground font-mono">
-              <span className="text-primary">© </span>
-              {currentYear} {personalInfo.name}.toUpperCase() 
-              <span className="text-primary"> // </span>
-              All rights reserved.
-            </div>
-            <div className="flex items-center text-sm text-muted-foreground font-mono">
-              Made with
-              <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" />
-              using
-              <Code2 className="h-4 w-4 mx-1 text-primary" />
-              React && Tailwind CSS
-            </div>
-          </div>
-
-          {/* Center - Quick Links with tech styling */}
-          <div className="flex items-center space-x-6 md:space-x-8 lg:space-x-12">
-            <button 
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
-            >
-              ./projects
-            </button>
-            <button 
-              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
-            >
-              ./about
-            </button>
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
-            >
-              ./contact
-            </button>
-          </div>
-
-          {/* Right Side - Back to Top with tech styling */}
-          <div className="absolute right-0 hidden md:block">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={scrollToTop}
-              className="group straight-line border-primary/50 hover:border-primary font-mono"
-            >
-              <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
-              sudo top
-            </Button>
-          </div>
-
-          {/* Mobile Layout - Stack items vertically */}
-          <div className="md:hidden flex flex-col items-center space-y-4">
-            <div className="flex flex-col items-center space-y-2">
-              <div className="text-sm text-muted-foreground font-mono text-center">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 text-left">
+            {/* Left Side - Copyright with tech styling */}
+            <div className="flex flex-col space-y-2">
+              <div className="text-sm text-muted-foreground font-mono">
                 <span className="text-primary">© </span>
                 {currentYear} {personalInfo.name}.toUpperCase()
                 <span className="text-primary"> // </span>
@@ -83,36 +31,62 @@ const Footer = () => {
                 React && Tailwind CSS
               </div>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={scrollToTop}
-              className="group straight-line border-primary/50 hover:border-primary font-mono"
-            >
-              <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
-              sudo top
-            </Button>
+
+            {/* Center - Quick Links with tech styling */}
+            <div className="flex items-center space-x-6 md:space-x-8">
+              <button
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
+              >
+                ./projects
+              </button>
+              <button
+                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
+              >
+                ./about
+              </button>
+              <button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
+              >
+                ./contact
+              </button>
+            </div>
+
+            {/* Right Side - Back to Top with tech styling */}
+            <div className="flex justify-start md:justify-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={scrollToTop}
+                className="group straight-line border-primary/50 hover:border-primary font-mono"
+              >
+                <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
+                sudo top
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Bottom Section with tech styling */}
         <div className="mt-8 pt-8 border-t border-primary/20">
-          <div className="text-center">
+          <div className="max-w-4xl mx-auto text-left">
             <p className="text-sm text-muted-foreground font-mono">
               <Terminal className="inline h-4 w-4 mr-1 text-primary" />
               This portfolio is open source
               <span className="text-primary"> && </span>
               available on{' '}
-              <a 
-                href="https://github.com/Garvit1000/portfolio-main" 
-                target="_blank" 
+              <a
+                href="https://github.com/Garvit1000/portfolio-main"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline transition-colors"
               >
                 GitHub.repository
               </a>
             </p>
-            <div className="mt-2 flex items-center justify-center space-x-4 text-xs text-muted-foreground font-mono">
+            <div className="mt-2 flex items-center space-x-4 text-xs text-muted-foreground font-mono">
               <span className="flex items-center">
                 <Database className="h-3 w-3 mr-1 text-primary" />
                 Built: {currentYear}
