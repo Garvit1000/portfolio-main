@@ -44,12 +44,6 @@ const Projects = () => {
               Projects
             </span>
                     </h2>
-                    <div className="max-w-2xl mx-auto rounded-lg p-4 bg-card/30 backdrop-blur-sm border border-primary/10">
-                        <p className="text-lg sm:text-xl text-muted-foreground font-mono">
-                            <span className="text-primary">{'// '}</span>
-                            A collection of projects showcasing modern web development with cutting-edge technologies.
-                        </p>
-                    </div>
                 </div>
 
                 {/* Filter Buttons */}

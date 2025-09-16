@@ -19,7 +19,7 @@ const Footer = () => {
             <div className="flex flex-col space-y-2">
               <div className="text-sm text-muted-foreground font-mono">
                 <span className="text-primary">© </span>
-                {currentYear} {personalInfo.name}.toUpperCase()
+                {currentYear} {personalInfo.name}
                 <span className="text-primary"> // </span>
                 All rights reserved.
               </div>

@@ -41,12 +41,7 @@ const About = () => {
               Developer
             </span>
           </h2>
-          <div className="max-w-2xl mx-auto rounded-lg p-4 bg-card/30 backdrop-blur-sm border border-primary/10">
-            <p className="text-lg sm:text-xl text-muted-foreground font-mono">
-              <span className="text-primary">{'// '}</span>
-              Passionate about creating exceptional digital experiences through innovative code architecture.
-            </p>
-          </div>
+
         </div>
 
         {/* Minimalistic About List - Left aligned within centered container */}

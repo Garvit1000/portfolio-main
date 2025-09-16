@@ -237,11 +237,6 @@ const Hero = () => {
         <section id="hero" className="pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-8 sm:pb-12 md:pb-16 tech-section gpu-accelerated">
             <div className="container-xl text-center">
                 <div className="space-y-4 sm:space-y-6 md:space-y-8">
-                    {/* Terminal Badge */}
-                    <Badge variant="secondary" className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-lg inline-flex items-center">
-                        <Terminal className="mr-1.5 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                        $ status --available
-                    </Badge>
 
                     {/* Main Heading */}
                     <div className="space-y-2 sm:space-y-3 md:space-y-4">

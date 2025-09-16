@@ -30,12 +30,6 @@ const Contact = () => {
               Touch
             </span>
           </h2>
-          <div className="max-w-2xl mx-auto rounded-lg p-4 bg-card/30 backdrop-blur-sm border border-primary/10">
-            <p className="text-lg sm:text-xl text-muted-foreground font-mono">
-              <span className="text-primary">{'// '}</span>
-              Ready to collaborate? Let's discuss your next project and build something amazing together.
-            </p>
-          </div>
         </div>
 
         {/* Contact List - Left aligned within centered container */}
