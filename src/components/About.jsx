@@ -48,31 +48,6 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-12 text-left">
 
-            {/* Bio Section */}
-            <div className="group">
-              <div className="flex items-center gap-4 mb-3">
-                <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                  Developer Story
-                  <User className="inline ml-2 h-5 w-5 text-primary" />
-                </h3>
-              </div>
-
-              <div className="text-muted-foreground font-mono text-sm leading-relaxed mb-4 space-y-2">
-                <p>
-                  <span className="text-primary">{'// '}</span>
-                  {personalInfo.yearsOfExperience} years of experience crafting digital solutions with modern technologies.
-                </p>
-                <p>
-                  <span className="text-primary">{'// '}</span>
-                  Specialized in React.js, JavaScript frameworks, and creating intuitive user interfaces.
-                </p>
-                <p>
-                  <span className="text-primary">{'// '}</span>
-                  Passionate about clean code architecture, performance optimization, and open-source contributions.
-                </p>
-              </div>
-            </div>
-
             {/* Skills Section */}
             <div className="group">
               <div className="flex items-center gap-4 mb-3">

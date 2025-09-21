@@ -18,7 +18,7 @@ const Portfolio = () => {
         <Hero />
         <Projects />
         <About />
-        <Contact />
+        {/*<Contact />*/}
       </main>
       <Footer />
     </div>
