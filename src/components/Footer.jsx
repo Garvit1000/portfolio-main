@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart, ArrowUp, Terminal, Code2, Database } from 'lucide-react';
 import { Button } from './ui/button';
 import { personalInfo } from '../data/mock';
+import FooterText from './spectrumui/footer';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -70,34 +71,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section with tech styling */}
-        <div className="mt-8 pt-8 border-t border-primary/20">
-          <div className="max-w-4xl mx-auto text-left">
-            <p className="text-sm text-muted-foreground font-mono">
-              <Terminal className="inline h-4 w-4 mr-1 text-primary" />
-              This portfolio is open source
-              <span className="text-primary"> && </span>
-              available on{' '}
-              <a
-                href="https://github.com/Garvit1000/portfolio-main"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline transition-colors"
-              >
-                GitHub.repository
-              </a>
-            </p>
-            <div className="mt-2 flex items-center space-x-4 text-xs text-muted-foreground font-mono">
-              <span className="flex items-center">
-                <Database className="h-3 w-3 mr-1 text-primary" />
-                Built: {currentYear}
-              </span>
-              <span className="flex items-center">
-                <Code2 className="h-3 w-3 mr-1 text-primary" />
-                Version: 1.0.0
-              </span>
-            </div>
-          </div>
-        </div>
+        <FooterText />
       </div>
     </footer>
   );

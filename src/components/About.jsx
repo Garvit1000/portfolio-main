@@ -74,37 +74,6 @@ const About = () => {
               </div>
             </div>
 
-          {/* What I Do Section */}
-          {/* <div className="group">
-            <div className="flex items-center gap-4 mb-3">
-              <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                Core Functions
-                <Code className="inline ml-2 h-5 w-5 text-primary" />
-              </h3>
-            </div>
-            
-            <p className="text-muted-foreground font-mono text-sm leading-relaxed max-w-2xl mb-4">
-              <span className="text-primary">{'// '}</span>
-              Key areas where I deliver exceptional results and drive innovation.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 rounded border border-primary/20 hover:border-primary/50 transition-colors">
-                  <div className="text-primary mt-1">
-                    {feature.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm font-mono mb-1">{feature.title}</h4>
-                    <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
-
             {/* Experience Section */}
             <div className="group">
               <div className="flex items-center gap-4 mb-3">
