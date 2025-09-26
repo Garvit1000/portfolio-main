@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
 import {personalInfo, projects, socialLinks} from '../data/mock';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom'; // Removed for compatibility
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -33,15 +33,14 @@ const Hero = () => {
     const fetchGitHubContributions = async (username) => {
         setLoading(true);
         setError(null);
-        
+
         try {
             const token = import.meta.env.VITE_GITHUB_TOKEN;
-            
+
             if (!token) {
                 throw new Error('GitHub token not found. Please add VITE_GITHUB_TOKEN to your .env file');
             }
 
-            // GraphQL query to get contribution data
             const query = `
                 query($username: String!) {
                     user(login: $username) {
@@ -91,7 +90,7 @@ const Hero = () => {
             }
 
             const data = await response.json();
-            
+
             if (data.errors) {
                 throw new Error(`GraphQL error: ${data.errors[0].message}`);
             }
@@ -99,15 +98,14 @@ const Hero = () => {
             const user = data.data.user;
             const contributionData = user.contributionsCollection.contributionCalendar;
 
-            // Flatten the weeks data
-            const contributionsArray = contributionData.weeks.flatMap(week => 
+            const contributionsArray = contributionData.weeks.flatMap(week =>
                 week.contributionDays.map(day => ({
                     date: day.date,
                     count: day.contributionCount,
-                    level: day.contributionLevel === 'NONE' ? 0 : 
-                           day.contributionLevel === 'FIRST_QUARTILE' ? 1 :
-                           day.contributionLevel === 'SECOND_QUARTILE' ? 2 :
-                           day.contributionLevel === 'THIRD_QUARTILE' ? 3 : 4
+                    level: day.contributionLevel === 'NONE' ? 0 :
+                        day.contributionLevel === 'FIRST_QUARTILE' ? 1 :
+                            day.contributionLevel === 'SECOND_QUARTILE' ? 2 :
+                                day.contributionLevel === 'THIRD_QUARTILE' ? 3 : 4
                 }))
             );
 
@@ -137,12 +135,10 @@ const Hero = () => {
     };
 
     useEffect(() => {
-        // Extract GitHub username from your socialLinks or set it directly
         const githubLink = socialLinks.find(link => link.name === 'github' || link.icon === 'github');
-        let username = 'octocat'; // fallback
-        
+        let username = 'octocat';
+
         if (githubLink && githubLink.url) {
-            // Extract username from GitHub URL
             const match = githubLink.url.match(/github\.com\/([^\/]+)/);
             if (match) {
                 username = match[1];
@@ -156,7 +152,7 @@ const Hero = () => {
         const colors = {
             0: 'bg-gray-100 dark:bg-gray-800',
             1: 'bg-green-200 dark:bg-green-900',
-            2: 'bg-green-300 dark:bg-green-700', 
+            2: 'bg-green-300 dark:bg-green-700',
             3: 'bg-green-400 dark:bg-green-600',
             4: 'bg-green-500 dark:bg-green-500'
         };
@@ -167,8 +163,8 @@ const Hero = () => {
         if (!contributions || !contributions.weeks) return null;
 
         return (
-            <div className="mt-6 p-4 bg-card/30 rounded-lg border border-primary/10 text-left">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+            <div className="mt-8 p-6 bg-card/30 backdrop-blur-sm rounded-xl border border-primary/10 text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
                     <h3 className="text-sm font-mono text-muted-foreground flex items-center">
                         <GitCommit className="mr-2 h-4 w-4" />
                         GitHub Activity
@@ -177,20 +173,20 @@ const Hero = () => {
                         {contributions.totalContributions} contributions in the last year
                     </div>
                 </div>
-                
+
                 <div className="flex gap-1 overflow-x-auto pb-2 justify-center sm:justify-start">
                     {contributions.weeks.map((week, weekIndex) => (
                         <div key={weekIndex} className="flex flex-col gap-1 flex-shrink-0">
                             {week.contributionDays.map((day, dayIndex) => {
                                 const level = day.contributionLevel === 'NONE' ? 0 :
-                                           day.contributionLevel === 'FIRST_QUARTILE' ? 1 :
-                                           day.contributionLevel === 'SECOND_QUARTILE' ? 2 :
-                                           day.contributionLevel === 'THIRD_QUARTILE' ? 3 : 4;
-                                
+                                    day.contributionLevel === 'FIRST_QUARTILE' ? 1 :
+                                        day.contributionLevel === 'SECOND_QUARTILE' ? 2 :
+                                            day.contributionLevel === 'THIRD_QUARTILE' ? 3 : 4;
+
                                 return (
                                     <div
                                         key={`${weekIndex}-${dayIndex}`}
-                                        className={`w-3 h-3 rounded-sm ${getContributionColor(level)} transition-all duration-200 hover:ring-1 hover:ring-primary cursor-pointer`}
+                                        className={`w-3 h-3 rounded-sm ${getContributionColor(level)} cursor-pointer`}
                                         title={`${day.contributionCount} contributions on ${day.date}`}
                                     />
                                 );
@@ -198,8 +194,8 @@ const Hero = () => {
                         </div>
                     ))}
                 </div>
-                
-                <div className="flex items-center justify-center sm:justify-start mt-4 text-xs text-muted-foreground font-mono">
+
+                <div className="flex items-center justify-center sm:justify-start mt-6 text-xs text-muted-foreground font-mono">
                     <div className="flex items-center gap-4">
                         <span>Less</span>
                         <div className="flex gap-1">
@@ -214,116 +210,147 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* GitHub Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-primary/10">
-                    <div className="text-center">
-                        <div className="text-lg font-bold text-primary font-mono">{contributions.stats.totalRepos}</div>
-                        <div className="text-xs text-muted-foreground">Repositories</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-lg font-bold text-primary font-mono">{contributions.stats.followers}</div>
-                        <div className="text-xs text-muted-foreground">Followers</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-lg font-bold text-primary font-mono">{contributions.stats.following}</div>
-                        <div className="text-xs text-muted-foreground">Following</div>
-                    </div>
+                <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-primary/10">
+                    {[
+                        { value: contributions.stats.totalRepos, label: 'Repositories' },
+                        { value: contributions.stats.followers, label: 'Followers' },
+                        { value: contributions.stats.following, label: 'Following' }
+                    ].map((stat, index) => (
+                        <div key={stat.label} className="text-center">
+                            <div className="text-xl font-bold text-primary font-mono">
+                                {stat.value}
+                            </div>
+                            <div className="text-xs text-muted-foreground font-mono">{stat.label}</div>
+                        </div>
+                    ))}
                 </div>
             </div>
         );
     };
 
     return (
-        <section id="hero" className="pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-8 sm:pb-12 md:pb-16 tech-section gpu-accelerated">
-            <div className="container-xl text-center">
-                <div className="space-y-4 sm:space-y-6 md:space-y-8">
+        <>
+            <style jsx>{`
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
-                    {/* Main Heading */}
-                    <div className="space-y-2 sm:space-y-3 md:space-y-4">
-                        <div className="relative">
-                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight font-mono gpu-accelerated">
-                                <span className="text-muted-foreground">{'>'}</span> Hi, I'm{' '}
-                                <span className="text-primary tech-text-glow">
-                                    {personalInfo.name}
-                                </span>
-                            </h1>
-                            <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-16 sm:w-24 md:w-32 h-0.5 bg-primary"></div>
-                        </div>
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground font-mono font-medium gpu-accelerated flex items-center justify-center">
-                            <Code2 className="inline mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                            {personalInfo.title}
-                        </p>
-                    </div>
+                .font-serif {
+                    font-family: 'Playfair Display', serif;
+                }
 
-                    {/* Bio */}
-                    <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto">
-                        <div className="rounded-lg p-3 sm:p-4 md:p-6 bg-card/50 backdrop-blur-sm border border-primary/10">
-                            <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-mono">
-                                <span className="text-primary">{'// '}</span>
-                                {personalInfo.bio}
+                .elegant-shadow {
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+                }
+            `}</style>
+
+            <section id="hero" className="pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-8 sm:pb-12 md:pb-16 tech-section gpu-accelerated">
+                <div className="container-xl text-center">
+                    <div className="space-y-6 sm:space-y-8 md:space-y-10">
+
+                        {/* Main Heading */}
+                        <div className="space-y-3 sm:space-y-4 md:space-y-6">
+                            <div className="relative">
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold
+                                             tracking-tight leading-tight">
+                                    <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
+                                    <span className="inline-block">Hi, I'm</span>{' '}
+                                    <span className="text-primary tech-text-glow inline-block">
+                                        {personalInfo.name}
+                                    </span>
+                                </h1>
+                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
+                                              h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                            </div>
+                            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-mono
+                                         font-medium flex items-center justify-center">
+                                <Code2 className="inline mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                                {personalInfo.title}
                             </p>
                         </div>
-                    </div>
 
-                    {/* GitHub Contributions Graph */}
-                    <div className="max-w-4xl mx-auto">
-                        {loading && (
-                            <div className="flex items-center justify-center p-8">
-                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                                <span className="ml-3 text-sm text-muted-foreground font-mono">Loading contributions...</span>
+                        {/* Bio */}
+                        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl mx-auto">
+                            <div className="rounded-2xl p-4 sm:p-6 md:p-8 bg-card/40 backdrop-blur-md border border-primary/10
+                                          elegant-shadow">
+                                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed
+                                             font-mono">
+                                    <span className="text-primary font-mono text-xs sm:text-sm md:text-base">{'// '}</span>
+                                    {personalInfo.bio}
+                                </p>
                             </div>
-                        )}
-                        
-                        {error && (
-                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                                <p className="text-sm text-red-500 font-mono">Error: {error}</p>
-                            </div>
-                        )}
+                        </div>
 
-                        {contributions && renderContributionGraph()}
-                    </div>
+                        {/* GitHub Contributions Graph */}
+                        <div className="max-w-5xl mx-auto">
+                            {loading && (
+                                <div className="flex items-center justify-center p-12">
+                                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
+                                    <span className="ml-4 text-sm text-muted-foreground font-mono">
+                                        Loading contributions...
+                                    </span>
+                                </div>
+                            )}
 
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4">
-                        <Button
-                            size="sm"
-                            onClick={() => scrollToSection('projects')}
-                            className="group rounded-lg tech-glow hover:tech-glow font-mono gpu-accelerated transition-all duration-100 w-full sm:w-auto text-xs sm:text-sm md:text-base px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3"
-                        >
-                            <Terminal className="mr-1.5 h-3 w-3 sm:h-4 sm:w-4" />
-                            ./view-projects
-                            <ArrowRight className="ml-1.5 h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-100 group-hover:translate-x-1" />
-                        </Button>
-                        <Link to="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing">
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            className="rounded-lg border-primary/50 hover:border-primary font-mono gpu-accelerated transition-all duration-100 w-full sm:w-auto text-xs sm:text-sm md:text-base px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3"
-                        >
-                            <Download className="mr-1.5 h-3 w-3 sm:h-4 sm:w-4" />
-                            View-resume.pdf
-                        </Button>
-                        </Link>
-                    </div>
+                            {error && (
+                                <div className="p-6 bg-red-500/10 border border-red-500/20 rounded-xl">
+                                    <p className="text-sm text-red-400 font-mono">Error: {error}</p>
+                                </div>
+                            )}
 
-                    {/* Social Links */}
-                    <div className="flex items-center justify-center space-x-3 sm:space-x-4 md:space-x-5 pt-2 sm:pt-3 md:pt-4">
-                        {socialLinks.map((social) => (
-                            <a
-                                key={social.name}
-                                href={social.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-muted-foreground hover:text-primary transition-all duration-100 p-2 sm:p-2.5 md:p-3 border border-primary/20 hover:border-primary rounded-lg hover:tech-glow gpu-accelerated"
-                                aria-label={social.name}
+                            {contributions && renderContributionGraph()}
+                        </div>
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-6">
+                            <Button
+                                size="lg"
+                                onClick={() => scrollToSection('projects')}
+                                className="rounded-xl tech-glow hover:tech-glow font-mono font-medium
+                                         w-full sm:w-auto text-sm sm:text-base md:text-lg
+                                         px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 elegant-shadow"
                             >
-                                {getSocialIcon(social.icon)}
+                                <Terminal className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                ./view-projects
+                                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                            </Button>
+                            <a href="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               className="inline-block">
+                                <Button
+                                    variant="outline"
+                                    size="lg"
+                                    className="rounded-xl border-primary/30 hover:border-primary font-mono font-medium
+                                             w-full sm:w-auto text-sm sm:text-base md:text-lg
+                                             px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 elegant-shadow hover:bg-primary/5"
+                                >
+                                    <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                    View-resume.pdf
+                                </Button>
                             </a>
-                        ))}
+                        </div>
+
+                        {/* Social Links */}
+                        <div className="flex items-center justify-center space-x-4 sm:space-x-5 md:space-x-6
+                                        pt-4 sm:pt-6 md:pt-8">
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.name}
+                                    href={social.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-muted-foreground hover:text-primary
+                                             p-3 sm:p-4 border border-primary/20 hover:border-primary rounded-xl
+                                             elegant-shadow hover:bg-primary/5"
+                                    aria-label={social.name}
+                                >
+                                    {getSocialIcon(social.icon)}
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 
