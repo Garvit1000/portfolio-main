@@ -76,7 +76,7 @@ git clone https://github.com/Garvit1000/portfolio-main.git
 cd portfolio-main
 
 # Install dependencies
-npm install
+npm install --legacy-peer-deps
 
 # Start development server
 npm run dev
