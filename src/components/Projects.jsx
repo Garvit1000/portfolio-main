@@ -32,15 +32,28 @@ const Projects = () => {
     };
 
     return (
+        <>
+        <style jsx>{`
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+                .font-serif {
+                    font-family: 'Playfair Display', serif;
+                }
+
+                .elegant-shadow {
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+                }
+            `}</style>
+
         <section id="projects" className="py-20 tech-section">
             <div className="container-xl">
                 <div className="text-center mb-16">
                     <div className="mb-4">
                         <span className="text-primary font-mono text-lg">{'>'} ls -la ~/projects</span>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-mono">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-serif ">
                         Featured{' '}
-                        <span className="text-primary tech-text-glow">
+                        <span className="text-primary tech-text-glow inline-block">
               Projects
             </span>
                     </h2>
@@ -72,7 +85,7 @@ const Projects = () => {
                         {filteredProjects.map((project) => {
                             const expanded = isExpanded(project.id);
                             const needsTruncation = project.description.length > 120;
-                            
+
                             return (
                                 <div key={project.id} className="group text-left">
                                     {/* Project Title with underline and italic */}
@@ -115,7 +128,7 @@ const Projects = () => {
                                             <span className="text-primary">{'// '}</span>
                                             {expanded ? project.description : truncateText(project.description)}
                                         </p>
-                                        
+
                                         {needsTruncation && (
                                             <button
                                                 onClick={() => toggleExpanded(project.id)}
@@ -164,6 +177,7 @@ const Projects = () => {
                 </div>
             </div>
         </section>
+            </>
     );
 };
 

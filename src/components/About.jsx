@@ -29,13 +29,26 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-muted/30 tech-section">
+      <>
+          <style jsx>{`
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+                .font-serif {
+                    font-family: 'Playfair Display', serif;
+                }
+
+                .elegant-shadow {
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+                }
+            `}</style>
+
+          <section id="about" className="py-20 bg-muted/30 tech-section">
       <div className="container-xl">
         <div className="text-center mb-16">
           <div className="mb-4">
             <span className="text-primary font-mono text-lg">{'>'} cat ~/about.md</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-mono">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-serif">
             About{' '}
             <span className="text-primary tech-text-glow">
               Developer
@@ -129,6 +142,7 @@ const About = () => {
         </div>
       </div>
     </section>
+          </>
   );
 };
 
