@@ -163,8 +163,8 @@ const Hero = () => {
         if (!contributions || !contributions.weeks) return null;
 
         return (
-            <div className="mt-8 p-6 bg-card/30 backdrop-blur-sm rounded-xl border border-primary/10 text-left">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
+            <div className="mt-6 p-4 bg-card/30 rounded-lg border border-primary/10 text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
                     <h3 className="text-sm font-mono text-muted-foreground flex items-center">
                         <GitCommit className="mr-2 h-4 w-4" />
                         GitHub Activity
@@ -280,13 +280,11 @@ const Hero = () => {
                         </div>
 
                         {/* GitHub Contributions Graph */}
-                        <div className="max-w-5xl mx-auto">
+                        <div className="max-w-4xl mx-auto">
                             {loading && (
-                                <div className="flex items-center justify-center p-12">
-                                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
-                                    <span className="ml-4 text-sm text-muted-foreground font-mono">
-                                        Loading contributions...
-                                    </span>
+                                <div className="flex items-center justify-center p-8">
+                                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                                    <span className="ml-3 text-sm text-muted-foreground font-mono">Loading contributions...</span>
                                 </div>
                             )}
 
