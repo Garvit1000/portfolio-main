@@ -1,36 +1,36 @@
 import React from 'react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Code, Monitor, Zap, Database, Terminal, Github, User, Briefcase } from 'lucide-react';
+import { Code, Monitor, Zap, Database, Terminal, Github, User, Briefcase, Code2, GitCommit } from 'lucide-react';
 import { personalInfo, experience } from '../data/mock';
 
 const About = () => {
-  const features = [
-    {
-      icon: <Code className="h-5 w-5" />,
-      title: "Clean Code",
-      description: "Writing maintainable, scalable code following industry best practices and modern standards."
-    },
-    {
-      icon: <Monitor className="h-5 w-5" />,
-      title: "UI/UX Focus",
-      description: "Creating intuitive interfaces with pixel-perfect design and seamless user experiences."
-    },
-    {
-      icon: <Zap className="h-5 w-5" />,
-      title: "Performance",
-      description: "Optimizing applications for speed, accessibility, and flawless user interactions."
-    },
-    {
-      icon: <Database className="h-5 w-5" />,
-      title: "System Design",
-      description: "Architecting robust solutions with scalable infrastructure and efficient workflows."
-    }
-  ];
+    const features = [
+        {
+            icon: <Code className="h-5 w-5" />,
+            title: "Clean Code",
+            description: "Writing maintainable, scalable code following industry best practices."
+        },
+        {
+            icon: <Monitor className="h-5 w-5" />,
+            title: "UI/UX Focus",
+            description: "Creating intuitive interfaces with seamless user experiences."
+        },
+        {
+            icon: <Zap className="h-5 w-5" />,
+            title: "Performance",
+            description: "Optimizing applications for speed and accessibility."
+        },
+        {
+            icon: <Database className="h-5 w-5" />,
+            title: "System Design",
+            description: "Architecting robust, scalable solutions."
+        }
+    ];
 
-  return (
-      <>
-          <style jsx>{`
+    return (
+        <>
+            <style jsx>{`
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
                 .font-serif {
@@ -42,108 +42,161 @@ const About = () => {
                 }
             `}</style>
 
-          <section id="about" className="py-20 bg-muted/30 tech-section">
-      <div className="container-xl">
-        <div className="text-center mb-16">
-          <div className="mb-4">
-            <span className="text-primary font-mono text-lg">{'>'} cat ~/about.md</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-serif">
-            About{' '}
-            <span className="text-primary tech-text-glow">
-              Developer
-            </span>
-          </h2>
-
-        </div>
-
-        {/* Minimalistic About List - Left aligned within centered container */}
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-12 text-left">
-
-            {/* Skills Section */}
-            <div className="group">
-              <div className="flex items-center gap-4 mb-3">
-                <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                  Technical Skills
-                  <Terminal className="inline ml-2 h-5 w-5 text-primary" />
-                </h3>
-              </div>
-
-              <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-4">
-                <span className="text-primary">{'// '}</span>
-                Technologies and frameworks I work with on a daily basis.
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {personalInfo.skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Experience Section */}
-            <div className="group">
-              <div className="flex items-center gap-4 mb-3">
-                <h3 className="text-2xl font-mono font-bold italic underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary transition-colors">
-                  Work Experience
-                  <Briefcase className="inline ml-2 h-5 w-5 text-primary" />
-                </h3>
-              </div>
-
-              <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-4">
-                <span className="text-primary">{'// '}</span>
-                Professional journey and key contributions across different organizations.
-              </p>
-
-              <div className="space-y-6">
-                {experience.map((exp, index) => (
-                  <div key={exp.id} className="border-l-2 border-primary/30 pl-4 relative">
-                    <div className="absolute -left-1.5 top-1 w-3 h-3 bg-primary rounded-full"></div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2">
-                      <div>
-                        <h4 className="font-bold font-mono text-lg">{exp.position}</h4>
-                        <div className="text-primary font-medium font-mono text-sm">{exp.company}</div>
-                      </div>
-                      <span className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20 w-fit mt-1 sm:mt-0">
-                        {exp.period}
-                      </span>
+            <section id="about" className="py-20 tech-section">
+                <div className="container-xl">
+                    {/* Header Section */}
+                    <div className="text-center mb-16">
+                        <div className="space-y-6">
+                            <div className="mb-4">
+                              <span className="text-primary font-mono text-lg flex items-center justify-center">
+                                  <Terminal className="mr-2 h-4 w-4" />
+                                  {'>'} cat ~/about.md
+                              </span>
+                            </div>
+                            <div className="relative">
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6">
+                                    About{' '}
+                                    <span className="text-primary tech-text-glow inline-block">
+                                      Developer
+                                  </span>
+                                </h2>
+                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
+                                            h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="text-muted-foreground font-mono text-sm leading-relaxed">
-                      <span className="text-primary">{'// '}</span>
-                      <div className="ml-4">
-                        {exp.description.split('\n').map((line, lineIndex) => (
-                          <div key={lineIndex} className="mb-1">
-                            {line}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+                    <div className="max-w-4xl mx-auto space-y-16">
 
-        {/* Connect Button */}
-        <div className="text-center mt-16">
-          <Button variant="outline" size="lg" className="rounded-lg border-primary/50 hover:border-primary font-mono hover:tech-glow">
-            <Github className="mr-2 h-4 w-4" />
-            git clone --about-me
-          </Button>
-        </div>
-      </div>
-    </section>
-          </>
-  );
+                        {/* Skills Section */}
+                        <div className="text-left">
+                            <div className="flex items-center gap-3 mb-6">
+                                <Code2 className="h-5 w-5 text-primary" />
+                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                           underline-offset-4 hover:decoration-primary transition-colors">
+                                    Technical Skills
+                                </h3>
+                            </div>
+
+                            <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-6">
+                                <span className="text-primary">{'// '}</span>
+                                Technologies and frameworks I work with daily
+                            </p>
+
+                            <div className="flex flex-wrap gap-2">
+                                {personalInfo.skills.map((skill, index) => (
+                                    <span
+                                        key={index}
+                                        className="text-xs font-mono text-primary/80 bg-primary/10 px-3 py-2
+                                               rounded border border-primary/20 hover:bg-primary/20
+                                               transition-colors cursor-default"
+                                    >
+                                      {skill}
+                                  </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* What I Do Section */}
+                        <div className="text-left">
+                            <div className="flex items-center gap-3 mb-6">
+                                <Zap className="h-5 w-5 text-primary" />
+                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                           underline-offset-4 hover:decoration-primary transition-colors">
+                                    What I Do
+                                </h3>
+                            </div>
+
+                            <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-8">
+                                <span className="text-primary">{'// '}</span>
+                                Core areas of expertise and focus
+                            </p>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {features.map((feature, index) => (
+                                    <div key={index} className="flex gap-4 p-6 rounded-lg border border-primary/10
+                                                             hover:border-primary/30 hover:bg-primary/5
+                                                             transition-all duration-300">
+                                        <div className="text-primary mt-1">
+                                            {feature.icon}
+                                        </div>
+                                        <div>
+                                            <h4 className="font-mono font-semibold text-lg mb-2">
+                                                {feature.title}
+                                            </h4>
+                                            <p className="text-muted-foreground text-sm font-mono leading-relaxed">
+                                                {feature.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Work Experience Section */}
+                        <div className="text-left">
+                            <div className="flex items-center gap-3 mb-6">
+                                <Briefcase className="h-5 w-5 text-primary" />
+                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                           underline-offset-4 hover:decoration-primary transition-colors">
+                                    Work Experience
+                                </h3>
+                            </div>
+
+                            <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-8">
+                                <span className="text-primary">{'// '}</span>
+                                Professional journey and key contributions
+                            </p>
+
+                            <div className="space-y-8">
+                                {experience.map((exp, index) => (
+                                    <div key={exp.id} className="relative pl-8 border-l-2 border-primary/20">
+                                        <div className="absolute -left-2 top-2 w-4 h-4 bg-primary rounded-full
+                                                    border-4 border-background"></div>
+
+                                        <div className="pb-8">
+                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
+                                                <div>
+                                                    <h4 className="font-mono font-bold text-xl mb-1">
+                                                        {exp.position}
+                                                    </h4>
+                                                    <div className="text-primary font-medium font-mono">
+                                                        {exp.company}
+                                                    </div>
+                                                </div>
+                                                <span className="text-xs font-mono text-primary/80 bg-primary/10
+                                                             px-3 py-1 rounded border border-primary/20
+                                                             w-fit mt-2 sm:mt-0">
+                                                  {exp.period}
+                                              </span>
+                                            </div>
+
+                                            <p className="text-muted-foreground font-mono text-sm leading-relaxed">
+                                                <span className="text-primary">{'// '}</span>
+                                                {exp.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Connect Button */}
+                    <div className="text-center mt-16">
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary"
+                        >
+                            <Github className="mr-2 h-4 w-4" />
+                            git clone --about-me
+                        </Button>
+                    </div>
+                </div>
+            </section>
+        </>
+    );
 };
 
 export default About;

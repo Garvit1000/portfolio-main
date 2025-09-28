@@ -1,4 +1,7 @@
 // Mock data for Garvit's Portfolio
+import flexhunt from '../assets/flexhunt.png'
+import food from '../assets/food.jpeg'
+import freshstart from '../assets/freshstart.jpeg'
 
 export const personalInfo = {
   name: "Garvit Joshi",
@@ -30,7 +33,7 @@ export const projects = [
     technologies: ["React", "JavaScript", "Tailwind CSS", "Node.js", "Express"],
     liveUrl: "https://freshstartai-1.onrender.com/",
     githubUrl: "https://github.com/Garvit1000/freshstartAI",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    image: freshstart,
     featured: true
   },
   {
@@ -40,7 +43,7 @@ export const projects = [
     technologies: ["React", "JavaScript", "CSS3", "Firebase"],
     liveUrl: "https://www.flexhunt.co/",
     githubUrl: "https://github.com/Garvit1000/flexhunt.git",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+    image: flexhunt,
     featured: true
   },
   {
@@ -60,7 +63,7 @@ export const projects = [
     technologies: ["React", "CSS", "MongoDB","Node.js", "Express"],
     liveUrl: "https://github.com/Garvit1000/food-delivery-website.git",
     githubUrl: "https://github.com/Garvit1000/food-delivery-website.git",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop",
+    image: food,
     featured: false
   },
   {

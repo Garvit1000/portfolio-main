@@ -3,7 +3,6 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
 import {personalInfo, projects, socialLinks} from '../data/mock';
-// import {Link} from 'react-router-dom'; // Removed for compatibility
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -163,18 +162,21 @@ const Hero = () => {
         if (!contributions || !contributions.weeks) return null;
 
         return (
-            <div className="mt-6 p-4 bg-card/30 rounded-lg border border-primary/10 text-left">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
-                    <h3 className="text-sm font-mono text-muted-foreground flex items-center">
-                        <GitCommit className="mr-2 h-4 w-4" />
+            <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                <div className="flex items-center gap-3 mb-6">
+                    <GitCommit className="h-5 w-5 text-primary" />
+                    <h3 className="font-mono font-bold text-xl underline decoration-primary/50 decoration-2
+                                 underline-offset-4 hover:decoration-primary transition-colors">
                         GitHub Activity
                     </h3>
-                    <div className="text-xs text-muted-foreground font-mono">
-                        {contributions.totalContributions} contributions in the last year
-                    </div>
                 </div>
 
-                <div className="flex gap-1 overflow-x-auto pb-2 justify-center sm:justify-start">
+                <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-6">
+                    <span className="text-primary">{'// '}</span>
+                    {contributions.totalContributions} contributions in the last year
+                </p>
+
+                <div className="flex gap-1 overflow-x-auto pb-4 justify-center">
                     {contributions.weeks.map((week, weekIndex) => (
                         <div key={weekIndex} className="flex flex-col gap-1 flex-shrink-0">
                             {week.contributionDays.map((day, dayIndex) => {
@@ -195,7 +197,7 @@ const Hero = () => {
                     ))}
                 </div>
 
-                <div className="flex items-center justify-center sm:justify-start mt-6 text-xs text-muted-foreground font-mono">
+                <div className="flex items-center justify-center mt-6 text-xs text-muted-foreground font-mono">
                     <div className="flex items-center gap-4">
                         <span>Less</span>
                         <div className="flex gap-1">
@@ -210,7 +212,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-primary/10">
+                <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary/20">
                     {[
                         { value: contributions.stats.totalRepos, label: 'Repositories' },
                         { value: contributions.stats.followers, label: 'Followers' },
@@ -242,45 +244,46 @@ const Hero = () => {
                 }
             `}</style>
 
-            <section id="hero" className="pt-2 sm:pt-4 md:pt-6 lg:pt-8 pb-8 sm:pb-12 md:pb-16 tech-section gpu-accelerated">
-                <div className="container-xl text-center">
-                    <div className="space-y-6 sm:space-y-8 md:space-y-10">
+            <section id="hero" className="py-20 tech-section">
+                <div className="container-xl">
+                    <div className="max-w-4xl mx-auto">
 
                         {/* Main Heading */}
-                        <div className="space-y-3 sm:space-y-4 md:space-y-6">
-                            <div className="relative">
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold
-                                             tracking-tight leading-tight">
-                                    <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
-                                    <span className="inline-block">Hi, I'm</span>{' '}
-                                    <span className="text-primary tech-text-glow inline-block">
-                                        {personalInfo.name}
-                                    </span>
-                                </h1>
-                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
-                                              h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                        <div className="text-center mb-16">
+                            <div className="space-y-6">
+                                <div className="relative">
+                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold
+                                                 tracking-tight leading-tight">
+                                        <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
+                                        <span className="inline-block">Hi, I'm</span>{' '}
+                                        <span className="text-primary tech-text-glow inline-block">
+                                            {personalInfo.name}
+                                        </span>
+                                    </h1>
+                                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
+                                                  h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                                </div>
+                                <div className="flex items-center justify-center gap-3 mt-8">
+                                    <Code2 className="h-5 w-5 text-primary" />
+                                    <p className="text-lg sm:text-xl text-muted-foreground font-mono font-medium">
+                                        {personalInfo.title}
+                                    </p>
+                                </div>
                             </div>
-                            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-mono
-                                         font-medium flex items-center justify-center">
-                                <Code2 className="inline mr-3 h-5 w-5 sm:h-6 sm:w-6" />
-                                {personalInfo.title}
-                            </p>
                         </div>
 
                         {/* Bio */}
-                        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl mx-auto">
-                            <div className="rounded-2xl p-4 sm:p-6 md:p-8 bg-card/40 backdrop-blur-md border border-primary/10
-                                          elegant-shadow">
-                                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed
-                                             font-mono">
-                                    <span className="text-primary font-mono text-xs sm:text-sm md:text-base">{'// '}</span>
+                        <div className="mb-16">
+                            <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
+                                    <span className="text-primary font-mono">{'// '}</span>
                                     {personalInfo.bio}
                                 </p>
                             </div>
                         </div>
 
-                        {/* GitHub Contributions Graph */}
-                        <div className="max-w-4xl mx-auto">
+                        {/* GitHub Contributions */}
+                        <div className="mb-16">
                             {loading && (
                                 <div className="flex items-center justify-center p-8">
                                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -289,7 +292,7 @@ const Hero = () => {
                             )}
 
                             {error && (
-                                <div className="p-6 bg-red-500/10 border border-red-500/20 rounded-xl">
+                                <div className="p-6 border border-red-500/20 rounded-lg">
                                     <p className="text-sm text-red-400 font-mono">Error: {error}</p>
                                 </div>
                             )}
@@ -298,47 +301,41 @@ const Hero = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-6">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
                             <Button
                                 size="lg"
                                 onClick={() => scrollToSection('projects')}
-                                className="rounded-xl tech-glow hover:tech-glow font-mono font-medium
-                                         w-full sm:w-auto text-sm sm:text-base md:text-lg
-                                         px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 elegant-shadow"
+                                className="transition-all rounded-lg font-mono w-full sm:w-auto"
                             >
-                                <Terminal className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                <Terminal className="mr-2 h-4 w-4" />
                                 ./view-projects
-                                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
                             <a href="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing"
                                target="_blank"
                                rel="noopener noreferrer"
-                               className="inline-block">
+                               className="inline-block w-full sm:w-auto">
                                 <Button
                                     variant="outline"
                                     size="lg"
-                                    className="rounded-xl border-primary/30 hover:border-primary font-mono font-medium
-                                             w-full sm:w-auto text-sm sm:text-base md:text-lg
-                                             px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 elegant-shadow hover:bg-primary/5"
+                                    className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary w-full"
                                 >
-                                    <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                    <Download className="mr-2 h-4 w-4" />
                                     View-resume.pdf
                                 </Button>
                             </a>
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex items-center justify-center space-x-4 sm:space-x-5 md:space-x-6
-                                        pt-4 sm:pt-6 md:pt-8">
+                        <div className="flex items-center justify-center space-x-6">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-muted-foreground hover:text-primary
-                                             p-3 sm:p-4 border border-primary/20 hover:border-primary rounded-xl
-                                             elegant-shadow hover:bg-primary/5"
+                                    className="text-muted-foreground hover:text-primary transition-colors
+                                             p-3 border border-primary/20 hover:border-primary rounded-lg"
                                     aria-label={social.name}
                                 >
                                     {getSocialIcon(social.icon)}
