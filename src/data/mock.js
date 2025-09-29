@@ -2,6 +2,8 @@
 import flexhunt from '../assets/flexhunt.png'
 import food from '../assets/food.jpeg'
 import freshstart from '../assets/freshstart.jpeg'
+import mindflow from '../assets/mindflow.png'
+import cli from '../assets/cli.png'
 
 export const personalInfo = {
   name: "Garvit Joshi",
@@ -53,7 +55,7 @@ export const projects = [
     technologies: ["React", "PostgrSql", "Tailwind CSS","CLI"],
     liveUrl: "https://www.npmjs.com/package/create-vite-shadcn-app",
     githubUrl: "https://github.com/Garvit1000/create-vite-shadcn-app.git",
-    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop",
+    image: cli,
     featured: false
   },
   {
@@ -73,7 +75,7 @@ export const projects = [
     technologies: ["ReactNative", "REST API", "Tailwind CSS", "Expo"],
     liveUrl: "https://recipe-finder.example.com",
     githubUrl: "https://github.com/garvit/recipe-finder",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
+    image: mindflow,
     featured: false
   }
 ];

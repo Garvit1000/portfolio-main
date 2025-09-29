@@ -249,29 +249,48 @@ const Hero = () => {
                     <div className="max-w-4xl mx-auto">
 
                         {/* Main Heading */}
-                        <div className="text-center mb-16">
-                            <div className="space-y-6">
-                                <div className="relative">
-                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold
-                                                 tracking-tight leading-tight">
-                                        <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
-                                        <span className="inline-block">Hi, I'm</span>{' '}
-                                        <span className="text-primary tech-text-glow inline-block">
-                                            {personalInfo.name}
-                                        </span>
-                                    </h1>
-                                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
-                                                  h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                        {/* Main Heading with Avatar */}
+                        <div className="mb-16">
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                                {/* Avatar */}
+                                <div className="flex-shrink-0">
+                                    {contributions?.user?.avatarUrl ? (
+                                        <div className="relative">
+                                            <img
+                                                src={contributions.user.avatarUrl}
+                                                alt={personalInfo.name}
+                                                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 elegant-shadow"
+                                            />
+                                            <div className="absolute inset-0 rounded-full border-4 border-primary/50 animate-pulse"></div>
+                                        </div>
+                                    ) : (
+                                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
+                                    )}
                                 </div>
-                                <div className="flex items-center justify-center gap-3 mt-8">
-                                    <Code2 className="h-5 w-5 text-primary" />
-                                    <p className="text-lg sm:text-xl text-muted-foreground font-mono font-medium">
-                                        {personalInfo.title}
-                                    </p>
+
+                                {/* Name and Title */}
+                                <div className="text-center md:text-left space-y-6">
+                                    <div className="relative">
+                                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold
+                                                     tracking-tight leading-tight">
+                                            <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
+                                            <span className="inline-block">Hi, I'm</span>{' '}
+                                            <span className="text-primary tech-text-glow inline-block">
+                                                {personalInfo.name}
+                                            </span>
+                                        </h1>
+                                        <div className="absolute -bottom-2 left-0 md:left-8 w-20 sm:w-28 md:w-36
+                                                      h-0.5 bg-gradient-to-r from-primary via-primary to-transparent"></div>
+                                    </div>
+                                    <div className="flex items-center justify-center md:justify-start gap-3 mt-8">
+                                        <Code2 className="h-5 w-5 text-primary" />
+                                        <p className="text-lg sm:text-xl text-muted-foreground font-mono font-medium">
+                                            {personalInfo.title}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         {/* Bio */}
                         <div className="mb-16">
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
