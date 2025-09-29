@@ -242,13 +242,13 @@ const Hero = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
+               
             `}</style>
 
             <section id="hero" className="py-20 tech-section">
                 <div className="container-xl">
                     <div className="max-w-4xl mx-auto">
 
-                        {/* Main Heading */}
                         {/* Main Heading with Avatar */}
                         <div className="mb-16">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
