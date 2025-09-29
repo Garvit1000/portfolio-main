@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
 import {personalInfo, projects, socialLinks} from '../data/mock';
+import { TextEffect } from './motion-primitives/text-effect.jsx' ;
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -276,7 +277,9 @@ const Hero = () => {
                                             <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
                                             <span className="inline-block">Hi, I'm</span>{' '}
                                             <span className="text-primary tech-text-glow inline-block">
+                                                 <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
                                                 {personalInfo.name}
+                                                 </TextEffect>
                                             </span>
                                         </h1>
                                         <div className="absolute -bottom-2 left-0 md:left-8 w-20 sm:w-28 md:w-36
@@ -293,11 +296,16 @@ const Hero = () => {
                         </div>
                         {/* Bio */}
                         <div className="mb-16">
+
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+
                                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
-                                    <span className="text-primary font-mono">{'// '}</span>
+                                    {/*<span className="text-primary font-mono">{'// '}</span>*/}
+                                    <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
                                     {personalInfo.bio}
+                                    </TextEffect>
                                 </p>
+
                             </div>
                         </div>
 
