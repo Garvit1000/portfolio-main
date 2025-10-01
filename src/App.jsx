@@ -9,6 +9,7 @@ import Projects from "./components/Projects";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const Portfolio = () => {
   return (
@@ -35,6 +36,7 @@ function App() {
           </Routes>
         </BrowserRouter>
         <Toaster />
+        <SpeedInsights />
       </div>
     </ThemeProvider>
   );

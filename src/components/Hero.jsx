@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
-import {personalInfo, projects, socialLinks} from '../data/mock';
-import { TextEffect } from './motion-primitives/text-effect.jsx' ;
+import { personalInfo, projects, socialLinks } from '../data/mock';
+import { TextEffect } from './motion-primitives/text-effect.jsx';
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -249,6 +249,21 @@ const Hero = () => {
             <section id="hero" className="py-20 tech-section">
                 <div className="container-xl">
                     <div className="max-w-4xl mx-auto">
+                        {/*peerlist launchpad*/}
+                        {/* <div className="flex justify-center mb-8">
+                            <a
+                                href="https://peerlist.io/garvit1000/project/portfolio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block hover:opacity-80 transition-opacity"
+                            >
+                                <img
+                                    src="https://peerlist.io/api/v1/projects/embed/PRJHP6L99RNGPP8EL16QE66L8QMQM9?showUpvote=false&theme=light"
+                                    alt="Portfolio on Peerlist"
+                                    style={{ width: 'auto', height: '72px' }}
+                                />
+                            </a>
+                        </div> */}
 
                         {/* Main Heading with Avatar */}
                         <div className="mb-16">
@@ -277,9 +292,9 @@ const Hero = () => {
                                             <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
                                             <span className="inline-block">Hi, I'm</span>{' '}
                                             <span className="text-primary tech-text-glow inline-block">
-                                                 <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
-                                                {personalInfo.name}
-                                                 </TextEffect>
+                                                <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
+                                                    {personalInfo.name}
+                                                </TextEffect>
                                             </span>
                                         </h1>
                                         <div className="absolute -bottom-2 left-0 md:left-8 w-20 sm:w-28 md:w-36
@@ -302,7 +317,7 @@ const Hero = () => {
                                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
                                     {/*<span className="text-primary font-mono">{'// '}</span>*/}
                                     <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
-                                    {personalInfo.bio}
+                                        {personalInfo.bio}
                                     </TextEffect>
                                 </p>
 
@@ -339,9 +354,9 @@ const Hero = () => {
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
                             <a href="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               className="inline-block w-full sm:w-auto">
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block w-full sm:w-auto">
                                 <Button
                                     variant="outline"
                                     size="lg"

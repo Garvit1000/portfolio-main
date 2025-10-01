@@ -140,22 +140,6 @@ const Contact = () => {
                     </a>
                 </div>
             </div>
-
-            {/*peerlist launchpad*/}
-            {/*<div className="flex justify-center mb-8">*/}
-            {/*    <a*/}
-            {/*        href="https://peerlist.io/garvit1000/project/portfolio"*/}
-            {/*        target="_blank"*/}
-            {/*        rel="noopener noreferrer"*/}
-            {/*        className="inline-block hover:opacity-80 transition-opacity"*/}
-            {/*    >*/}
-            {/*        <img*/}
-            {/*            src="https://peerlist.io/api/v1/projects/embed/PRJHP6L99RNGPP8EL16QE66L8QMQM9?showUpvote=false&theme=light"*/}
-            {/*            alt="Portfolio on Peerlist"*/}
-            {/*            style={{ width: 'auto', height: '72px' }}*/}
-            {/*        />*/}
-            {/*    </a>*/}
-            {/*</div>*/}
         </section>
             </>
     );
