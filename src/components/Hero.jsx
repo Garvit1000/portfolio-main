@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
@@ -9,6 +9,25 @@ const Hero = () => {
     const [contributions, setContributions] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        elements?.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, []);
 
     const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
@@ -243,10 +262,27 @@ const Hero = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
+
+                .fade-in-element {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .fade-in-element.animate-in {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
+                .fade-in-element:nth-child(2) { transition-delay: 0.2s; }
+                .fade-in-element:nth-child(3) { transition-delay: 0.3s; }
+                .fade-in-element:nth-child(4) { transition-delay: 0.4s; }
                
             `}</style>
 
-            <section id="hero" className="py-20 tech-section">
+            <section id="hero" className="py-20 tech-section" ref={sectionRef}>
                 <div className="container-xl">
                     <div className="max-w-4xl mx-auto">
                         {/*peerlist launchpad*/}
@@ -266,7 +302,7 @@ const Hero = () => {
                         </div> */}
 
                         {/* Main Heading with Avatar */}
-                        <div className="mb-16">
+                        <div className="mb-16 fade-in-element">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
                                 {/* Avatar */}
                                 <div className="flex-shrink-0">
@@ -310,7 +346,7 @@ const Hero = () => {
                             </div>
                         </div>
                         {/* Bio */}
-                        <div className="mb-16">
+                        <div className="mb-16 fade-in-element">
 
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
 
@@ -325,7 +361,7 @@ const Hero = () => {
                         </div>
 
                         {/* GitHub Contributions */}
-                        <div className="mb-16">
+                        <div className="mb-16 fade-in-element">
                             {loading && (
                                 <div className="flex items-center justify-center p-8">
                                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -343,7 +379,7 @@ const Hero = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 fade-in-element">
                             <Button
                                 size="lg"
                                 onClick={() => scrollToSection('projects')}
@@ -369,7 +405,7 @@ const Hero = () => {
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex items-center justify-center space-x-6">
+                        <div className="flex items-center justify-center space-x-6 fade-in-element">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}

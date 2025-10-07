@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Mail, MapPin, Github, Linkedin, Twitter, Terminal, User } from 'lucide-react';
 import { Button } from './ui/button';
 import { personalInfo, socialLinks } from '../data/mock';
 
 const Contact = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        elements?.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, []);
     const getSocialIcon = (iconName) => {
         switch (iconName) {
             case 'github':
@@ -29,15 +48,32 @@ const Contact = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
+
+                .fade-in-element {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .fade-in-element.animate-in {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
+                .fade-in-element:nth-child(2) { transition-delay: 0.2s; }
+                .fade-in-element:nth-child(3) { transition-delay: 0.3s; }
+                .fade-in-element:nth-child(4) { transition-delay: 0.4s; }
                
             `}</style>
-        <section id="contact" className="py-20 tech-section">
+        <section id="contact" className="py-20 tech-section" ref={sectionRef}>
             <div className="container-xl">
                 <div className="text-center mb-16">
-                    <div className="mb-4">
+                    <div className="mb-4 fade-in-element">
                         <span className="text-primary font-mono text-lg">{'>'} ./initiate-contact.sh</span>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-serif">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 font-serif fade-in-element">
                         Get In{' '}
                         <span className="text-primary tech-text-glow">
               Touch
@@ -50,7 +86,7 @@ const Contact = () => {
                     <div className="space-y-12 text-left">
 
                         {/* Contact Info Section */}
-                        <div className="group">
+                        <div className="group fade-in-element">
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                                 <div className="flex items-center gap-4 mb-4">
                                     <User className="h-5 w-5 text-primary" />
@@ -91,7 +127,7 @@ const Contact = () => {
                         </div>
 
                         {/* Social Links Section */}
-                        <div className="group">
+                        <div className="group fade-in-element">
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                                 <div className="flex items-center gap-4 mb-4">
                                     <Terminal className="h-5 w-5 text-primary" />
@@ -127,7 +163,7 @@ const Contact = () => {
                 </div>
 
                 {/* Connect Button */}
-                <div className="text-center mt-16">
+                <div className="text-center mt-16 fade-in-element">
                     <a href={`mailto:${personalInfo.email}`}>
                         <Button
                             variant="outline"

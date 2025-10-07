@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Github, Star, Terminal, ExternalLink, ChevronDown, ChevronUp, Code2, GitCommit, Image as ImageIcon } from 'lucide-react';
 import { projects } from '../data/mock';
@@ -7,6 +7,25 @@ import {Link} from 'react-router-dom';
 const Projects = () => {
     const [filter, setFilter] = useState('all');
     const [expandedProjects, setExpandedProjects] = useState(new Set());
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        elements?.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, [filter]);
 
     const filteredProjects = filter === 'all'
         ? projects
@@ -43,20 +62,38 @@ const Projects = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
+
+                .fade-in-element {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .fade-in-element.animate-in {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
+                .fade-in-element:nth-child(2) { transition-delay: 0.2s; }
+                .fade-in-element:nth-child(3) { transition-delay: 0.25s; }
+                .fade-in-element:nth-child(4) { transition-delay: 0.3s; }
+                .fade-in-element:nth-child(5) { transition-delay: 0.35s; }
             `}</style>
 
-            <section id="projects" className="py-20 tech-section">
+            <section id="projects" className="py-20 tech-section" ref={sectionRef}>
                 <div className="container-xl">
                     {/* Header Section */}
                     <div className="text-center mb-16">
                         <div className="space-y-6">
-                            <div className="mb-4">
+                            <div className="mb-4 fade-in-element">
                                 <span className="text-primary font-mono text-lg flex items-center justify-center">
                                     <Terminal className="mr-2 h-4 w-4" />
                                     {'>'} ls -la ~/projects
                                 </span>
                             </div>
-                            <div className="relative">
+                            <div className="relative fade-in-element">
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6">
                                     Featured{' '}
                                     <span className="text-primary tech-text-glow inline-block">
@@ -70,7 +107,7 @@ const Projects = () => {
                     </div>
 
                     {/* Filter Buttons */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-12">
+                    <div className="flex flex-wrap justify-center gap-4 mb-12 fade-in-element">
                         <Button
                             variant={filter === 'all' ? 'default' : 'outline'}
                             onClick={() => setFilter('all')}
@@ -96,7 +133,7 @@ const Projects = () => {
                             const needsTruncation = project.description.length > 120;
 
                             return (
-                                <div key={project.id} className="group">
+                                <div key={project.id} className="group fade-in-element">
 
                                     {/* Project Image */}
                                     <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5
@@ -214,7 +251,7 @@ const Projects = () => {
                     </div>
 
                     {/* View More Button */}
-                    <div className="text-center mt-16">
+                    <div className="text-center mt-16 fade-in-element">
                         <Link to="https://github.com/Garvit1000">
                             <Button
                                 variant="outline"
