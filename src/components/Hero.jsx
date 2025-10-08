@@ -4,6 +4,8 @@ import { Badge } from './ui/badge';
 import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
 import { personalInfo, projects, socialLinks } from '../data/mock';
 import { TextEffect } from './motion-primitives/text-effect.jsx';
+import { LampContainer } from './ui/lamp.jsx';
+import { motion } from 'motion/react';
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -282,67 +284,88 @@ const Hero = () => {
                
             `}</style>
 
-            <section id="hero" className="py-20 tech-section" ref={sectionRef}>
+            <section id="hero" className="pt-8 pb-20 tech-section relative" ref={sectionRef}>
                 <div className="container-xl">
                     <div className="max-w-4xl mx-auto">
-                        {/*peerlist launchpad*/}
-                        {/* <div className="flex justify-center mb-8">
-                            <a
-                                href="https://peerlist.io/garvit1000/project/portfolio"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block hover:opacity-80 transition-opacity"
-                            >
-                                <img
-                                    src="https://peerlist.io/api/v1/projects/embed/PRJHP6L99RNGPP8EL16QE66L8QMQM9?showUpvote=false&theme=light"
-                                    alt="Portfolio on Peerlist"
-                                    style={{ width: 'auto', height: '72px' }}
-                                />
-                            </a>
-                        </div> */}
 
-                        {/* Main Heading with Avatar */}
+                     {/* Main Heading with Avatar - WITH LAMP EFFECT */}
                         <div className="mb-16 fade-in-element">
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-                                {/* Avatar */}
-                                <div className="flex-shrink-0">
-                                    {contributions?.user?.avatarUrl ? (
-                                        <div className="relative">
-                                            <img
-                                                src={contributions.user.avatarUrl}
-                                                alt={personalInfo.name}
-                                                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 elegant-shadow"
-                                            />
-                                            <div className="absolute inset-0 rounded-full border-4 border-primary/50 animate-pulse"></div>
-                                        </div>
-                                    ) : (
-                                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
-                                    )}
+                            <div className="relative flex min-h-[400px] flex-col items-center justify-center overflow-hidden bg-background w-full rounded-md">
+                                {/* Simple Lamp Effect - No animations */}
+                                <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
+                                    {/* Left cone gradient */}
+                                    <div
+                                        style={{
+                                            backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
+                                        }}
+                                        className="absolute inset-auto right-1/2 h-56 w-[30rem] bg-gradient-conic from-primary via-transparent to-transparent [--conic-position:from_70deg_at_center_top]">
+                                        <div className="absolute w-[100%] left-0 bg-background h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+                                        <div className="absolute w-40 h-[100%] left-0 bg-background bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+                                    </div>
+                                    
+                                    {/* Right cone gradient */}
+                                    <div
+                                        style={{
+                                            backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
+                                        }}
+                                        className="absolute inset-auto left-1/2 h-56 w-[30rem] bg-gradient-conic from-transparent via-transparent to-primary [--conic-position:from_290deg_at_center_top]">
+                                        <div className="absolute w-40 h-[100%] right-0 bg-background bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
+                                        <div className="absolute w-[100%] right-0 bg-background h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+                                    </div>
+                                    
+                                    {/* Blur effects */}
+                                    <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-background blur-2xl"></div>
+                                    <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-primary opacity-50 blur-3xl"></div>
+                                    <div className="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-primary/80 blur-2xl"></div>
+                                    <div className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-primary/80"></div>
+                                    <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-background"></div>
                                 </div>
 
-                                {/* Name and Title */}
-                                <div className="text-center md:text-left space-y-6">
-                                    <div className="relative">
-                                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold
-                                                     tracking-tight leading-tight">
-                                            <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
-                                            <span className="inline-block">Hi, I'm</span>{' '}
-                                            <span className="text-primary tech-text-glow inline-block">
-                                                <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
-                                                    {personalInfo.name}
-                                                </TextEffect>
-                                            </span>
-                                        </h1>
-                                        <div className="absolute -bottom-2 left-0 md:left-8 w-20 sm:w-28 md:w-36
-                                                      h-0.5 bg-gradient-to-r from-primary via-primary to-transparent"></div>
+                                {/* Content */}
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.5, duration: 0.6 }}
+                                    className="relative z-50 flex -translate-y-40 flex-col items-center px-5"
+                                >
+                                    <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                                        {/* Avatar */}
+                                        <div className="flex-shrink-0">
+                                            {contributions?.user?.avatarUrl ? (
+                                                <div className="relative">
+                                                    <img
+                                                        src={contributions.user.avatarUrl}
+                                                        alt={personalInfo.name}
+                                                        className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 elegant-shadow bg-background"
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5"></div>
+                                            )}
+                                        </div>
+
+                                        {/* Name and Title */}
+                                        <div className="text-center md:text-left space-y-6">
+                                            <div className="relative">
+                                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-tight">
+                                                    <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
+                                                    <span className="inline-block">Hi, I'm</span>{' '}
+                                                    <span className="text-primary tech-text-glow inline-block">
+                                                        {personalInfo.name}
+                                                    </span>
+                                                </h1>
+                                                <div className="absolute -bottom-2 left-0 md:left-8 w-20 sm:w-28 md:w-36
+                                                              h-0.5 bg-gradient-to-r from-primary via-primary to-transparent"></div>
+                                            </div>
+                                            <div className="flex items-center justify-center md:justify-start gap-3 mt-8">
+                                                <Code2 className="h-5 w-5 text-primary" />
+                                                <p className="text-lg sm:text-xl text-muted-foreground font-mono font-medium">
+                                                    {personalInfo.title}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center justify-center md:justify-start gap-3 mt-8">
-                                        <Code2 className="h-5 w-5 text-primary" />
-                                        <p className="text-lg sm:text-xl text-muted-foreground font-mono font-medium">
-                                            {personalInfo.title}
-                                        </p>
-                                    </div>
-                                </div>
+                                </motion.div>
                             </div>
                         </div>
                         {/* Bio */}
