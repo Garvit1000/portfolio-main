@@ -265,9 +265,9 @@ const Hero = () => {
 
                 .fade-in-element {
                     opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                    transform: translateY(20px);
+                    transition: opacity 0.8s ease-out,
+                                transform 0.8s ease-out;
                 }
 
                 .fade-in-element.animate-in {
@@ -276,9 +276,9 @@ const Hero = () => {
                 }
 
                 .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-                .fade-in-element:nth-child(2) { transition-delay: 0.2s; }
-                .fade-in-element:nth-child(3) { transition-delay: 0.3s; }
-                .fade-in-element:nth-child(4) { transition-delay: 0.4s; }
+                .fade-in-element:nth-child(2) { transition-delay: 0.15s; }
+                .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
+                .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
                
             `}</style>
 
@@ -337,9 +337,9 @@ const Hero = () => {
 
                                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
                                     {/*<span className="text-primary font-mono">{'// '}</span>*/}
-                                    <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
-                                        {personalInfo.bio}
-                                    </TextEffect>
+                                     {/* <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}> */}
+                                        {personalInfo.bio} 
+                                    {/* </TextEffect> */}
                                 </p>
 
                             </div>

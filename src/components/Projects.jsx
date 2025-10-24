@@ -65,9 +65,9 @@ const Projects = () => {
 
                 .fade-in-element {
                     opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                    transform: translateY(20px);
+                    transition: opacity 0.8s ease-out,
+                                transform 0.8s ease-out;
                 }
 
                 .fade-in-element.animate-in {
@@ -76,10 +76,10 @@ const Projects = () => {
                 }
 
                 .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-                .fade-in-element:nth-child(2) { transition-delay: 0.2s; }
-                .fade-in-element:nth-child(3) { transition-delay: 0.25s; }
-                .fade-in-element:nth-child(4) { transition-delay: 0.3s; }
-                .fade-in-element:nth-child(5) { transition-delay: 0.35s; }
+                .fade-in-element:nth-child(2) { transition-delay: 0.15s; }
+                .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
+                .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
+                .fade-in-element:nth-child(5) { transition-delay: 0.3s; }
             `}</style>
 
             <section id="projects" className="py-20 tech-section" ref={sectionRef}>
@@ -137,7 +137,7 @@ const Projects = () => {
 
                                     {/* Project Image */}
                                     <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5
-                                                  h-48 mb-6 border border-primary/10 hover:border-primary/30
+                                                  h-64 mb-6 border border-primary/10 hover:border-primary/30
                                                   transition-colors duration-300">
                                         {project.image ? (
                                             <img
@@ -234,16 +234,60 @@ const Projects = () => {
                                         </span>
                                     </div>
                                     <div className="flex flex-wrap gap-2">
-                                        {project.technologies.map((tech, index) => (
-                                            <span
-                                                key={index}
-                                                className="text-xs font-mono text-primary/80 bg-primary/10 px-3 py-2
-                                                         rounded border border-primary/20 hover:bg-primary/20
-                                                         transition-colors cursor-default"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
+                                        {project.technologies.map((tech, index) => {
+                                            // Map tech names to logo identifiers
+                                            const techMap = {
+                                                'React': { logo: 'react', color: '61DAFB' },
+                                                'JavaScript': { logo: 'javascript', color: 'F7DF1E' },
+                                                'TypeScript': { logo: 'typescript', color: '3178C6' },
+                                                'Typescript': { logo: 'typescript', color: '3178C6' },
+                                                'Tailwind CSS': { logo: 'tailwindcss', color: '06B6D4' },
+                                                'Shadcn': { logo: 'react', color: '000000' },
+                                                'shadcn': { logo: 'react', color: '000000' },
+                                                'shadcn/ui': { logo: 'react', color: '000000000' },
+                                                'Node.js': { logo: 'nodedotjs', color: '339933' },
+                                                'Express': { logo: 'express', color: '000000' },
+                                                'MongoDB': { logo: 'mongodb', color: '47A248' },
+                                                'PostgrSql': { logo: 'postgresql', color: '4169E1' },
+                                                'PostgreSQL': { logo: 'postgresql', color: '4169E1' },
+                                                'Firebase': { logo: 'firebase', color: 'FFCA28' },
+                                                'CSS': { logo: 'css3', color: '1572B6' },
+                                                'CSS3': { logo: 'css3', color: '1572B6' },
+                                                'HTML5': { logo: 'html5', color: 'E34F26' },
+                                                'HTML': { logo: 'html5', color: 'E34F26' },
+                                                'CLI': { logo: 'gnubash', color: '4EAA25' },
+                                                'REST API': { logo: 'fastapi', color: '009688' },
+                                                'Expo': { logo: 'expo', color: '000020' },
+                                                'ReactNative': { logo: 'react', color: '61DAFB' }
+                                            };
+
+                                            const techInfo = techMap[tech];
+
+                                            return techInfo ? (
+                                                <div
+                                                    key={index}
+                                                    className="flex items-center gap-2 px-3 py-1.5 bg-card border border-border 
+                                                             rounded-lg hover:border-primary/50 hover:scale-105 transition-all duration-200
+                                                             cursor-default shadow-sm"
+                                                >
+                                                    <img
+                                                        src={`https://cdn.simpleicons.org/${techInfo.logo}/${techInfo.color}`}
+                                                        alt={tech}
+                                                        className="w-4 h-4"
+                                                    />
+                                                    <span className="text-xs font-medium text-foreground">{tech}</span>
+                                                </div>
+                                            ) : (
+                                                <span
+                                                    key={index}
+                                                    className="text-xs font-mono text-primary/80 bg-primary/10 px-3 py-1.5
+                                                             rounded border border-primary/20 hover:bg-primary/20
+                                                             transition-colors cursor-default"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             );

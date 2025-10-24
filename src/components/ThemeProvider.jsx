@@ -18,9 +18,13 @@ export const ThemeProvider = ({ children }) => {
     
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
+      // Apply immediately to prevent flash
+      document.documentElement.classList.add(savedTheme);
       return savedTheme;
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.classList.add(systemTheme);
+    return systemTheme;
   });
 
   // Initialize current theme name
@@ -46,24 +50,24 @@ export const ThemeProvider = ({ children }) => {
   useLayoutEffect(() => {
     const root = document.documentElement;
     
-    // Instantly apply theme without transitions during switch
-    root.style.setProperty('--theme-transition', 'none');
-    
-    // Remove previous theme class and add new one atomically
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-    
-    // Apply theme variables for current theme and mode
-    applyThemeVariables(currentTheme, theme);
+    // Check if View Transitions API is supported
+    if (typeof document.startViewTransition === 'function') {
+      // Use View Transitions API for smooth circular animation
+      document.startViewTransition(() => {
+        root.classList.remove('light', 'dark');
+        root.classList.add(theme);
+        applyThemeVariables(currentTheme, theme);
+      });
+    } else {
+      // Fallback: instant change with CSS transitions
+      root.classList.remove('light', 'dark');
+      root.classList.add(theme);
+      applyThemeVariables(currentTheme, theme);
+    }
     
     // Save to localStorage
     localStorage.setItem('theme', theme);
     localStorage.setItem('currentTheme', currentTheme);
-    
-    // Re-enable transitions after a frame
-    requestAnimationFrame(() => {
-      root.style.setProperty('--theme-transition', 'all 0.15s ease-in-out');
-    });
   }, [theme, currentTheme]);
 
   // Listen for system theme changes
@@ -79,7 +83,19 @@ export const ThemeProvider = ({ children }) => {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = (event) => {
+    // Store click position for animation
+    if (event?.clientX && event?.clientY) {
+      const x = event.clientX;
+      const y = event.clientY;
+      document.documentElement.style.setProperty('--x', `${x}px`);
+      document.documentElement.style.setProperty('--y', `${y}px`);
+    } else {
+      // Default to center if no click event
+      document.documentElement.style.setProperty('--x', '50%');
+      document.documentElement.style.setProperty('--y', '50%');
+    }
+    
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 

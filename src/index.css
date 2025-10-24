@@ -7,25 +7,48 @@
 
 /* Fast theme switching with hardware acceleration */
 :root {
-  --theme-transition: all 0.15s ease-in-out;
+  --theme-transition-duration: 150ms;
+  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* {
-  transition: var(--theme-transition);
-  transform: translateZ(0); /* Enable hardware acceleration */
-  backface-visibility: hidden;
+/* Only transition theme-related properties, not all properties */
+html {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 body {
-    margin: 0;
-    font-family: 'JetBrains Mono', 'Space Mono', monospace;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    will-change: background-color, color;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Space Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Apply transitions to common elements */
+header,
+main,
+section,
+footer,
+nav,
+div,
+button,
+input,
+textarea,
+select,
+a {
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 code {
-    font-family: 'JetBrains Mono', 'Space Mono', monospace;
+  font-family: 'JetBrains Mono', 'Space Mono', monospace;
 }
 
 /* Prevent flash of unstyled content */
@@ -34,167 +57,202 @@ html {
 }
 
 @layer base {
-    :root {
-  --background: 223.8136 0.0005% 98.6829%;
-  --foreground: 0 0% 0%;
-  --card: 223.8136 -172.5242% 100.0000%;
-  --card-foreground: 0 0% 0%;
-  --popover: 223.8136 0.0005% 98.6829%;
-  --popover-foreground: 0 0% 0%;
-  --primary: 0 0% 0%;
-  --primary-foreground: 223.8136 -172.5242% 100.0000%;
-  --secondary: 223.8136 0.0001% 92.1478%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 223.8136 0.0002% 96.0587%;
-  --muted-foreground: 223.8136 0.0000% 32.3067%;
-  --accent: 223.8136 0.0001% 92.1478%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 358.4334 74.9120% 59.7455%;
-  --destructive-foreground: 223.8136 -172.5242% 100.0000%;
-  --border: 223.8136 0.0001% 89.5577%;
-  --input: 223.8136 0.0001% 92.1478%;
-  --ring: 0 0% 0%;
-  --chart-1: 40.6655 100.2361% 50.9228%;
-  --chart-2: 223.7490 85.9924% 55.8092%;
-  --chart-3: 223.8136 0.0000% 64.4710%;
-  --chart-4: 223.8136 0.0001% 89.5577%;
-  --chart-5: 223.8136 0.0000% 45.6078%;
-  --sidebar: 223.8136 0.0005% 98.6829%;
-  --sidebar-foreground: 0 0% 0%;
-  --sidebar-primary: 0 0% 0%;
-  --sidebar-primary-foreground: 223.8136 -172.5242% 100.0000%;
-  --sidebar-accent: 223.8136 0.0001% 92.1478%;
-  --sidebar-accent-foreground: 0 0% 0%;
-  --sidebar-border: 223.8136 0.0001% 92.1478%;
-  --sidebar-ring: 0 0% 0%;
-  --font-sans: Geist, sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: Geist Mono, monospace;
-  --radius: 0.5rem;
-  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
-  --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
-  --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
-  --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
-  --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
-  --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
-  --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
-  --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
-  --tracking-normal: 0em;
-  --spacing: 0.25rem;
-}
+  :root {
+    --background: 223.8136 0.0005% 98.6829%;
+    --foreground: 0 0% 0%;
+    --card: 223.8136 -172.5242% 100.0000%;
+    --card-foreground: 0 0% 0%;
+    --popover: 223.8136 0.0005% 98.6829%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 223.8136 -172.5242% 100.0000%;
+    --secondary: 223.8136 0.0001% 92.1478%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 223.8136 0.0002% 96.0587%;
+    --muted-foreground: 223.8136 0.0000% 32.3067%;
+    --accent: 223.8136 0.0001% 92.1478%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 358.4334 74.9120% 59.7455%;
+    --destructive-foreground: 223.8136 -172.5242% 100.0000%;
+    --border: 223.8136 0.0001% 89.5577%;
+    --input: 223.8136 0.0001% 92.1478%;
+    --ring: 0 0% 0%;
+    --chart-1: 40.6655 100.2361% 50.9228%;
+    --chart-2: 223.7490 85.9924% 55.8092%;
+    --chart-3: 223.8136 0.0000% 64.4710%;
+    --chart-4: 223.8136 0.0001% 89.5577%;
+    --chart-5: 223.8136 0.0000% 45.6078%;
+    --sidebar: 223.8136 0.0005% 98.6829%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 223.8136 -172.5242% 100.0000%;
+    --sidebar-accent: 223.8136 0.0001% 92.1478%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 223.8136 0.0001% 92.1478%;
+    --sidebar-ring: 0 0% 0%;
+    --font-sans: Geist, sans-serif;
+    --font-serif: Georgia, serif;
+    --font-mono: Geist Mono, monospace;
+    --radius: 0.5rem;
+    --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+    --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+    --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+    --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+    --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
+    --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
+    --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
+    --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
+  }
 
-.dark {
-  --background: 0 0% 0%;
-  --foreground: 223.8136 -172.5242% 100.0000%;
-  --card: 223.8136 0.0000% 3.5452%;
-  --card-foreground: 223.8136 -172.5242% 100.0000%;
-  --popover: 223.8136 0.0000% 6.8692%;
-  --popover-foreground: 223.8136 -172.5242% 100.0000%;
-  --primary: 223.8136 -172.5242% 100.0000%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 223.8136 0.0000% 13.1499%;
-  --secondary-foreground: 223.8136 -172.5242% 100.0000%;
-  --muted: 223.8136 0.0000% 11.3040%;
-  --muted-foreground: 223.8136 0.0000% 64.4710%;
-  --accent: 223.8136 0.0000% 19.8916%;
-  --accent-foreground: 223.8136 -172.5242% 100.0000%;
-  --destructive: 359.9132 100.2494% 67.8807%;
-  --destructive-foreground: 0 0% 0%;
-  --border: 223.8136 0.0000% 14.0871%;
-  --input: 223.8136 0.0000% 19.8916%;
-  --ring: 223.8136 0.0000% 64.4710%;
-  --chart-1: 40.6655 100.2361% 50.9228%;
-  --chart-2: 218.1624 90.0354% 55.1618%;
-  --chart-3: 223.8136 0.0000% 45.6078%;
-  --chart-4: 223.8136 0.0000% 32.3067%;
-  --chart-5: 223.8136 0.0001% 89.5577%;
-  --sidebar: 223.8136 0.0000% 6.8692%;
-  --sidebar-foreground: 223.8136 -172.5242% 100.0000%;
-  --sidebar-primary: 223.8136 -172.5242% 100.0000%;
-  --sidebar-primary-foreground: 0 0% 0%;
-  --sidebar-accent: 223.8136 0.0000% 19.8916%;
-  --sidebar-accent-foreground: 223.8136 -172.5242% 100.0000%;
-  --sidebar-border: 223.8136 0.0000% 19.8916%;
-  --sidebar-ring: 223.8136 0.0000% 64.4710%;
-  --font-sans: Geist, sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: Geist Mono, monospace;
-  --radius: 0.5rem;
-  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
-  --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
-  --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
-  --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
-  --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
-  --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
-  --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
-  --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
-}
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 223.8136 -172.5242% 100.0000%;
+    --card: 223.8136 0.0000% 3.5452%;
+    --card-foreground: 223.8136 -172.5242% 100.0000%;
+    --popover: 223.8136 0.0000% 6.8692%;
+    --popover-foreground: 223.8136 -172.5242% 100.0000%;
+    --primary: 223.8136 -172.5242% 100.0000%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 223.8136 0.0000% 13.1499%;
+    --secondary-foreground: 223.8136 -172.5242% 100.0000%;
+    --muted: 223.8136 0.0000% 11.3040%;
+    --muted-foreground: 223.8136 0.0000% 64.4710%;
+    --accent: 223.8136 0.0000% 19.8916%;
+    --accent-foreground: 223.8136 -172.5242% 100.0000%;
+    --destructive: 359.9132 100.2494% 67.8807%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 223.8136 0.0000% 14.0871%;
+    --input: 223.8136 0.0000% 19.8916%;
+    --ring: 223.8136 0.0000% 64.4710%;
+    --chart-1: 40.6655 100.2361% 50.9228%;
+    --chart-2: 218.1624 90.0354% 55.1618%;
+    --chart-3: 223.8136 0.0000% 45.6078%;
+    --chart-4: 223.8136 0.0000% 32.3067%;
+    --chart-5: 223.8136 0.0001% 89.5577%;
+    --sidebar: 223.8136 0.0000% 6.8692%;
+    --sidebar-foreground: 223.8136 -172.5242% 100.0000%;
+    --sidebar-primary: 223.8136 -172.5242% 100.0000%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 223.8136 0.0000% 19.8916%;
+    --sidebar-accent-foreground: 223.8136 -172.5242% 100.0000%;
+    --sidebar-border: 223.8136 0.0000% 19.8916%;
+    --sidebar-ring: 223.8136 0.0000% 64.4710%;
+    --font-sans: Geist, sans-serif;
+    --font-serif: Georgia, serif;
+    --font-mono: Geist Mono, monospace;
+    --radius: 0.5rem;
+    --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+    --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+    --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+    --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+    --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
+    --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
+    --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
+    --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
+  }
 }
 
 /* Large screen optimizations */
 @layer utilities {
+
   /* Container improvements for large screens */
   .container-xl {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
   }
-  
+
   /* Ultra-wide screen support */
   .ultra-wide {
     @apply max-w-[1920px] mx-auto;
   }
-  
+
   /* Better spacing for large screens */
   .section-spacing {
     @apply py-16 sm:py-20 lg:py-24 xl:py-32;
   }
-  
+
   /* Grid improvements for large screens */
   .grid-responsive {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5;
   }
-  
+
   /* Typography scaling for large screens */
   .text-hero {
     @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl;
   }
-  
+
   .text-section {
     @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl;
   }
-  
+
   /* Performance optimizations */
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
   }
-  
+
   /* Smooth scrolling performance */
   .smooth-scroll {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Better button scaling */
   .btn-responsive {
     @apply px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 xl:px-10 xl:py-5;
   }
 }
 
-/* Theme transition optimizations */
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    --theme-transition: background-color 0.1s ease-out,
-                       color 0.1s ease-out,
-                       border-color 0.1s ease-out;
+/* Circular ripple animation for theme transitions using View Transitions API */
+:root {
+  --x: 50%;
+  --y: 50%;
+}
+
+/* View Transitions API styles */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation-name: circle-expand;
+}
+
+@keyframes circle-expand {
+  from {
+    clip-path: circle(0% at var(--x) var(--y));
+  }
+
+  to {
+    clip-path: circle(150% at var(--x) var(--y));
   }
 }
 
+/* Remove body animation that causes white flash */
+
+/* Theme transition optimizations */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --theme-transition: none;
+    --theme-transition-duration: 0ms;
   }
-  
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
+  html,
+  body,
+  [data-theme],
   * {
     transition: none !important;
     animation: none !important;
@@ -206,29 +264,29 @@ html {
   .tech-glow {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
-  
+
   .tech-text-glow {
     text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
   }
-  
+
   .straight-line {
     border-radius: 0;
   }
-  
+
   .angular-card {
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
     border-radius: 0;
   }
-  
+
   .mono-numbers {
     font-variant-numeric: tabular-nums;
     font-family: 'JetBrains Mono', monospace;
   }
-  
+
   .tech-section {
     position: relative;
   }
-  
+
   .tech-section::before {
     content: '';
     position: absolute;
@@ -243,6 +301,7 @@ html {
 
 /* Global theme radius application */
 @layer base {
+
   /* Apply theme radius to all common UI elements */
   button:not(.straight-line):not(.angular-card),
   input:not(.straight-line):not(.angular-card),
@@ -287,27 +346,27 @@ html {
   [role="alertdialog"]:not(.straight-line):not(.angular-card) {
     border-radius: var(--radius) !important;
   }
-  
+
   /* Apply smaller radius for nested elements */
   button button:not(.straight-line):not(.angular-card),
   .card .card:not(.straight-line):not(.angular-card),
   .dropdown .dropdown:not(.straight-line):not(.angular-card) {
     border-radius: calc(var(--radius) - 2px) !important;
   }
-  
+
   /* Special handling for font families from themes */
   body {
     font-family: var(--font-sans), 'JetBrains Mono', 'Space Mono', monospace;
   }
-  
+
   .font-sans {
     font-family: var(--font-sans), system-ui, sans-serif;
   }
-  
+
   .font-serif {
     font-family: var(--font-serif), Georgia, serif;
   }
-  
+
   .font-mono {
     font-family: var(--font-mono), 'JetBrains Mono', monospace;
   }
@@ -324,7 +383,7 @@ html {
   .container {
     max-width: 2400px;
   }
-  
+
   /* Larger font sizes for ultra-wide */
   .text-hero {
     font-size: 6rem;

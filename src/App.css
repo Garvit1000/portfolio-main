@@ -149,9 +149,18 @@ body {
     border-radius: 0;
 }
 
-/* Smooth transitions for theme switching */
-* {
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+/* Smooth transitions for theme switching - only for theme-related properties */
+html,
+body,
+.tech-section,
+.angular-card,
+button,
+input,
+textarea,
+select {
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Prevent layout shift during loading */
