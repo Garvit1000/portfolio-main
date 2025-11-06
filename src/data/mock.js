@@ -10,7 +10,7 @@ export const personalInfo = {
   name: "Garvit Joshi",
   title: "Frontend Developer",
   email: "garvitjoshi543@gmail.com",
-  bio: "I’m a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with React, JavaScript, and today’s web tech to create fast, user-friendly experiences. Always learning, always experimenting, and always shipping projects that push design and functionality a step further.",
+  bio: "I’m a frontend dev focused on building responsive, modern web apps that look good and feel smooth. Constantly learning and growing.",
   location: "India",
   yearsOfExperience: "1+",
   techStack: [
