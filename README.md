@@ -2,30 +2,30 @@
 
 A modern, responsive portfolio website for **Garvit Joshi** built with React, Vite, and TailwindCSS. Features a comprehensive theming system inspired by TweakCN with multiple theme variants and seamless dark/light mode switching.
 
-## 🚀 Live Demo
+## Live Demo
 
 Visit the live portfolio at [https://www.garvit.me/](#)
 
-## ✨ Features
+## Features
 
-### 🎨 Advanced Theming System
+### Advanced Theming System
 - **8 Unique Themes**: Default, Amber-Minimal, Supabase, Darkmatter, Soft Pop, Candyland, and Twitter
 - **Dark/Light Mode**: Automatic system preference detection with manual toggle
 - **Dynamic CSS Variables**: Real-time theme switching without page refresh
 - **TweakCN Integration**: Complete shadcn/ui component library with custom theme variants
 
-### 📱 Modern Design
+### Modern Design
 - **Fully Responsive**: Mobile-first design with optimized layouts for all devices
 - **GPU Accelerated Animations**: Smooth transitions and hover effects
 - **Tech-Inspired UI**: Terminal-style elements, monospace fonts, and developer aesthetics
 - **Glass Morphism Effects**: Modern backdrop blur and transparency effects
 
-### 🔧 Developer Features
+### Developer Features
 - **GitHub Integration**: Live contribution graph from GitHub API
 - **Project Showcase**: Dynamic project cards with live links and technologies
 - **Skills Display**: Organized skill categorization with visual indicators
 
-### 🏗️ Technical Stack
+### Technical Stack
 - **Frontend**: React 19, Vite, TailwindCSS
 - **UI Components**: shadcn/ui (complete component library)
 - **Routing**: React Router DOM
@@ -33,7 +33,7 @@ Visit the live portfolio at [https://www.garvit.me/](#)
 - **Animations**: TailwindCSS Animate
 - **Theme Management**: Context API with localStorage persistence
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 portfolio-main/
@@ -62,7 +62,7 @@ portfolio-main/
 └── package.json           # Dependencies and scripts
 ```
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Node.js 18+ 
@@ -91,7 +91,7 @@ VITE_GITHUB_TOKEN=your_github_personal_access_token
 
 **Note**: GitHub token is required for the contribution graph feature. Generate one at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
 
-## 🎨 Theme System
+## Theme System
 
 ### Available Themes
 1. **Default** - Clean and minimal
@@ -123,7 +123,7 @@ export const themes = {
 }
 ```
 
-## 📊 Features Breakdown
+## Features Breakdown
 
 ### GitHub Integration
 - **Live Contribution Graph**: Fetches real-time data from GitHub API
@@ -140,7 +140,7 @@ export const themes = {
 - **Multiple Contact Methods**: Email, social links
 - **Social Integration**: LinkedIn, GitHub, and Twitter links
 
-## 🔧 Development Scripts
+## Development Scripts
 
 ```bash
 # Start development server
@@ -156,21 +156,21 @@ npm run preview
 npm run test
 ```
 
-## 📱 Responsive Design
+## Responsive Design
 
 - **Mobile First**: Optimized for mobile devices (320px+)
 - **Tablet Support**: Enhanced layouts for tablet sizes (768px+)
 - **Desktop Optimization**: Full desktop experience (1024px+)
 - **Ultra-wide Support**: Support for ultra-wide monitors (1920px+)
 
-## 🎯 Performance Features
+## Performance Features
 
 - **Code Splitting**: Lazy loading of components
 - **Optimized Assets**: Compressed images and fonts
 - **Fast Refresh**: Hot module replacement during development
 - **Tree Shaking**: Eliminated unused code in production builds
 
-## 🌟 Key Components
+## Key Components
 
 ### ThemeProvider
 Advanced theme management with:
@@ -186,13 +186,13 @@ Advanced theme management with:
 - Responsive social links
 
 
-## 🔒 Security Features
+## Security Features
 
 - **Environment Variables**: Secure API key management
 - **Input Validation**: Client-side form validation
 - **External Link Safety**: `rel="noopener noreferrer"` on external links
 
-## 📈 Future Enhancements
+## Future Enhancements
 
 - [ ] Blog integration with markdown support
 - [ ] Advanced animations with Framer Motion
@@ -201,7 +201,7 @@ Advanced theme management with:
 - [ ] Analytics integration
 - [ ] SEO optimization with meta tags
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -209,11 +209,11 @@ Advanced theme management with:
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **shadcn/ui** - For the comprehensive component library
 - **TweakCN** - For theming inspiration and CSS variable system
@@ -221,7 +221,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Tailwind CSS** - For utility-first CSS framework
 - **Radix UI** - For accessible, unstyled UI primitives
 
-## 📞 Contact
+## Contact
 
 **Garvit Joshi**
 - Email: [garvitjoshi543@gmail.com](mailto:garvitjoshi543@gmail.com)
