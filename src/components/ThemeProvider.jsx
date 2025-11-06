@@ -52,14 +52,22 @@ export const ThemeProvider = ({ children }) => {
     
     // Check if View Transitions API is supported
     if (typeof document.startViewTransition === 'function') {
+      // Add active class to disable other transitions
+      root.classList.add('view-transition-active');
+      
       // Use View Transitions API for smooth circular animation
-      document.startViewTransition(() => {
+      const transition = document.startViewTransition(() => {
         root.classList.remove('light', 'dark');
         root.classList.add(theme);
         applyThemeVariables(currentTheme, theme);
       });
+      
+      // Remove active class after transition
+      transition.finished.finally(() => {
+        root.classList.remove('view-transition-active');
+      });
     } else {
-      // Fallback: instant change with CSS transitions
+      // Fallback: instant change
       root.classList.remove('light', 'dark');
       root.classList.add(theme);
       applyThemeVariables(currentTheme, theme);

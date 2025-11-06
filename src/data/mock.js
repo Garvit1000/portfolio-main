@@ -13,6 +13,14 @@ export const personalInfo = {
   bio: "I’m a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with React, JavaScript, and today’s web tech to create fast, user-friendly experiences. Always learning, always experimenting, and always shipping projects that push design and functionality a step further.",
   location: "India",
   yearsOfExperience: "1+",
+  techStack: [
+    { name: "TypeScript", icon: "typescript" },
+    { name: "React", icon: "react" },
+    { name: "Next.js", icon: "nextjs" },
+    { name: "Node.js", icon: "nodejs" },
+    { name: "PostgreSQL", icon: "postgresql" },
+    { name: "Tailwind CSS", icon: "tailwindcss" }
+  ],
   skills: [
     "React.js",
     "JavaScript",

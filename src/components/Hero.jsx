@@ -285,7 +285,7 @@ const Hero = () => {
             <section id="hero" className=" tech-section" ref={sectionRef}>
                 <div className="container-xl">
                     <div className="max-w-4xl mx-auto">
-                       
+
                         {/* Main Heading with Avatar */}
                         <div className="mb-16 fade-in-element">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
@@ -335,12 +335,29 @@ const Hero = () => {
 
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
 
-                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
-                                    {/*<span className="text-primary font-mono">{'// '}</span>*/}
-                                     {/* <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}> */}
-                                        {personalInfo.bio} 
-                                    {/* </TextEffect> */}
-                                </p>
+                                <div className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
+                                    I'm a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with{' '}
+
+                                    {/* Tech Stack Badges - Inline */}
+                                    {personalInfo.techStack && personalInfo.techStack.map((tech, index) => (
+                                        <span key={tech.icon} className="inline-flex items-center">
+                                            <span
+                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-card border border-border 
+                                                         rounded-lg hover:border-primary/50 hover:scale-105 transition-all duration-200
+                                                         cursor-default shadow-sm mx-1 align-middle"
+                                            >
+                                                <img
+                                                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
+                                                    alt={tech.name}
+                                                    className="w-3.5 h-3.5"
+                                                />
+                                                <span className="text-xs font-medium text-foreground">{tech.name}</span>
+                                            </span>
+                                            {index < personalInfo.techStack.length - 1 && <span className="mx-0.5">,</span>}
+                                        </span>
+                                    ))}
+                                    {' '}and today's web tech to create fast, user-friendly experiences. Always learning, always experimenting, and always shipping projects that push design and functionality a step further.
+                                </div>
 
                             </div>
                         </div>

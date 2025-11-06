@@ -15,8 +15,6 @@
 html {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 body {
@@ -26,25 +24,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
-/* Apply transitions to common elements */
-header,
-main,
-section,
-footer,
-nav,
-div,
-button,
-input,
-textarea,
-select,
-a {
-  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing),
-    border-color var(--theme-transition-duration) var(--theme-transition-timing);
+/* Disable transitions during view transition to prevent lag */
+html.view-transition-active * {
+  transition: none !important;
 }
 
 code {
@@ -211,27 +195,32 @@ html {
   --y: 50%;
 }
 
-/* View Transitions API styles */
-::view-transition-old(root),
-::view-transition-new(root) {
+/* View Transitions API styles - Optimized for performance */
+::view-transition-group(root) {
   animation-duration: 0.5s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-::view-transition-old(root) {
-  z-index: 1;
-}
-
 ::view-transition-new(root) {
-  z-index: 2;
-  animation-name: circle-expand;
+  animation-name: reveal-theme;
+  will-change: clip-path;
 }
 
-@keyframes circle-expand {
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+.dark::view-transition-new(root) {
+  animation-name: reveal-theme;
+  will-change: clip-path;
+}
+
+@keyframes reveal-theme {
   from {
     clip-path: circle(0% at var(--x) var(--y));
   }
-
   to {
     clip-path: circle(150% at var(--x) var(--y));
   }
