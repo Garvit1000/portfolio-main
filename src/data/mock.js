@@ -1,7 +1,8 @@
 // Mock data for Garvit's Portfolio
+import animbits from '../assets/animbits.png'
 import flexhunt from '../assets/flexhunt.png'
-import food from '../assets/food.jpeg'
-import freshstart from '../assets/freshstart.jpeg'
+import food from '../assets/food.png'
+import freshstart from '../assets/freshstart.png'
 import mindflow from '../assets/mindflow.png'
 import cli from '../assets/cli.png'
 import motion from '../assets/motion.png'
@@ -39,6 +40,16 @@ export const personalInfo = {
 export const projects = [
   {
     id: 1,
+    title: "AnimBits",
+    description: "A production-ready animation library for React with 50+ components powered by Framer Motion. Built with TypeScript and integrates seamlessly with shadcn CLI for one-command installation. Includes animated icons, buttons, cards, loaders, and page transitions. Fully responsive, accessible with reduced-motion support, and works out of the box with Next.js and Vite.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui"],
+    liveUrl: "https://animbits.dev",
+    githubUrl: "https://github.com/Garvit1000/animbits",
+    image: animbits,
+    featured: true
+  },
+  {
+    id: 2,
     title: "Motion Icons",
     description: "Beautiful animated icons for React - Where simplicity meets motion. Motion Icons is a powerful React component library that brings your icons to life with smooth animations, entrance effects, and interactive behaviors. Built on top of Lucide React icons with 3500+ icons and 15+ animation presets.",
     technologies: ["React", "JavaScript", "Tailwind CSS", "Shadcn", "Typescript"],
@@ -48,7 +59,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 2,
+    id: 3,
     title: "FreshStart AI",
     description: "a SaaS platform delivering AI-powered resume optimization with 80%+ ATS score targets. Integrated LinkedIn headline & About-section optimizers to boost recruiter visibility.and Developed edit suggestions and PDF export workflows for user-customized resumes.",
     technologies: ["React", "JavaScript", "Tailwind CSS", "Node.js", "Express"],
@@ -58,7 +69,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 3,
+    id: 4,
     title: "Flexhunt",
     description: "a job platform with skill-based matchmaking and recruiter management tools. Built seller dashboard with PayPal payment integration and real-time transaction logging. Created a community forum module for discussions and professional networking.",
     technologies: ["React", "JavaScript", "CSS3", "Firebase"],
@@ -68,7 +79,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 4,
+    id: 5,
     title: "Create Vite shadcn app",
     description: "A zero-config CLI tool to scaffold full-stack React applications with authentication and database integration. Build production-ready apps in seconds with Clerk authentication and PostgreSQL database support built-in. 1K+ downloads",
     technologies: ["React", "PostgrSql", "Tailwind CSS", "CLI"],
@@ -78,7 +89,7 @@ export const projects = [
     featured: false
   },
   {
-    id: 5,
+    id: 6,
     title: "Food Delivery website",
     description: "A full-stack food delivery web application built using the MERN (MongoDB, Express, React, Node.js) stack. This project allows users to browse menus, place orders, and track deliveries in real-time. Features include user authentication, payment gateway integration, and a admin dashboard for managing orders, restaurants, and menus.",
     technologies: ["React", "CSS", "MongoDB", "Node.js", "Express"],
@@ -87,16 +98,16 @@ export const projects = [
     image: food,
     featured: false
   },
-  {
-    id: 6,
-    title: "Mindflow App",
-    description: "MindFlow, your personal AI-powered mental wellness companion! This app is designed to provide you with tools and resources to support your mental health journey. Whether you're looking for soothing music, personalized diet plans, or just someone to talk to, MindFlow is here for you.",
-    technologies: ["ReactNative", "REST API", "Tailwind CSS", "Expo"],
-    liveUrl: "https://recipe-finder.example.com",
-    githubUrl: "https://github.com/garvit/recipe-finder",
-    image: mindflow,
-    featured: false
-  }
+  // {
+  //   id: 7,
+  //   title: "Mindflow App",
+  //   description: "MindFlow, your personal AI-powered mental wellness companion! This app is designed to provide you with tools and resources to support your mental health journey. Whether you're looking for soothing music, personalized diet plans, or just someone to talk to, MindFlow is here for you.",
+  //   technologies: ["ReactNative", "REST API", "Tailwind CSS", "Expo"],
+  //   liveUrl: "https://recipe-finder.example.com",
+  //   githubUrl: "https://github.com/garvit/recipe-finder",
+  //   image: mindflow,
+  //   featured: false
+  // }
 ];
 
 export const experience = [

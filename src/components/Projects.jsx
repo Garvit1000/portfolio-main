@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Github, Star, Terminal, ExternalLink, ChevronDown, ChevronUp, Code2, GitCommit, Image as ImageIcon } from 'lucide-react';
 import { projects } from '../data/mock';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
@@ -80,6 +80,7 @@ const Projects = () => {
                 .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
                 .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
                 .fade-in-element:nth-child(5) { transition-delay: 0.3s; }
+                .fade-in-element:nth-child(6) { transition-delay: 0.35s; }
             `}</style>
 
             <section id="projects" className="py-20 tech-section" ref={sectionRef}>
@@ -126,26 +127,34 @@ const Projects = () => {
                         </Button>
                     </div>
 
-                    {/* Projects List - Clean and Minimal */}
-                    <div className="max-w-4xl mx-auto space-y-12">
+                    {/* Projects Grid - 2 Columns */}
+                    <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {filteredProjects.map((project) => {
                             const expanded = isExpanded(project.id);
                             const needsTruncation = project.description.length > 120;
 
                             return (
-                                <div key={project.id} className="group fade-in-element">
-
+                                <div
+                                    key={project.id}
+                                    className="group fade-in-element bg-card/50 backdrop-blur-sm rounded-xl border border-border/50
+                                             hover:border-primary/30 transition-all duration-500 overflow-hidden
+                                             hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 flex flex-col h-full"
+                                >
                                     {/* Project Image */}
-                                    <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5
-                                                  h-64 mb-6 border border-primary/10 hover:border-primary/30
-                                                  transition-colors duration-300">
+                                    <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5
+                                                  h-64 border-b border-border/50">
                                         {project.image ? (
-                                            <img
-                                                src={project.image}
-                                                alt={`${project.title} preview`}
-                                                className="w-full h-full object-cover group-hover:scale-105
-                                                         transition-transform duration-300"
-                                            />
+                                            <>
+                                                <img
+                                                    src={project.image}
+                                                    alt={`${project.title} preview`}
+                                                    className="w-full h-full object-cover group-hover:scale-110
+                                                             transition-transform duration-700 ease-out"
+                                                />
+                                                {/* Gradient Overlay */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent
+                                                              opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                            </>
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center">
                                                 <div className="text-center">
@@ -156,138 +165,152 @@ const Projects = () => {
                                                 </div>
                                             </div>
                                         )}
-                                    </div>
 
-                                    {/* Project Header */}
-                                    <div className="flex items-start justify-between gap-4 mb-4">
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <Code2 className="h-5 w-5 text-primary" />
-                                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                                             underline-offset-4 hover:decoration-primary transition-colors">
-                                                    {project.title}
-                                                </h3>
-                                                {project.featured && (
-                                                    <Star className="h-5 w-5 text-primary fill-primary" />
-                                                )}
+                                        {/* Featured Badge */}
+                                        {project.featured && (
+                                            <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground
+                                                          px-3 py-1.5 rounded-full text-xs font-mono font-semibold
+                                                          flex items-center gap-1.5 shadow-lg">
+                                                <Star className="h-3.5 w-3.5 fill-current" />
+                                                Featured
                                             </div>
-                                        </div>
-
-                                        {/* Action Links */}
-                                        <div className="flex items-center gap-3">
-                                            {project.liveUrl && (
-                                                <a
-                                                    href={project.liveUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-muted-foreground hover:text-primary transition-colors"
-                                                    title="View Live Demo"
-                                                >
-                                                    <ExternalLink className="h-5 w-5" />
-                                                </a>
-                                            )}
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-muted-foreground hover:text-primary transition-colors"
-                                                title="View Source Code"
-                                            >
-                                                <Github className="h-5 w-5" />
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    {/* Project Description */}
-                                    <div className="mb-6">
-                                        <p className="text-muted-foreground font-mono text-sm leading-relaxed">
-                                            <span className="text-primary">{'// '}</span>
-                                            {expanded ? project.description : truncateText(project.description)}
-                                        </p>
-
-                                        {needsTruncation && (
-                                            <button
-                                                onClick={() => toggleExpanded(project.id)}
-                                                className="mt-2 text-xs font-mono text-primary hover:text-primary/80
-                                                         transition-colors flex items-center gap-1"
-                                            >
-                                                {expanded ? (
-                                                    <>
-                                                        <ChevronUp className="h-3 w-3" />
-                                                        show less
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <ChevronDown className="h-3 w-3" />
-                                                        show more
-                                                    </>
-                                                )}
-                                            </button>
                                         )}
                                     </div>
 
-                                    {/* Technologies */}
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <GitCommit className="h-4 w-4 text-primary" />
-                                        <span className="text-xs font-mono text-muted-foreground">
-                                            Tech Stack:
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.technologies.map((tech, index) => {
-                                            // Map tech names to logo identifiers
-                                            const techMap = {
-                                                'React': { logo: 'react', color: '61DAFB' },
-                                                'JavaScript': { logo: 'javascript', color: 'F7DF1E' },
-                                                'TypeScript': { logo: 'typescript', color: '3178C6' },
-                                                'Typescript': { logo: 'typescript', color: '3178C6' },
-                                                'Tailwind CSS': { logo: 'tailwindcss', color: '06B6D4' },
-                                                'Shadcn': { logo: 'react', color: '000000' },
-                                                'shadcn': { logo: 'react', color: '000000' },
-                                                'shadcn/ui': { logo: 'react', color: '000000000' },
-                                                'Node.js': { logo: 'nodedotjs', color: '339933' },
-                                                'Express': { logo: 'express', color: '000000' },
-                                                'MongoDB': { logo: 'mongodb', color: '47A248' },
-                                                'PostgrSql': { logo: 'postgresql', color: '4169E1' },
-                                                'PostgreSQL': { logo: 'postgresql', color: '4169E1' },
-                                                'Firebase': { logo: 'firebase', color: 'FFCA28' },
-                                                'CSS': { logo: 'css3', color: '1572B6' },
-                                                'CSS3': { logo: 'css3', color: '1572B6' },
-                                                'HTML5': { logo: 'html5', color: 'E34F26' },
-                                                'HTML': { logo: 'html5', color: 'E34F26' },
-                                                'CLI': { logo: 'gnubash', color: '4EAA25' },
-                                                'REST API': { logo: 'fastapi', color: '009688' },
-                                                'Expo': { logo: 'expo', color: '000020' },
-                                                'ReactNative': { logo: 'react', color: '61DAFB' }
-                                            };
-
-                                            const techInfo = techMap[tech];
-
-                                            return techInfo ? (
-                                                <div
-                                                    key={index}
-                                                    className="flex items-center gap-2 px-3 py-1.5 bg-card border border-border 
-                                                             rounded-lg hover:border-primary/50 hover:scale-105 transition-all duration-200
-                                                             cursor-default shadow-sm"
-                                                >
-                                                    <img
-                                                        src={`https://cdn.simpleicons.org/${techInfo.logo}/${techInfo.color}`}
-                                                        alt={tech}
-                                                        className="w-4 h-4"
-                                                    />
-                                                    <span className="text-xs font-medium text-foreground">{tech}</span>
+                                    {/* Card Content */}
+                                    <div className="p-6 flex flex-col flex-grow">
+                                        {/* Project Header */}
+                                        <div className="flex items-start justify-between gap-4 mb-4">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Code2 className="h-5 w-5 text-primary flex-shrink-0" />
+                                                    <h3 className="text-xl font-mono font-bold text-foreground
+                                                                 group-hover:text-primary transition-colors duration-300">
+                                                        {project.title}
+                                                    </h3>
                                                 </div>
-                                            ) : (
-                                                <span
-                                                    key={index}
-                                                    className="text-xs font-mono text-primary/80 bg-primary/10 px-3 py-1.5
-                                                             rounded border border-primary/20 hover:bg-primary/20
-                                                             transition-colors cursor-default"
+                                            </div>
+
+                                            {/* Action Links */}
+                                            <div className="flex items-center gap-2 flex-shrink-0">
+                                                {project.liveUrl && (
+                                                    <a
+                                                        href={project.liveUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground
+                                                                 transition-all duration-300 hover:scale-110"
+                                                        title="View Live Demo"
+                                                    >
+                                                        <ExternalLink className="h-4 w-4" />
+                                                    </a>
+                                                )}
+                                                <a
+                                                    href={project.githubUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground
+                                                             transition-all duration-300 hover:scale-110"
+                                                    title="View Source Code"
                                                 >
-                                                    {tech}
+                                                    <Github className="h-4 w-4" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        {/* Project Description */}
+                                        <div className="mb-5 flex-grow">
+                                            <p className="text-muted-foreground text-sm leading-relaxed">
+                                                <span className="text-primary font-mono">{'// '}</span>
+                                                {expanded ? project.description : truncateText(project.description)}
+                                            </p>
+
+                                            {needsTruncation && (
+                                                <button
+                                                    onClick={() => toggleExpanded(project.id)}
+                                                    className="mt-2 text-xs font-mono text-primary hover:text-primary/80
+                                                             transition-colors flex items-center gap-1.5 group/btn"
+                                                >
+                                                    {expanded ? (
+                                                        <>
+                                                            <ChevronUp className="h-3.5 w-3.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                                            show less
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <ChevronDown className="h-3.5 w-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
+                                                            show more
+                                                        </>
+                                                    )}
+                                                </button>
+                                            )}
+                                        </div>
+
+                                        {/* Technologies */}
+                                        <div className="space-y-2">
+                                            <div className="flex items-center gap-2">
+                                                <GitCommit className="h-3.5 w-3.5 text-primary" />
+                                                <span className="text-xs font-mono text-muted-foreground font-semibold">
+                                                    Tech Stack
                                                 </span>
-                                            );
-                                        })}
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.technologies.map((tech, index) => {
+                                                    // Map tech names to logo identifiers
+                                                    const techMap = {
+                                                        'React': { logo: 'react', color: '61DAFB' },
+                                                        'JavaScript': { logo: 'javascript', color: 'F7DF1E' },
+                                                        'TypeScript': { logo: 'typescript', color: '3178C6' },
+                                                        'Typescript': { logo: 'typescript', color: '3178C6' },
+                                                        'Tailwind CSS': { logo: 'tailwindcss', color: '06B6D4' },
+                                                        'Shadcn': { logo: 'react', color: '000000' },
+                                                        'shadcn': { logo: 'react', color: '000000' },
+                                                        'shadcn/ui': { logo: 'react', color: '000000000' },
+                                                        'Node.js': { logo: 'nodedotjs', color: '339933' },
+                                                        'Express': { logo: 'express', color: '000000' },
+                                                        'MongoDB': { logo: 'mongodb', color: '47A248' },
+                                                        'PostgrSql': { logo: 'postgresql', color: '4169E1' },
+                                                        'PostgreSQL': { logo: 'postgresql', color: '4169E1' },
+                                                        'Firebase': { logo: 'firebase', color: 'FFCA28' },
+                                                        'CSS': { logo: 'css3', color: '1572B6' },
+                                                        'CSS3': { logo: 'css3', color: '1572B6' },
+                                                        'HTML5': { logo: 'html5', color: 'E34F26' },
+                                                        'HTML': { logo: 'html5', color: 'E34F26' },
+                                                        'CLI': { logo: 'gnubash', color: '4EAA25' },
+                                                        'REST API': { logo: 'fastapi', color: '009688' },
+                                                        'Expo': { logo: 'expo', color: '000020' },
+                                                        'ReactNative': { logo: 'react', color: '61DAFB' }
+                                                    };
+
+                                                    const techInfo = techMap[tech];
+
+                                                    return techInfo ? (
+                                                        <div
+                                                            key={index}
+                                                            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-background/50 border border-border/60
+                                                                     rounded-lg hover:border-primary/50 hover:bg-primary/5 hover:scale-105 
+                                                                     transition-all duration-200 cursor-default shadow-sm"
+                                                        >
+                                                            <img
+                                                                src={`https://cdn.simpleicons.org/${techInfo.logo}/${techInfo.color}`}
+                                                                alt={tech}
+                                                                className="w-3.5 h-3.5"
+                                                            />
+                                                            <span className="text-xs font-medium text-foreground">{tech}</span>
+                                                        </div>
+                                                    ) : (
+                                                        <span
+                                                            key={index}
+                                                            className="text-xs font-mono text-primary/80 bg-primary/10 px-2.5 py-1.5
+                                                                     rounded-lg border border-primary/20 hover:bg-primary/20 hover:scale-105
+                                                                     transition-all duration-200 cursor-default"
+                                                        >
+                                                            {tech}
+                                                        </span>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             );
