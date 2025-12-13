@@ -18,7 +18,7 @@ const Contact = () => {
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
         );
 
-        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
         elements?.forEach((el) => observer.observe(el));
 
         return () => observer.disconnect();
@@ -48,37 +48,19 @@ const Contact = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
-
-                .fade-in-element {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.8s ease-out,
-                                transform 0.8s ease-out;
-                }
-
-                .fade-in-element.animate-in {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-                .fade-in-element:nth-child(2) { transition-delay: 0.15s; }
-                .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
-                .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
-               
             `}</style>
             <section id="contact" className="py-20 tech-section" ref={sectionRef}>
                 <div className="container-xl">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <div className="mb-4 fade-in-element">
+                        <div className="mb-4 blur-fade-in-element">
                             <span className="text-primary font-mono text-lg flex items-center justify-center">
                                 <Terminal className="mr-2 h-4 w-4" />
                                 {'>'} cat ~/contact.txt
                             </span>
                         </div>
-                        <div className="relative fade-in-element">
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6">
+                        <div className="relative blur-fade-in-element">
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                 Get In{' '}
                                 <span className="text-primary tech-text-glow inline-block">
                                     Touch
@@ -90,16 +72,16 @@ const Contact = () => {
                     </div>
 
                     <div className="max-w-4xl mx-auto">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 fade-in-element">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 blur-fade-in-element">
                             {/* Left Side - Contact Info */}
                             <div className="space-y-12">
                                 {/* Description */}
                                 <div>
-                                    <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-2">
+                                    <p className="text-muted-foreground font-mono text-base leading-relaxed mb-2">
                                         <span className="text-primary">{'// '}</span>
                                         I'm currently available for freelance work, collaborations, and full-time opportunities.
                                     </p>
-                                    <p className="text-muted-foreground font-mono text-sm leading-relaxed">
+                                    <p className="text-muted-foreground font-mono text-base leading-relaxed">
                                         <span className="text-primary">{'// '}</span>
                                         Let's build something amazing together.
                                     </p>

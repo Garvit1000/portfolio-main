@@ -18,7 +18,7 @@ const About = () => {
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
         );
 
-        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
         elements?.forEach((el) => observer.observe(el));
 
         return () => observer.disconnect();
@@ -58,23 +58,6 @@ const About = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
-
-                .fade-in-element {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.8s ease-out,
-                                transform 0.8s ease-out;
-                }
-
-                .fade-in-element.animate-in {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-                .fade-in-element:nth-child(2) { transition-delay: 0.15s; }
-                .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
-                .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
             `}</style>
 
             <section id="about" className="py-20 tech-section" ref={sectionRef}>
@@ -82,14 +65,14 @@ const About = () => {
                     {/* Header Section */}
                     <div className="text-center mb-16">
                         <div className="space-y-6">
-                            <div className="mb-4 fade-in-element">
+                            <div className="mb-4 blur-fade-in-element">
                                 <span className="text-primary font-mono text-lg flex items-center justify-center">
                                     <Terminal className="mr-2 h-4 w-4" />
                                     {'>'} cat ~/about.md
                                 </span>
                             </div>
-                            <div className="relative fade-in-element">
-                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6">
+                            <div className="relative blur-fade-in-element">
+                                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                     About{' '}
                                     <span className="text-primary tech-text-glow inline-block">
                                         Developer
@@ -104,16 +87,16 @@ const About = () => {
                     <div className="max-w-4xl mx-auto space-y-16">
 
                         {/* Skills Section */}
-                        <div className="text-left fade-in-element">
+                        <div className="text-left blur-fade-in-element">
                             <div className="flex items-center gap-3 mb-6">
-                                <Code2 className="h-5 w-5 text-primary" />
-                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                <Code2 className="h-6 w-6 text-primary" />
+                                <h3 className="text-2xl sm:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
                                            underline-offset-4 hover:decoration-primary transition-colors">
                                     Technical Skills
                                 </h3>
                             </div>
 
-                            <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-6">
+                            <p className="text-muted-foreground font-mono text-base leading-relaxed mb-6">
                                 <span className="text-primary">{'// '}</span>
                                 Technologies and frameworks I work with daily
                             </p>
@@ -152,16 +135,16 @@ const About = () => {
                         </div>
 
                         {/* What I Do Section */}
-                        <div className="text-left fade-in-element">
+                        <div className="text-left blur-fade-in-element">
                             <div className="flex items-center gap-3 mb-6">
-                                <Rocket className="h-5 w-5 text-primary" />
-                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                <Rocket className="h-6 w-6 text-primary" />
+                                <h3 className="text-2xl sm:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
                                            underline-offset-4 hover:decoration-primary transition-colors">
                                     What I Do
                                 </h3>
                             </div>
 
-                            <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-8">
+                            <p className="text-muted-foreground font-mono text-base leading-relaxed mb-8">
                                 <span className="text-primary">{'// '}</span>
                                 Core areas of expertise and focus
                             </p>
@@ -186,16 +169,16 @@ const About = () => {
                         </div>
 
                         {/* Work Experience Section */}
-                        <div className="text-left fade-in-element">
+                        <div className="text-left blur-fade-in-element">
                             <div className="flex items-center gap-3 mb-6">
-                                <Briefcase className="h-5 w-5 text-primary" />
-                                <h3 className="text-2xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                <Briefcase className="h-6 w-6 text-primary" />
+                                <h3 className="text-2xl sm:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
                                            underline-offset-4 hover:decoration-primary transition-colors">
                                     Work Experience
                                 </h3>
                             </div>
 
-                            <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-8">
+                            <p className="text-muted-foreground font-mono text-base leading-relaxed mb-8">
                                 <span className="text-primary">{'// '}</span>
                                 Professional journey and key contributions
                             </p>
@@ -205,10 +188,10 @@ const About = () => {
                                     <div key={exp.id} className="space-y-4">
                                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                                             <div>
-                                                <h4 className="font-mono font-bold text-lg text-foreground">
+                                                <h4 className="font-mono font-bold text-xl sm:text-2xl text-foreground">
                                                     {exp.position}
                                                 </h4>
-                                                <div className="text-primary font-medium font-mono text-sm">
+                                                <div className="text-primary font-medium font-mono text-base sm:text-lg">
                                                     {exp.company}
                                                 </div>
                                             </div>
@@ -220,7 +203,7 @@ const About = () => {
 
                                         <div className="space-y-2">
                                             {exp.description.split('•').filter(item => item.trim()).map((item, idx) => (
-                                                <div key={idx} className="flex items-start gap-2 text-muted-foreground text-sm font-mono leading-relaxed">
+                                                <div key={idx} className="flex items-start gap-2 text-muted-foreground text-base font-mono leading-relaxed">
                                                     <span className="text-primary mt-1 flex-shrink-0">▸</span>
                                                     <span>{item.trim()}</span>
                                                 </div>

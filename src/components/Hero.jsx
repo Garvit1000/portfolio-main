@@ -23,7 +23,7 @@ const Hero = () => {
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
         );
 
-        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
         elements?.forEach((el) => observer.observe(el));
 
         return () => observer.disconnect();
@@ -262,24 +262,6 @@ const Hero = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
-
-                .fade-in-element {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.8s ease-out,
-                                transform 0.8s ease-out;
-                }
-
-                .fade-in-element.animate-in {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-                .fade-in-element:nth-child(2) { transition-delay: 0.15s; }
-                .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
-                .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
-               
             `}</style>
 
             <section id="hero" className=" tech-section" ref={sectionRef}>
@@ -287,7 +269,7 @@ const Hero = () => {
                     <div className="max-w-4xl mx-auto">
 
                         {/* Main Heading with Avatar */}
-                        <div className="mb-16 fade-in-element">
+                        <div className="mb-16 blur-fade-in-element">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
                                 {/* Avatar */}
                                 <div className="flex-shrink-0">
@@ -308,9 +290,9 @@ const Hero = () => {
                                 {/* Name and Title */}
                                 <div className="text-center md:text-left space-y-6">
                                     <div className="relative">
-                                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold
+                                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold
                                                      tracking-tight leading-tight">
-                                            <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl">{'>'}</span>{' '}
+                                            <span className="text-muted-foreground/70 text-3xl sm:text-4xl md:text-5xl">{'>'}</span>{' '}
                                             <span className="inline-block">Hi, I'm</span>{' '}
                                             <span className="text-primary tech-text-glow inline-block">
                                                 <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
@@ -322,8 +304,8 @@ const Hero = () => {
                                                       h-0.5 bg-gradient-to-r from-primary via-primary to-transparent"></div>
                                     </div>
                                     <div className="flex items-center justify-center md:justify-start gap-3 mt-8">
-                                        <Code2 className="h-5 w-5 text-primary" />
-                                        <p className="text-lg sm:text-xl text-muted-foreground font-mono font-medium">
+                                        <Code2 className="h-6 w-6 text-primary" />
+                                        <p className="text-xl sm:text-2xl text-muted-foreground font-mono font-medium">
                                             {personalInfo.title}
                                         </p>
                                     </div>
@@ -331,11 +313,11 @@ const Hero = () => {
                             </div>
                         </div>
                         {/* Bio */}
-                        <div className="mb-16 fade-in-element">
+                        <div className="mb-16 blur-fade-in-element">
 
                             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
 
-                                <div className="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono text-center">
+                                <div className="text-base sm:text-lg text-muted-foreground leading-relaxed font-mono text-center">
                                     I'm a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with{' '}
 
                                     {/* Tech Stack Badges - Inline */}
@@ -363,7 +345,7 @@ const Hero = () => {
                         </div>
 
                         {/* GitHub Contributions */}
-                        <div className="mb-16 fade-in-element">
+                        <div className="mb-16 blur-fade-in-element">
                             {loading && (
                                 <div className="flex items-center justify-center p-8">
                                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -381,7 +363,7 @@ const Hero = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 fade-in-element">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 blur-fade-in-element">
                             <Button
                                 size="lg"
                                 onClick={() => scrollToSection('projects')}
@@ -407,7 +389,7 @@ const Hero = () => {
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex items-center justify-center space-x-6 fade-in-element">
+                        <div className="flex items-center justify-center space-x-6 blur-fade-in-element">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}

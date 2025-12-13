@@ -21,7 +21,7 @@ const Projects = () => {
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
         );
 
-        const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
         elements?.forEach((el) => observer.observe(el));
 
         return () => observer.disconnect();
@@ -62,25 +62,6 @@ const Projects = () => {
                 .elegant-shadow {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
-
-                .fade-in-element {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.8s ease-out,
-                                transform 0.8s ease-out;
-                }
-
-                .fade-in-element.animate-in {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-                .fade-in-element:nth-child(2) { transition-delay: 0.15s; }
-                .fade-in-element:nth-child(3) { transition-delay: 0.2s; }
-                .fade-in-element:nth-child(4) { transition-delay: 0.25s; }
-                .fade-in-element:nth-child(5) { transition-delay: 0.3s; }
-                .fade-in-element:nth-child(6) { transition-delay: 0.35s; }
             `}</style>
 
             <section id="projects" className="py-20 tech-section" ref={sectionRef}>
@@ -88,14 +69,14 @@ const Projects = () => {
                     {/* Header Section */}
                     <div className="text-center mb-16">
                         <div className="space-y-6">
-                            <div className="mb-4 fade-in-element">
+                            <div className="mb-4 blur-fade-in-element">
                                 <span className="text-primary font-mono text-lg flex items-center justify-center">
                                     <Terminal className="mr-2 h-4 w-4" />
                                     {'>'} ls -la ~/projects
                                 </span>
                             </div>
-                            <div className="relative fade-in-element">
-                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6">
+                            <div className="relative blur-fade-in-element">
+                                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                     Featured{' '}
                                     <span className="text-primary tech-text-glow inline-block">
                                         Projects
@@ -108,7 +89,7 @@ const Projects = () => {
                     </div>
 
                     {/* Filter Buttons */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-12 fade-in-element">
+                    <div className="flex flex-wrap justify-center gap-4 mb-12 blur-fade-in-element">
                         <Button
                             variant={filter === 'all' ? 'default' : 'outline'}
                             onClick={() => setFilter('all')}
@@ -136,7 +117,7 @@ const Projects = () => {
                             return (
                                 <div
                                     key={project.id}
-                                    className="group fade-in-element bg-card/50 backdrop-blur-sm rounded-xl border border-border/50
+                                    className="group blur-fade-in-element bg-card/50 backdrop-blur-sm rounded-xl border border-border/50
                                              hover:border-primary/30 transition-all duration-500 overflow-hidden
                                              hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 flex flex-col h-full"
                                 >
@@ -184,7 +165,7 @@ const Projects = () => {
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-2">
                                                     <Code2 className="h-5 w-5 text-primary flex-shrink-0" />
-                                                    <h3 className="text-xl font-mono font-bold text-foreground
+                                                    <h3 className="text-xl sm:text-2xl font-mono font-bold text-foreground
                                                                  group-hover:text-primary transition-colors duration-300">
                                                         {project.title}
                                                     </h3>
@@ -220,7 +201,7 @@ const Projects = () => {
 
                                         {/* Project Description */}
                                         <div className="mb-5 flex-grow">
-                                            <p className="text-muted-foreground text-sm leading-relaxed">
+                                            <p className="text-muted-foreground text-base leading-relaxed">
                                                 <span className="text-primary font-mono">{'// '}</span>
                                                 {expanded ? project.description : truncateText(project.description)}
                                             </p>
@@ -318,7 +299,7 @@ const Projects = () => {
                     </div>
 
                     {/* View More Button */}
-                    <div className="text-center mt-16 fade-in-element">
+                    <div className="text-center mt-16 blur-fade-in-element">
                         <Link to="https://github.com/Garvit1000">
                             <Button
                                 variant="outline"
