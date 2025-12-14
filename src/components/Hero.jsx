@@ -266,7 +266,7 @@ const Hero = () => {
 
             <section id="hero" className="tech-section" ref={sectionRef}>
                 <div className="container-xl">
-                    <div className="max-w-5xl mx-auto">
+                    <div className="max-w-4xl mx-auto">
 
                         {/* Main Heading with Avatar */}
                         <div className="mb-16 blur-fade-in-element">
@@ -290,11 +290,11 @@ const Hero = () => {
                                 {/* Name and Title */}
                                 <div className="space-y-3 md:space-y-4 text-left">
                                     <div className="relative">
-                                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold
+                                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold
                                                      tracking-tight leading-tight">
-                                            <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">{'>'}</span>{' '}
-                                            <span className="inline-block">Hi, I'm</span>{' '}
-                                            <span className="text-primary tech-text-glow inline-block">
+                                            <span className="text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">{'>'}</span>{' '}
+                                            <span>Hi, I'm</span>{' '}
+                                            <span className="text-primary tech-text-glow inline-block whitespace-nowrap">
                                                 <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
                                                     {personalInfo.name}
                                                 </TextEffect>
@@ -373,7 +373,7 @@ const Hero = () => {
                                 ./view-projects
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
-                            <a href="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing"
+                            <a href="https://drive.google.com/file/d/1OYbuD4SnNmj66oBbIUDphRdyuQofLS5t/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block w-full sm:w-auto">

@@ -84,7 +84,7 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className="max-w-5xl mx-auto space-y-12">
+                    <div className="max-w-4xl mx-auto space-y-12">
 
                         {/* Skills Section */}
                         <div className="blur-fade-in-element">
