@@ -76,7 +76,7 @@ const Projects = () => {
                                 </span>
                             </div>
                             <div className="relative blur-fade-in-element">
-                                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
+                                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                     Featured{' '}
                                     <span className="text-primary tech-text-glow inline-block">
                                         Projects
@@ -165,7 +165,7 @@ const Projects = () => {
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-2">
                                                     <Code2 className="h-5 w-5 text-primary flex-shrink-0" />
-                                                    <h3 className="text-xl sm:text-2xl font-mono font-bold text-foreground
+                                                    <h3 className="text-lg sm:text-2xl font-mono font-bold text-foreground
                                                                  group-hover:text-primary transition-colors duration-300">
                                                         {project.title}
                                                     </h3>
@@ -201,7 +201,7 @@ const Projects = () => {
 
                                         {/* Project Description */}
                                         <div className="mb-5 flex-grow">
-                                            <p className="text-muted-foreground text-base leading-relaxed">
+                                            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                                                 <span className="text-primary font-mono">{'// '}</span>
                                                 {expanded ? project.description : truncateText(project.description)}
                                             </p>

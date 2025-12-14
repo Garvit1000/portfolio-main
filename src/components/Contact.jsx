@@ -60,7 +60,7 @@ const Contact = () => {
                             </span>
                         </div>
                         <div className="relative blur-fade-in-element">
-                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
+                            <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                 Get In{' '}
                                 <span className="text-primary tech-text-glow inline-block">
                                     Touch
@@ -77,11 +77,11 @@ const Contact = () => {
                             <div className="space-y-12">
                                 {/* Description */}
                                 <div>
-                                    <p className="text-muted-foreground font-mono text-base leading-relaxed mb-2">
+                                    <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed mb-2">
                                         <span className="text-primary">{'// '}</span>
                                         I'm currently available for freelance work, collaborations, and full-time opportunities.
                                     </p>
-                                    <p className="text-muted-foreground font-mono text-base leading-relaxed">
+                                    <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed">
                                         <span className="text-primary">{'// '}</span>
                                         Let's build something amazing together.
                                     </p>

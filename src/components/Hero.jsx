@@ -264,13 +264,13 @@ const Hero = () => {
                 }
             `}</style>
 
-            <section id="hero" className=" tech-section" ref={sectionRef}>
+            <section id="hero" className="tech-section" ref={sectionRef}>
                 <div className="container-xl">
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-5xl mx-auto">
 
                         {/* Main Heading with Avatar */}
                         <div className="mb-16 blur-fade-in-element">
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                            <div className="flex flex-row items-center justify-center gap-6 md:gap-8 lg:gap-12">
                                 {/* Avatar */}
                                 <div className="flex-shrink-0">
                                     {contributions?.user?.avatarUrl ? (
@@ -278,21 +278,21 @@ const Hero = () => {
                                             <img
                                                 src={contributions.user.avatarUrl}
                                                 alt={personalInfo.name}
-                                                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 elegant-shadow"
+                                                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full border-4 border-primary/30 elegant-shadow"
                                             />
                                             <div className="absolute inset-0 rounded-full border-4 border-primary/50 animate-pulse"></div>
                                         </div>
                                     ) : (
-                                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
+                                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
                                     )}
                                 </div>
 
                                 {/* Name and Title */}
-                                <div className="text-center md:text-left space-y-6">
+                                <div className="space-y-3 md:space-y-4 text-left">
                                     <div className="relative">
-                                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold
+                                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold
                                                      tracking-tight leading-tight">
-                                            <span className="text-muted-foreground/70 text-3xl sm:text-4xl md:text-5xl">{'>'}</span>{' '}
+                                            <span className="text-muted-foreground/70 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">{'>'}</span>{' '}
                                             <span className="inline-block">Hi, I'm</span>{' '}
                                             <span className="text-primary tech-text-glow inline-block">
                                                 <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
@@ -300,12 +300,10 @@ const Hero = () => {
                                                 </TextEffect>
                                             </span>
                                         </h1>
-                                        <div className="absolute -bottom-2 left-0 md:left-8 w-20 sm:w-28 md:w-36
-                                                      h-0.5 bg-gradient-to-r from-primary via-primary to-transparent"></div>
                                     </div>
-                                    <div className="flex items-center justify-center md:justify-start gap-3 mt-8">
-                                        <Code2 className="h-6 w-6 text-primary" />
-                                        <p className="text-xl sm:text-2xl text-muted-foreground font-mono font-medium">
+                                    <div className="flex items-center gap-2 md:gap-3">
+                                        <Code2 className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
+                                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground font-mono font-medium">
                                             {personalInfo.title}
                                         </p>
                                     </div>
@@ -315,27 +313,29 @@ const Hero = () => {
                         {/* Bio */}
                         <div className="mb-16 blur-fade-in-element">
 
-                            <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
 
-                                <div className="text-base sm:text-lg text-muted-foreground leading-relaxed font-mono text-center">
+                                <div className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed font-mono text-center">
                                     I'm a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with{' '}
 
                                     {/* Tech Stack Badges - Inline */}
                                     {personalInfo.techStack && personalInfo.techStack.map((tech, index) => (
-                                        <span key={tech.icon} className="inline-flex items-center">
+                                        <span key={tech.icon} className="inline-flex align-middle mx-1">
                                             <span
-                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-card border border-border 
-                                                         rounded-lg hover:border-primary/50 hover:scale-105 transition-all duration-200
-                                                         cursor-default shadow-sm mx-1 align-middle"
+                                                className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1 
+                                                         bg-card border border-border rounded-md 
+                                                         hover:border-primary/50 hover:scale-105 transition-all duration-200
+                                                         cursor-default shadow-sm relative -top-0.5"
                                             >
                                                 <img
                                                     src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
                                                     alt={tech.name}
-                                                    className="w-3.5 h-3.5"
+                                                    className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 object-contain"
                                                 />
-                                                <span className="text-xs font-medium text-foreground">{tech.name}</span>
+                                                <span className="text-xs sm:text-sm md:text-base font-medium text-foreground/80 leading-none pb-[1px]">
+                                                    {tech.name}
+                                                </span>
                                             </span>
-                                            {index < personalInfo.techStack.length - 1 && <span className="mx-0.5">,</span>}
                                         </span>
                                     ))}
                                     {' '}and today's web tech to create fast, user-friendly experiences. Always learning, always experimenting, and always shipping projects that push design and functionality a step further.
@@ -363,15 +363,15 @@ const Hero = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 blur-fade-in-element">
+                        <div className="flex flex-wrap gap-4 justify-center blur-fade-in-element">
                             <Button
                                 size="lg"
                                 onClick={() => scrollToSection('projects')}
-                                className="transition-all rounded-lg font-mono w-full sm:w-auto"
+                                className="group transition-all rounded-lg font-mono w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                             >
-                                <Terminal className="mr-2 h-4 w-4" />
+                                <Terminal className="mr-2 h-5 w-5" />
                                 ./view-projects
-                                <ArrowRight className="ml-2 h-4 w-4" />
+                                <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
                             <a href="https://drive.google.com/file/d/1TnMEMOYsJly9SQABwKvIgVcKUB9kUNZw/view?usp=sharing"
                                 target="_blank"
@@ -380,16 +380,16 @@ const Hero = () => {
                                 <Button
                                     variant="outline"
                                     size="lg"
-                                    className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary w-full"
+                                    className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary w-full px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                                 >
-                                    <Download className="mr-2 h-4 w-4" />
+                                    <Download className="mr-2 h-5 w-5" />
                                     View-resume.pdf
                                 </Button>
                             </a>
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex items-center justify-center space-x-6 blur-fade-in-element">
+                        <div className="flex items-center gap-6 justify-center mt-8 blur-fade-in-element">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
@@ -397,7 +397,7 @@ const Hero = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-muted-foreground hover:text-primary transition-colors
-                                             p-3 border border-primary/20 hover:border-primary rounded-lg"
+                                             p-3 sm:p-4 border border-primary/20 hover:border-primary rounded-lg"
                                     aria-label={social.name}
                                 >
                                     {getSocialIcon(social.icon)}

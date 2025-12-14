@@ -72,7 +72,7 @@ const About = () => {
                                 </span>
                             </div>
                             <div className="relative blur-fade-in-element">
-                                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
+                                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                     About{' '}
                                     <span className="text-primary tech-text-glow inline-block">
                                         Developer
@@ -84,145 +84,151 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className="max-w-4xl mx-auto space-y-16">
+                    <div className="max-w-5xl mx-auto space-y-12">
 
                         {/* Skills Section */}
-                        <div className="text-left blur-fade-in-element">
-                            <div className="flex items-center gap-3 mb-6">
-                                <Code2 className="h-6 w-6 text-primary" />
-                                <h3 className="text-2xl sm:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                           underline-offset-4 hover:decoration-primary transition-colors">
-                                    Technical Skills
-                                </h3>
-                            </div>
+                        <div className="blur-fade-in-element">
+                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <Code2 className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                        Technical Skills
+                                    </h3>
+                                </div>
 
-                            <p className="text-muted-foreground font-mono text-base leading-relaxed mb-6">
-                                <span className="text-primary">{'// '}</span>
-                                Technologies and frameworks I work with daily
-                            </p>
+                                <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed mb-6">
+                                    <span className="text-primary">{'// '}</span>
+                                    Technologies and frameworks I work with daily
+                                </p>
 
-                            <div className="flex flex-wrap gap-3">
-                                {[
-                                    { name: 'React', logo: 'react', color: '61DAFB' },
-                                    { name: 'JavaScript', logo: 'javascript', color: 'F7DF1E' },
-                                    // { name: 'TypeScript', logo: 'typescript', color: '3178C6' },
-                                    { name: 'Tailwind CSS', logo: 'tailwindcss', color: '06B6D4' },
-                                    { name: 'Node.js', logo: 'nodedotjs', color: '339933' },
-                                    { name: 'Express', logo: 'express', color: '000000' },
-                                    { name: 'MongoDB', logo: 'mongodb', color: '47A248' },
-                                    { name: 'PostgreSQL', logo: 'postgresql', color: '4169E1' },
-                                    { name: 'Firebase', logo: 'firebase', color: 'FFCA28' },
-                                    { name: 'Vite', logo: 'vite', color: '646CFF' },
-                                    { name: 'Git', logo: 'git', color: 'F05032' },
-                                    { name: 'Vercel', logo: 'vercel', color: '000000' },
-                                    { name: 'Postman', logo: 'postman', color: 'FF6C37' },
-                                ].map((tech) => (
-                                    <div
-                                        key={tech.name}
-                                        className="flex items-center gap-2 px-4 py-2 bg-card border border-border 
+                                <div className="flex flex-wrap gap-3">
+                                    {[
+                                        { name: 'React', logo: 'react', color: '61DAFB' },
+                                        { name: 'JavaScript', logo: 'javascript', color: 'F7DF1E' },
+                                        // { name: 'TypeScript', logo: 'typescript', color: '3178C6' },
+                                        { name: 'Tailwind CSS', logo: 'tailwindcss', color: '06B6D4' },
+                                        { name: 'Node.js', logo: 'nodedotjs', color: '339933' },
+                                        { name: 'Express', logo: 'express', color: '000000' },
+                                        { name: 'MongoDB', logo: 'mongodb', color: '47A248' },
+                                        { name: 'PostgreSQL', logo: 'postgresql', color: '4169E1' },
+                                        { name: 'Firebase', logo: 'firebase', color: 'FFCA28' },
+                                        { name: 'Vite', logo: 'vite', color: '646CFF' },
+                                        { name: 'Git', logo: 'git', color: 'F05032' },
+                                        { name: 'Vercel', logo: 'vercel', color: '000000' },
+                                        { name: 'Postman', logo: 'postman', color: 'FF6C37' },
+                                    ].map((tech) => (
+                                        <div
+                                            key={tech.name}
+                                            className="flex items-center gap-2 px-4 py-2 bg-card border border-border 
                                                  rounded-lg hover:border-primary/50 hover:scale-105 transition-all duration-200
                                                  cursor-default shadow-sm"
-                                    >
-                                        <img
-                                            src={`https://cdn.simpleicons.org/${tech.logo}/${tech.color}`}
-                                            alt={tech.name}
-                                            className="w-5 h-5"
-                                        />
-                                        <span className="text-sm font-medium text-foreground">{tech.name}</span>
-                                    </div>
-                                ))}
+                                        >
+                                            <img
+                                                src={`https://cdn.simpleicons.org/${tech.logo}/${tech.color}`}
+                                                alt={tech.name}
+                                                className="w-5 h-5"
+                                            />
+                                            <span className="text-sm font-medium text-foreground">{tech.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
                         {/* What I Do Section */}
-                        <div className="text-left blur-fade-in-element">
-                            <div className="flex items-center gap-3 mb-6">
-                                <Rocket className="h-6 w-6 text-primary" />
-                                <h3 className="text-2xl sm:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                           underline-offset-4 hover:decoration-primary transition-colors">
-                                    What I Do
-                                </h3>
-                            </div>
+                        <div className="blur-fade-in-element">
+                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <Rocket className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                        What I Do
+                                    </h3>
+                                </div>
 
-                            <p className="text-muted-foreground font-mono text-base leading-relaxed mb-8">
-                                <span className="text-primary">{'// '}</span>
-                                Core areas of expertise and focus
-                            </p>
+                                <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed mb-8">
+                                    <span className="text-primary">{'// '}</span>
+                                    Core areas of expertise and focus
+                                </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {features.map((feature, idx) => (
-                                    <div key={idx} className="space-y-2">
-                                        <div className="flex items-center gap-2">
-                                            <div className="text-primary">
-                                                {feature.icon}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    {features.map((feature, idx) => (
+                                        <div key={idx} className="space-y-2">
+                                            <div className="flex items-center gap-2">
+                                                <div className="text-primary">
+                                                    {feature.icon}
+                                                </div>
+                                                <h4 className="font-mono font-bold text-base text-foreground">
+                                                    {feature.title}
+                                                </h4>
                                             </div>
-                                            <h4 className="font-mono font-bold text-base text-foreground">
-                                                {feature.title}
-                                            </h4>
+                                            <p className="text-muted-foreground text-sm font-mono leading-relaxed pl-7">
+                                                {feature.description}
+                                            </p>
                                         </div>
-                                        <p className="text-muted-foreground text-sm font-mono leading-relaxed pl-7">
-                                            {feature.description}
-                                        </p>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
                         {/* Work Experience Section */}
-                        <div className="text-left blur-fade-in-element">
-                            <div className="flex items-center gap-3 mb-6">
-                                <Briefcase className="h-6 w-6 text-primary" />
-                                <h3 className="text-2xl sm:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                           underline-offset-4 hover:decoration-primary transition-colors">
-                                    Work Experience
-                                </h3>
-                            </div>
+                        <div className="blur-fade-in-element">
+                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <Briefcase className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
+                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                        Work Experience
+                                    </h3>
+                                </div>
 
-                            <p className="text-muted-foreground font-mono text-base leading-relaxed mb-8">
-                                <span className="text-primary">{'// '}</span>
-                                Professional journey and key contributions
-                            </p>
+                                <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed mb-8">
+                                    <span className="text-primary">{'// '}</span>
+                                    Professional journey and key contributions
+                                </p>
 
-                            <div className="space-y-10">
-                                {experience.map((exp) => (
-                                    <div key={exp.id} className="space-y-4">
-                                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                                            <div>
-                                                <h4 className="font-mono font-bold text-xl sm:text-2xl text-foreground">
-                                                    {exp.position}
-                                                </h4>
-                                                <div className="text-primary font-medium font-mono text-base sm:text-lg">
-                                                    {exp.company}
+                                <div className="space-y-10">
+                                    {experience.map((exp) => (
+                                        <div key={exp.id} className="space-y-4">
+                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                                                <div>
+                                                    <h4 className="font-mono font-bold text-lg sm:text-2xl text-foreground">
+                                                        {exp.position}
+                                                    </h4>
+                                                    <div className="text-primary font-medium font-mono text-sm sm:text-lg">
+                                                        {exp.company}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <span className="text-xs font-mono text-muted-foreground bg-primary/10
+                                                <span className="text-xs font-mono text-muted-foreground bg-primary/10
                                                          px-3 py-1 rounded border border-primary/20 w-fit">
-                                                {exp.period}
-                                            </span>
-                                        </div>
+                                                    {exp.period}
+                                                </span>
+                                            </div>
 
-                                        <div className="space-y-2">
-                                            {exp.description.split('•').filter(item => item.trim()).map((item, idx) => (
-                                                <div key={idx} className="flex items-start gap-2 text-muted-foreground text-base font-mono leading-relaxed">
-                                                    <span className="text-primary mt-1 flex-shrink-0">▸</span>
-                                                    <span>{item.trim()}</span>
-                                                </div>
-                                            ))}
+                                            <div className="space-y-2">
+                                                {exp.description.split('•').filter(item => item.trim()).map((item, idx) => (
+                                                    <div key={idx} className="flex items-start gap-2 text-muted-foreground text-sm sm:text-base font-mono leading-relaxed">
+                                                        <span className="text-primary mt-1 flex-shrink-0">▸</span>
+                                                        <span>{item.trim()}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Connect Button */}
-                    <div className="text-center mt-16">
+                    <div className="text-center mt-16 blur-fade-in-element">
                         <Button
                             variant="outline"
                             size="lg"
-                            className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary"
+                            className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                         >
-                            <Github className="mr-2 h-4 w-4" />
+                            <Github className="mr-2 h-5 w-5" />
                             git clone --about-me
                         </Button>
                     </div>
