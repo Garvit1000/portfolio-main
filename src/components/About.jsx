@@ -1,46 +1,31 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
-import { Terminal, Github, Briefcase, Code2, Sparkles, Rocket, Layers, Gauge } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ComputerTerminalIcon, GithubIcon, Briefcase01Icon, CodeIcon, SparklesIcon, Rocket01Icon, Layers01Icon, DashboardSpeed01Icon } from '@hugeicons/core-free-icons';
 import { experience } from '../data/mock';
 
 const About = () => {
     const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-        );
 
-        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
-        elements?.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
-    }, []);
     const features = [
         {
-            icon: <Code2 className="h-5 w-5" />,
+            icon: <HugeiconsIcon icon={CodeIcon} className="h-5 w-5" />,
             title: "Clean Code",
             description: "Writing maintainable, scalable code following industry best practices."
         },
         {
-            icon: <Sparkles className="h-5 w-5" />,
+            icon: <HugeiconsIcon icon={SparklesIcon} className="h-5 w-5" />,
             title: "UI/UX Focus",
             description: "Creating intuitive interfaces with seamless user experiences."
         },
         {
-            icon: <Gauge className="h-5 w-5" />,
+            icon: <HugeiconsIcon icon={DashboardSpeed01Icon} className="h-5 w-5" />,
             title: "Performance",
             description: "Optimizing applications for speed and accessibility."
         },
         {
-            icon: <Layers className="h-5 w-5" />,
+            icon: <HugeiconsIcon icon={Layers01Icon} className="h-5 w-5" />,
             title: "System Design",
             description: "Architecting robust, scalable solutions."
         }
@@ -48,7 +33,7 @@ const About = () => {
 
     return (
         <>
-            <style jsx>{`
+            <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
                 .font-serif {
@@ -65,13 +50,13 @@ const About = () => {
                     {/* Header Section */}
                     <div className="text-center mb-16">
                         <div className="space-y-6">
-                            <div className="mb-4 blur-fade-in-element">
+                            <div className="mb-4">
                                 <span className="text-primary font-mono text-lg flex items-center justify-center">
-                                    <Terminal className="mr-2 h-4 w-4" />
+                                    <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
                                     {'>'} cat ~/about.md
                                 </span>
                             </div>
-                            <div className="relative blur-fade-in-element">
+                            <div className="relative">
                                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                     About{' '}
                                     <span className="text-primary tech-text-glow inline-block">
@@ -87,10 +72,10 @@ const About = () => {
                     <div className="max-w-4xl mx-auto space-y-12">
 
                         {/* Skills Section */}
-                        <div className="blur-fade-in-element">
+                        <div>
                             <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <Code2 className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
+                                    <HugeiconsIcon icon={CodeIcon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                                     <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
                                                underline-offset-4 hover:decoration-primary transition-colors">
                                         Technical Skills
@@ -140,7 +125,7 @@ const About = () => {
                         <div className="blur-fade-in-element">
                             <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <Rocket className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
+                                    <HugeiconsIcon icon={Rocket01Icon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                                     <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
                                                underline-offset-4 hover:decoration-primary transition-colors">
                                         What I Do
@@ -176,7 +161,7 @@ const About = () => {
                         <div className="blur-fade-in-element">
                             <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <Briefcase className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
+                                    <HugeiconsIcon icon={Briefcase01Icon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                                     <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
                                                underline-offset-4 hover:decoration-primary transition-colors">
                                         Work Experience
@@ -222,13 +207,13 @@ const About = () => {
                     </div>
 
                     {/* Connect Button */}
-                    <div className="text-center mt-16 blur-fade-in-element">
+                    <div className="text-center mt-16">
                         <Button
                             variant="outline"
                             size="lg"
                             className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                         >
-                            <Github className="mr-2 h-5 w-5" />
+                            <HugeiconsIcon icon={GithubIcon} className="mr-2 h-5 w-5" />
                             git clone --about-me
                         </Button>
                     </div>

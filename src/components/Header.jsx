@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
-import { Sun, Moon, Menu, X, Terminal } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Sun01Icon, Moon01Icon, Menu01Icon, Cancel01Icon, ComputerTerminalIcon } from '@hugeicons/core-free-icons';
 import { useTheme } from './ThemeProvider';
 import { useState } from 'react';
 import ThemeSelector from './ThemeSelector';
@@ -28,7 +29,7 @@ const Header = () => {
                 onClick={() => scrollToSection('hero')}
                 className="text-xl font-bold text-foreground hover:text-primary transition-colors font-mono flex items-center"
               >
-                <Terminal className="mr-2 h-5 w-5 text-primary" />
+                <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-5 w-5 text-primary" />
                 {'{'}Garvit{'}'}
               </button>
             </div>
@@ -60,38 +61,38 @@ const Header = () => {
 
             {/* Theme Selector, Theme Toggle & Mobile Menu with sharp edges */}
             <div className="flex items-center space-x-2 lg:space-x-3">
-            {/* Theme Selector */}
-            <ThemeSelector />
-            
-            {/* Light/Dark Mode Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleTheme}
-              className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            >
-              {theme === 'light' ? (
-                <Moon className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-              ) : (
-                <Sun className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-              )}
-            </Button>
+              {/* Theme Selector */}
+              <ThemeSelector />
 
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden w-9 h-9 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle mobile menu"
-            >
-              {isMenuOpen ? (
-                <X className="h-4 w-4" />
-              ) : (
-                <Menu className="h-4 w-4" />
-              )}
-            </Button>
+              {/* Light/Dark Mode Toggle */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              >
+                {theme === 'light' ? (
+                  <HugeiconsIcon icon={Moon01Icon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
+                ) : (
+                  <HugeiconsIcon icon={Sun01Icon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
+                )}
+              </Button>
+
+              {/* Mobile Menu Button */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden w-9 h-9 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle mobile menu"
+              >
+                {isMenuOpen ? (
+                  <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+                ) : (
+                  <HugeiconsIcon icon={Menu01Icon} className="h-4 w-4" />
+                )}
+              </Button>
             </div>
           </div>
 

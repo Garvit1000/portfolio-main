@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
-import { Github, Star, Terminal, ExternalLink, ChevronDown, ChevronUp, Code2, GitCommit, Image as ImageIcon } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { GithubIcon, StarIcon, ComputerTerminalIcon, LinkSquare02Icon, ArrowDown01Icon, ArrowUp01Icon, CodeIcon, GitCommitIcon, Image01Icon } from '@hugeicons/core-free-icons';
 import { projects } from '../data/mock';
 import { Link } from 'react-router-dom';
 
@@ -9,23 +10,7 @@ const Projects = () => {
     const [expandedProjects, setExpandedProjects] = useState(new Set());
     const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-        );
 
-        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
-        elements?.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
-    }, [filter]);
 
     const filteredProjects = filter === 'all'
         ? projects
@@ -52,7 +37,7 @@ const Projects = () => {
 
     return (
         <>
-            <style jsx>{`
+            <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
                 .font-serif {
@@ -69,13 +54,13 @@ const Projects = () => {
                     {/* Header Section */}
                     <div className="text-center mb-16">
                         <div className="space-y-6">
-                            <div className="mb-4 blur-fade-in-element">
+                            <div className="mb-4">
                                 <span className="text-primary font-mono text-lg flex items-center justify-center">
-                                    <Terminal className="mr-2 h-4 w-4" />
+                                    <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
                                     {'>'} ls -la ~/projects
                                 </span>
                             </div>
-                            <div className="relative blur-fade-in-element">
+                            <div className="relative">
                                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                     Featured{' '}
                                     <span className="text-primary tech-text-glow inline-block">
@@ -89,13 +74,13 @@ const Projects = () => {
                     </div>
 
                     {/* Filter Buttons */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-12 blur-fade-in-element">
+                    <div className="flex flex-wrap justify-center gap-4 mb-12">
                         <Button
                             variant={filter === 'all' ? 'default' : 'outline'}
                             onClick={() => setFilter('all')}
                             className="transition-all rounded-lg font-mono border-primary/50"
                         >
-                            <Terminal className="mr-2 h-4 w-4" />
+                            <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
                             --all
                         </Button>
                         <Button
@@ -103,7 +88,7 @@ const Projects = () => {
                             onClick={() => setFilter('featured')}
                             className="transition-all rounded-lg font-mono border-primary/50"
                         >
-                            <Star className="mr-2 h-4 w-4" />
+                            <HugeiconsIcon icon={StarIcon} className="mr-2 h-4 w-4" />
                             --featured
                         </Button>
                     </div>
@@ -117,7 +102,7 @@ const Projects = () => {
                             return (
                                 <div
                                     key={project.id}
-                                    className="group blur-fade-in-element bg-card/50 backdrop-blur-sm rounded-xl border border-border/50
+                                    className="group bg-card/50 backdrop-blur-sm rounded-xl border border-border/50
                                              hover:border-primary/30 transition-all duration-500 overflow-hidden
                                              hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 flex flex-col h-full"
                                 >
@@ -139,7 +124,7 @@ const Projects = () => {
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center">
                                                 <div className="text-center">
-                                                    <ImageIcon className="mx-auto mb-2 text-primary/40 h-12 w-12" />
+                                                    <HugeiconsIcon icon={Image01Icon} className="mx-auto mb-2 text-primary/40 h-12 w-12" />
                                                     <p className="text-sm font-mono text-primary/60">
                                                         project preview
                                                     </p>
@@ -152,7 +137,7 @@ const Projects = () => {
                                             <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground
                                                           px-3 py-1.5 rounded-full text-xs font-mono font-semibold
                                                           flex items-center gap-1.5 shadow-lg">
-                                                <Star className="h-3.5 w-3.5 fill-current" />
+                                                <HugeiconsIcon icon={StarIcon} className="h-3.5 w-3.5 fill-current" />
                                                 Featured
                                             </div>
                                         )}
@@ -164,7 +149,7 @@ const Projects = () => {
                                         <div className="flex items-start justify-between gap-4 mb-4">
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-2">
-                                                    <Code2 className="h-5 w-5 text-primary flex-shrink-0" />
+                                                    <HugeiconsIcon icon={CodeIcon} className="h-5 w-5 text-primary flex-shrink-0" />
                                                     <h3 className="text-lg sm:text-2xl font-mono font-bold text-foreground
                                                                  group-hover:text-primary transition-colors duration-300">
                                                         {project.title}
@@ -183,7 +168,7 @@ const Projects = () => {
                                                                  transition-all duration-300 hover:scale-110"
                                                         title="View Live Demo"
                                                     >
-                                                        <ExternalLink className="h-4 w-4" />
+                                                        <HugeiconsIcon icon={LinkSquare02Icon} className="h-4 w-4" />
                                                     </a>
                                                 )}
                                                 <a
@@ -194,16 +179,22 @@ const Projects = () => {
                                                              transition-all duration-300 hover:scale-110"
                                                     title="View Source Code"
                                                 >
-                                                    <Github className="h-4 w-4" />
+                                                    <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
                                                 </a>
                                             </div>
                                         </div>
 
                                         {/* Project Description */}
-                                        <div className="mb-5 flex-grow">
-                                            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                                                <span className="text-primary font-mono">{'// '}</span>
-                                                {expanded ? project.description : truncateText(project.description)}
+                                        <div className="mb-5 flex-grow group/desc">
+                                            <p className="text-muted-foreground/90 text-sm sm:text-base leading-relaxed 
+                                                         transition-all duration-300 group-hover/desc:text-foreground/80">
+                                                <span className="text-primary/70 font-mono text-xs sm:text-sm 
+                                                               group-hover/desc:text-primary transition-colors duration-300">
+                                                    {'// '}
+                                                </span>
+                                                <span className="font-light tracking-wide">
+                                                    {expanded ? project.description : truncateText(project.description)}
+                                                </span>
                                             </p>
 
                                             {needsTruncation && (
@@ -214,12 +205,12 @@ const Projects = () => {
                                                 >
                                                     {expanded ? (
                                                         <>
-                                                            <ChevronUp className="h-3.5 w-3.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                                            <HugeiconsIcon icon={ArrowUp01Icon} className="h-3.5 w-3.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                                                             show less
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <ChevronDown className="h-3.5 w-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
+                                                            <HugeiconsIcon icon={ArrowDown01Icon} className="h-3.5 w-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
                                                             show more
                                                         </>
                                                     )}
@@ -230,7 +221,7 @@ const Projects = () => {
                                         {/* Technologies */}
                                         <div className="space-y-2">
                                             <div className="flex items-center gap-2">
-                                                <GitCommit className="h-3.5 w-3.5 text-primary" />
+                                                <HugeiconsIcon icon={GitCommitIcon} className="h-3.5 w-3.5 text-primary" />
                                                 <span className="text-xs font-mono text-muted-foreground font-semibold">
                                                     Tech Stack
                                                 </span>
@@ -299,14 +290,14 @@ const Projects = () => {
                     </div>
 
                     {/* View More Button */}
-                    <div className="text-center mt-16 blur-fade-in-element">
+                    <div className="text-center mt-16">
                         <Link to="https://github.com/Garvit1000">
                             <Button
                                 variant="outline"
                                 size="lg"
                                 className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary"
                             >
-                                <Github className="mr-2 h-4 w-4" />
+                                <HugeiconsIcon icon={GithubIcon} className="mr-2 h-4 w-4" />
                                 git clone --all-repos
                             </Button>
                         </Link>

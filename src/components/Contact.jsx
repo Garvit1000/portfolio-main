@@ -1,36 +1,21 @@
 import React, { useEffect, useRef } from 'react';
-import { Mail, MapPin, Github, Linkedin, Twitter, Terminal, Send, MessageSquare } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Mail01Icon, Location01Icon, GithubIcon, Linkedin01Icon, NewTwitterIcon, ComputerTerminalIcon, MailSend01Icon, MessageMultiple01Icon } from '@hugeicons/core-free-icons';
 import { Button } from './ui/button';
 import { personalInfo, socialLinks } from '../data/mock';
 
 const Contact = () => {
     const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-        );
 
-        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
-        elements?.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
-    }, []);
     const getSocialIcon = (iconName) => {
         switch (iconName) {
             case 'github':
-                return <Github className="h-5 w-5" />;
+                return <HugeiconsIcon icon={GithubIcon} className="h-5 w-5" />;
             case 'linkedin':
-                return <Linkedin className="h-5 w-5" />;
+                return <HugeiconsIcon icon={Linkedin01Icon} className="h-5 w-5" />;
             case 'twitter':
-                return <Twitter className="h-5 w-5" />;
+                return <HugeiconsIcon icon={NewTwitterIcon} className="h-5 w-5" />;
             default:
                 return null;
         }
@@ -38,7 +23,7 @@ const Contact = () => {
 
     return (
         <>
-            <style jsx>{`
+            <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
                 .font-serif {
@@ -53,13 +38,13 @@ const Contact = () => {
                 <div className="container-xl">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <div className="mb-4 blur-fade-in-element">
+                        <div className="mb-4">
                             <span className="text-primary font-mono text-lg flex items-center justify-center">
-                                <Terminal className="mr-2 h-4 w-4" />
+                                <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
                                 {'>'} cat ~/contact.txt
                             </span>
                         </div>
-                        <div className="relative blur-fade-in-element">
+                        <div className="relative">
                             <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
                                 Get In{' '}
                                 <span className="text-primary tech-text-glow inline-block">
@@ -72,7 +57,7 @@ const Contact = () => {
                     </div>
 
                     <div className="max-w-4xl mx-auto">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 blur-fade-in-element">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                             {/* Left Side - Contact Info */}
                             <div className="space-y-12">
                                 {/* Description */}
@@ -90,7 +75,7 @@ const Contact = () => {
                                 {/* Contact Info */}
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3">
-                                        <Send className="h-5 w-5 text-primary" />
+                                        <HugeiconsIcon icon={MailSend01Icon} className="h-5 w-5 text-primary" />
                                         <h3 className="text-xl font-mono font-bold underline decoration-primary/50 decoration-2
                                                underline-offset-4 hover:decoration-primary transition-colors">
                                             Contact Details
@@ -99,7 +84,7 @@ const Contact = () => {
 
                                     <div className="space-y-4">
                                         <div className="flex items-center gap-3">
-                                            <Mail className="h-4 w-4 text-primary" />
+                                            <HugeiconsIcon icon={Mail01Icon} className="h-4 w-4 text-primary" />
                                             <a
                                                 href={`mailto:${personalInfo.email}`}
                                                 className="font-mono text-base hover:text-primary transition-colors"
@@ -109,7 +94,7 @@ const Contact = () => {
                                         </div>
 
                                         <div className="flex items-center gap-3">
-                                            <MapPin className="h-4 w-4 text-primary" />
+                                            <HugeiconsIcon icon={Location01Icon} className="h-4 w-4 text-primary" />
                                             <span className="font-mono text-base text-muted-foreground">
                                                 {personalInfo.location}
                                             </span>
@@ -120,7 +105,7 @@ const Contact = () => {
                                 {/* Social Links */}
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3">
-                                        <Terminal className="h-5 w-5 text-primary" />
+                                        <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
                                         <h3 className="text-xl font-mono font-bold underline decoration-primary/50 decoration-2
                                                underline-offset-4 hover:decoration-primary transition-colors">
                                             Social Networks
@@ -182,7 +167,7 @@ const Contact = () => {
                                 {/* Interests */}
                                 <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                                     <div className="flex items-center gap-3 mb-4">
-                                        <Terminal className="h-5 w-5 text-primary" />
+                                        <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
                                         <h3 className="font-mono font-bold text-lg">
                                             Interested In
                                         </h3>

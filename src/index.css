@@ -307,61 +307,7 @@ html {
     pointer-events: none;
   }
 
-  /* Smooth Blur-In Animations */
-  .blur-fade-in-element {
-    filter: blur(8px);
-    transform: translateY(20px) scale(0.98);
-    transition: filter 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-      transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-    will-change: filter, transform;
-  }
 
-  .blur-fade-in-element.animate-in {
-    filter: blur(0px);
-    transform: translateY(0) scale(1);
-  }
-
-  /* Staggered animation delays for sequential elements */
-  .blur-fade-in-element:nth-child(1) {
-    transition-delay: 0.05s;
-  }
-
-  .blur-fade-in-element:nth-child(2) {
-    transition-delay: 0.15s;
-  }
-
-  .blur-fade-in-element:nth-child(3) {
-    transition-delay: 0.25s;
-  }
-
-  .blur-fade-in-element:nth-child(4) {
-    transition-delay: 0.35s;
-  }
-
-  .blur-fade-in-element:nth-child(5) {
-    transition-delay: 0.45s;
-  }
-
-  .blur-fade-in-element:nth-child(6) {
-    transition-delay: 0.55s;
-  }
-
-  .blur-fade-in-element:nth-child(7) {
-    transition-delay: 0.65s;
-  }
-
-  .blur-fade-in-element:nth-child(8) {
-    transition-delay: 0.75s;
-  }
-
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    .blur-fade-in-element {
-      filter: blur(0px);
-      transform: translateY(0) scale(1);
-      transition: none;
-    }
-  }
 }
 
 /* Global theme radius application */

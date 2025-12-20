@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heart, ArrowUp, Terminal, Code2, Database } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { FavouriteIcon, ArrowUp01Icon, ComputerTerminalIcon, CodeIcon, DatabaseIcon } from '@hugeicons/core-free-icons';
 import { Button } from './ui/button';
 import { personalInfo } from '../data/mock';
 import FooterText from './spectrumui/footer';
@@ -26,9 +27,9 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-sm text-muted-foreground font-mono">
                 Made with
-                <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" />
+                <HugeiconsIcon icon={FavouriteIcon} className="h-4 w-4 mx-1 text-red-500 fill-current" />
                 using
-                <Code2 className="h-4 w-4 mx-1 text-primary" />
+                <HugeiconsIcon icon={CodeIcon} className="h-4 w-4 mx-1 text-primary" />
                 React && Tailwind CSS
               </div>
             </div>
@@ -63,7 +64,7 @@ const Footer = () => {
                 onClick={scrollToTop}
                 className="group straight-line border-primary/50 hover:border-primary font-mono"
               >
-                <ArrowUp className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
+                <HugeiconsIcon icon={ArrowUp01Icon} className="h-4 w-4 mr-2 transition-transform group-hover:-translate-y-1" />
                 sudo top
               </Button>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
-import { Palette, Check } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ColorPickerIcon, CheckmarkCircle01Icon } from '@hugeicons/core-free-icons';
 import { useTheme } from './ThemeProvider';
 import { getThemeNames } from '../data/themes';
 
@@ -65,7 +66,7 @@ const ThemeSelector = () => {
                 className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
                 aria-label="Select theme"
             >
-                <Palette className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
+                <HugeiconsIcon icon={ColorPickerIcon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
             </Button>
 
             {/* Custom Dropdown */}
@@ -101,7 +102,7 @@ const ThemeSelector = () => {
                                         </span>
                                     </div>
                                     {isSelected && (
-                                        <Check className="h-3 w-3 text-primary flex-shrink-0" />
+                                        <HugeiconsIcon icon={CheckmarkCircle01Icon} className="h-3 w-3 text-primary flex-shrink-0" />
                                     )}
                                 </div>
                             );

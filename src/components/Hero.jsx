@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { ArrowRight, Download, Github, Linkedin, Twitter, Terminal, Code2, GitCommit } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowRight01Icon, Download01Icon, GithubIcon, Linkedin01Icon, NewTwitterIcon, ComputerTerminalIcon, CodeIcon, GitCommitIcon } from '@hugeicons/core-free-icons';
 import { personalInfo, projects, socialLinks } from '../data/mock';
-import { TextEffect } from './motion-primitives/text-effect.jsx';
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -11,23 +11,7 @@ const Hero = () => {
     const [error, setError] = useState(null);
     const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-        );
 
-        const elements = sectionRef.current?.querySelectorAll('.blur-fade-in-element');
-        elements?.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
-    }, []);
 
     const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
@@ -39,11 +23,11 @@ const Hero = () => {
     const getSocialIcon = (iconName) => {
         switch (iconName) {
             case 'github':
-                return <Github className="h-4 w-4" />;
+                return <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />;
             case 'linkedin':
-                return <Linkedin className="h-4 w-4" />;
+                return <HugeiconsIcon icon={Linkedin01Icon} className="h-4 w-4" />;
             case 'twitter':
-                return <Twitter className="h-4 w-4" />;
+                return <HugeiconsIcon icon={NewTwitterIcon} className="h-4 w-4" />;
             default:
                 return null;
         }
@@ -252,7 +236,7 @@ const Hero = () => {
 
     return (
         <>
-            <style jsx>{`
+            <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
                 .font-serif {
@@ -269,7 +253,7 @@ const Hero = () => {
                     <div className="max-w-4xl mx-auto">
 
                         {/* Main Heading with Avatar */}
-                        <div className="mb-16 blur-fade-in-element">
+                        <div className="mb-16">
                             <div className="flex flex-row items-center justify-center gap-6 md:gap-8 lg:gap-12">
                                 {/* Avatar */}
                                 <div className="flex-shrink-0">
@@ -295,14 +279,12 @@ const Hero = () => {
                                             <span className="text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">{'>'}</span>{' '}
                                             <span>Hi, I'm</span>{' '}
                                             <span className="text-primary tech-text-glow inline-block whitespace-nowrap">
-                                                <TextEffect preset='fade-in-blur' speedReveal={1.1} speedSegment={0.3}>
-                                                    {personalInfo.name}
-                                                </TextEffect>
+                                                {personalInfo.name}
                                             </span>
                                         </h1>
                                     </div>
                                     <div className="flex items-center gap-2 md:gap-3">
-                                        <Code2 className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
+                                        <HugeiconsIcon icon={CodeIcon} className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
                                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground font-mono font-medium">
                                             {personalInfo.title}
                                         </p>
@@ -311,7 +293,7 @@ const Hero = () => {
                             </div>
                         </div>
                         {/* Bio */}
-                        <div className="mb-16 blur-fade-in-element">
+                        <div className="mb-16">
 
                             <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
 
@@ -345,7 +327,7 @@ const Hero = () => {
                         </div>
 
                         {/* GitHub Contributions */}
-                        <div className="mb-16 blur-fade-in-element">
+                        <div className="mb-16">
                             {loading && (
                                 <div className="flex items-center justify-center p-8">
                                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -363,15 +345,15 @@ const Hero = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-wrap gap-4 justify-center blur-fade-in-element">
+                        <div className="flex flex-wrap gap-4 justify-center">
                             <Button
                                 size="lg"
                                 onClick={() => scrollToSection('projects')}
                                 className="group transition-all rounded-lg font-mono w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                             >
-                                <Terminal className="mr-2 h-5 w-5" />
+                                <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-5 w-5" />
                                 ./view-projects
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                <HugeiconsIcon icon={ArrowRight01Icon} className="ml-2 h-5 w-5" />
                             </Button>
                             <a href="https://drive.google.com/file/d/1OYbuD4SnNmj66oBbIUDphRdyuQofLS5t/view?usp=sharing"
                                 target="_blank"
@@ -382,14 +364,14 @@ const Hero = () => {
                                     size="lg"
                                     className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary w-full px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                                 >
-                                    <Download className="mr-2 h-5 w-5" />
+                                    <HugeiconsIcon icon={Download01Icon} className="mr-2 h-5 w-5" />
                                     View-resume.pdf
                                 </Button>
                             </a>
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex items-center gap-6 justify-center mt-8 blur-fade-in-element">
+                        <div className="flex items-center gap-6 justify-center mt-8">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
