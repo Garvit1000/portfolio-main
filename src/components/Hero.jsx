@@ -168,7 +168,7 @@ const Hero = () => {
         return (
             <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
                 <div className="flex items-center gap-3 mb-6">
-                    <GitCommit className="h-5 w-5 text-primary" />
+                    <HugeiconsIcon icon={GitCommitIcon} className="h-5 w-5 text-primary" />
                     <h3 className="font-mono font-bold text-xl underline decoration-primary/50 decoration-2
                                  underline-offset-4 hover:decoration-primary transition-colors">
                         GitHub Activity
