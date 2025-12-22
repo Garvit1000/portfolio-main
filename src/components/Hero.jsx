@@ -166,11 +166,10 @@ const Hero = () => {
         if (!contributions || !contributions.weeks) return null;
 
         return (
-            <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+            <div className="px-4 md:px-8">
                 <div className="flex items-center gap-3 mb-6">
                     <HugeiconsIcon icon={GitCommitIcon} className="h-5 w-5 text-primary" />
-                    <h3 className="font-mono font-bold text-xl underline decoration-primary/50 decoration-2
-                                 underline-offset-4 hover:decoration-primary transition-colors">
+                    <h3 className="font-mono font-bold text-xl">
                         GitHub Activity
                     </h3>
                 </div>
@@ -216,7 +215,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary/20">
+                <div className="grid grid-cols-3 gap-4 mt-8 pt-6">
                     {[
                         { value: contributions.stats.totalRepos, label: 'Repositories' },
                         { value: contributions.stats.followers, label: 'Followers' },
@@ -295,7 +294,7 @@ const Hero = () => {
                         {/* Bio */}
                         <div className="mb-16">
 
-                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                            <div className="px-4 md:px-8">
 
                                 <div className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed font-mono text-center">
                                     I'm a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with{' '}

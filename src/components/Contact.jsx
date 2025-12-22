@@ -74,10 +74,9 @@ const Contact = () => {
 
                                 {/* Contact Info */}
                                 <div className="space-y-6">
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-3 mb-4">
                                         <HugeiconsIcon icon={MailSend01Icon} className="h-5 w-5 text-primary" />
-                                        <h3 className="text-xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                        <h3 className="text-xl font-mono font-bold">
                                             Contact Details
                                         </h3>
                                     </div>
@@ -104,10 +103,9 @@ const Contact = () => {
 
                                 {/* Social Links */}
                                 <div className="space-y-6">
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-3 mb-4">
                                         <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
-                                        <h3 className="text-xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                        <h3 className="text-xl font-mono font-bold">
                                             Social Networks
                                         </h3>
                                     </div>
@@ -140,7 +138,7 @@ const Contact = () => {
                             <div className="space-y-8">
 
                                 {/* Current Status */}
-                                <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                                <div className="px-4 md:px-6">
                                     <div className="flex items-center gap-3 mb-4">
                                         <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                                         <h3 className="font-mono font-bold text-lg">
@@ -165,7 +163,7 @@ const Contact = () => {
                                 </div>
 
                                 {/* Interests */}
-                                <div className="p-6 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                                <div className="px-4 md:px-6">
                                     <div className="flex items-center gap-3 mb-4">
                                         <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
                                         <h3 className="font-mono font-bold text-lg">

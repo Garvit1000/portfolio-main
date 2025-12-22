@@ -73,11 +73,10 @@ const About = () => {
 
                         {/* Skills Section */}
                         <div>
-                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                            <div className="px-4 md:px-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <HugeiconsIcon icon={CodeIcon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
-                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold">
                                         Technical Skills
                                     </h3>
                                 </div>
@@ -123,11 +122,10 @@ const About = () => {
 
                         {/* What I Do Section */}
                         <div className="blur-fade-in-element">
-                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                            <div className="px-4 md:px-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <HugeiconsIcon icon={Rocket01Icon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
-                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold">
                                         What I Do
                                     </h3>
                                 </div>
@@ -159,11 +157,10 @@ const About = () => {
 
                         {/* Work Experience Section */}
                         <div className="blur-fade-in-element">
-                            <div className="p-6 md:p-8 border border-primary/10 rounded-lg hover:border-primary/30 transition-colors">
+                            <div className="px-4 md:px-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <HugeiconsIcon icon={Briefcase01Icon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
-                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold underline decoration-primary/50 decoration-2
-                                               underline-offset-4 hover:decoration-primary transition-colors">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-mono font-bold">
                                         Work Experience
                                     </h3>
                                 </div>

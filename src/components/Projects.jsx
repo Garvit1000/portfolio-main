@@ -102,13 +102,13 @@ const Projects = () => {
                             return (
                                 <div
                                     key={project.id}
-                                    className="group bg-card/50 backdrop-blur-sm rounded-xl border border-border/50
-                                             hover:border-primary/30 transition-all duration-500 overflow-hidden
-                                             hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 flex flex-col h-full"
+                                    className="group bg-card/30 backdrop-blur-sm rounded-xl border border-border/30
+                                             hover:border-primary/20 transition-all duration-500 overflow-hidden
+                                             hover:-translate-y-1 flex flex-col h-full"
                                 >
                                     {/* Project Image */}
                                     <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5
-                                                  h-64 border-b border-border/50">
+                                                  h-64 border-b border-border/30">
                                         {project.image ? (
                                             <>
                                                 <img
