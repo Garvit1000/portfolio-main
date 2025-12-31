@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Sun01Icon, Moon01Icon, Menu01Icon, Cancel01Icon, ComputerTerminalIcon } from '@hugeicons/core-free-icons';
@@ -9,6 +10,8 @@ import ThemeSelector from './ThemeSelector';
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isOnBlogPage = location.pathname.startsWith('/blog');
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -36,27 +39,46 @@ const Header = () => {
 
             {/* Desktop Navigation with tech styling */}
             <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
-              <button
-                onClick={() => scrollToSection('projects')}
+              {!isOnBlogPage ? (
+                <>
+                  <button
+                    onClick={() => scrollToSection('projects')}
+                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
+                  >
+                    ./projects
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                  </button>
+                  <button
+                    onClick={() => scrollToSection('about')}
+                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
+                  >
+                    ./about
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                  </button>
+                  <button
+                    onClick={() => scrollToSection('contact')}
+                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
+                  >
+                    ./contact
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/"
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
+                >
+                  ./home
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                </Link>
+              )}
+              <Link
+                to="/blog"
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
               >
-                ./projects
+                ./blog
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-              >
-                ./about
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-              >
-                ./contact
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-              </button>
+              </Link>
             </nav>
 
             {/* Theme Selector, Theme Toggle & Mobile Menu with sharp edges */}
@@ -100,24 +122,43 @@ const Header = () => {
           {isMenuOpen && (
             <div className="md:hidden border-t border-primary/20 bg-background/95 backdrop-blur gpu-accelerated">
               <div className="max-w-4xl mx-auto px-2 pt-2 pb-3 space-y-1">
-                <button
-                  onClick={() => scrollToSection('projects')}
+                {!isOnBlogPage ? (
+                  <>
+                    <button
+                      onClick={() => scrollToSection('projects')}
+                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
+                    >
+                      <span className="text-primary">$ </span>cd ./projects
+                    </button>
+                    <button
+                      onClick={() => scrollToSection('about')}
+                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
+                    >
+                      <span className="text-primary">$ </span>cd ./about
+                    </button>
+                    <button
+                      onClick={() => scrollToSection('contact')}
+                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
+                    >
+                      <span className="text-primary">$ </span>cd ./contact
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
+                  >
+                    <span className="text-primary">$ </span>cd ./home
+                  </Link>
+                )}
+                <Link
+                  to="/blog"
+                  onClick={() => setIsMenuOpen(false)}
                   className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
                 >
-                  <span className="text-primary">$ </span>cd ./projects
-                </button>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                >
-                  <span className="text-primary">$ </span>cd ./about
-                </button>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                >
-                  <span className="text-primary">$ </span>cd ./contact
-                </button>
+                  <span className="text-primary">$ </span>cd ./blog
+                </Link>
               </div>
             </div>
           )}

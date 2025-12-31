@@ -8,15 +8,22 @@ import { Link } from 'react-router-dom';
 const Projects = () => {
     const [filter, setFilter] = useState('all');
     const [expandedProjects, setExpandedProjects] = useState(new Set());
+    const [activeProjectIndex, setActiveProjectIndex] = useState(0);
     const sectionRef = useRef(null);
-
-
 
     const filteredProjects = filter === 'all'
         ? projects
         : filter === 'featured'
             ? projects.filter(project => project.featured)
             : projects;
+
+    // Auto-cycle through projects for grayscale animation
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveProjectIndex((prev) => (prev + 1) % filteredProjects.length);
+        }, 3000); // Change every 3 seconds
+        return () => clearInterval(interval);
+    }, [filteredProjects.length]);
 
     const toggleExpanded = (projectId) => {
         const newExpanded = new Set(expandedProjects);
@@ -49,8 +56,14 @@ const Projects = () => {
                 }
             `}</style>
 
-            <section id="projects" className="py-20 tech-section" ref={sectionRef}>
-                <div className="container-xl">
+            <section id="projects" className="py-20 tech-section relative" ref={sectionRef}>
+                {/* Horizontal line at start of section */}
+                <div className="absolute top-0 left-0 right-0 pointer-events-none z-0">
+                    <div className="container-xl mx-auto">
+                        <div className="max-w-4xl mx-auto h-px bg-border/50"></div>
+                    </div>
+                </div>
+                <div className="container-xl relative" style={{ zIndex: 2 }}>
                     {/* Header Section */}
                     <div className="text-center mb-16">
                         <div className="space-y-6">
@@ -104,18 +117,37 @@ const Projects = () => {
                                     key={project.id}
                                     className="group bg-card/30 backdrop-blur-sm rounded-xl border border-border/30
                                              hover:border-primary/20 transition-all duration-500 overflow-hidden
-                                             hover:-translate-y-1 flex flex-col h-full"
+                                             hover:-translate-y-1 hover:scale-[1.02] flex flex-col h-full"
                                 >
                                     {/* Project Image */}
                                     <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5
                                                   h-64 border-b border-border/30">
+                                        {/* Corner Frame Brackets - Only visible on active project */}
+                                        {filteredProjects.indexOf(project) === activeProjectIndex && (
+                                            <div className="absolute inset-0 pointer-events-none z-10 animate-in fade-in duration-700">
+                                                {/* Top-left corner */}
+                                                <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary 
+                                                             transition-all duration-700 ease-out"></div>
+                                                {/* Top-right corner */}
+                                                <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-primary
+                                                             transition-all duration-700 ease-out"></div>
+                                                {/* Bottom-left corner */}
+                                                <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-primary
+                                                             transition-all duration-700 ease-out"></div>
+                                                {/* Bottom-right corner */}
+                                                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary
+                                                             transition-all duration-700 ease-out"></div>
+                                            </div>
+                                        )}
+
                                         {project.image ? (
                                             <>
                                                 <img
                                                     src={project.image}
                                                     alt={`${project.title} preview`}
-                                                    className="w-full h-full object-cover group-hover:scale-110
-                                                             transition-transform duration-700 ease-out"
+                                                    className={`w-full h-full object-cover
+                                                             transition-all duration-700 ease-out
+                                                             ${filteredProjects.indexOf(project) === activeProjectIndex ? '' : 'grayscale'}`}
                                                 />
                                                 {/* Gradient Overlay */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent

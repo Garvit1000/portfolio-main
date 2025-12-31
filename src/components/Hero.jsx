@@ -4,6 +4,7 @@ import { Badge } from './ui/badge';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowRight01Icon, Download01Icon, GithubIcon, Linkedin01Icon, NewTwitterIcon, ComputerTerminalIcon, CodeIcon, GitCommitIcon } from '@hugeicons/core-free-icons';
 import { personalInfo, projects, socialLinks } from '../data/mock';
+import VerticalGuideLines from './VerticalGuideLines';
 
 const Hero = () => {
     const [contributions, setContributions] = useState(null);
@@ -247,8 +248,14 @@ const Hero = () => {
                 }
             `}</style>
 
-            <section id="hero" className="tech-section" ref={sectionRef}>
-                <div className="container-xl">
+            <section id="hero" className="tech-section relative" ref={sectionRef}>
+                {/* Horizontal line at start of section */}
+                <div className="absolute top-0 left-0 right-0 pointer-events-none z-0">
+                    <div className="container-xl mx-auto">
+                        <div className="max-w-4xl mx-auto h-px bg-border/50"></div>
+                    </div>
+                </div>
+                <div className="container-xl relative" style={{ zIndex: 2 }}>
                     <div className="max-w-4xl mx-auto">
 
                         {/* Main Heading with Avatar */}
@@ -256,26 +263,28 @@ const Hero = () => {
                             <div className="flex flex-row items-center justify-center gap-6 md:gap-8 lg:gap-12">
                                 {/* Avatar */}
                                 <div className="flex-shrink-0">
-                                    {contributions?.user?.avatarUrl ? (
-                                        <div className="relative">
-                                            <img
-                                                src={contributions.user.avatarUrl}
-                                                alt={personalInfo.name}
-                                                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full border-4 border-primary/30 elegant-shadow"
-                                            />
-                                            <div className="absolute inset-0 rounded-full border-4 border-primary/50 animate-pulse"></div>
-                                        </div>
-                                    ) : (
-                                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
-                                    )}
+                                    <div className="relative group">
+                                        {contributions?.user?.avatarUrl ? (
+                                            <>
+                                                <img
+                                                    src={contributions.user.avatarUrl}
+                                                    alt={personalInfo.name}
+                                                    className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-[2rem] border-4 border-primary/30 elegant-shadow transition-transform duration-500 hover:scale-105 hover:rotate-2"
+                                                />
+                                                <div className="absolute inset-0 rounded-[2rem] border-4 border-primary/50 animate-pulse bg-transparent"></div>
+                                            </>
+                                        ) : (
+                                            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-[2rem] border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Name and Title */}
                                 <div className="space-y-3 md:space-y-4 text-left">
                                     <div className="relative">
-                                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold
+                                        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-serif font-bold
                                                      tracking-tight leading-tight">
-                                            <span className="text-muted-foreground/70 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">{'>'}</span>{' '}
+                                            <span className="text-muted-foreground/70 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">{'>'}</span>{' '}
                                             <span>Hi, I'm</span>{' '}
                                             <span className="text-primary tech-text-glow inline-block whitespace-nowrap">
                                                 {personalInfo.name}
@@ -296,8 +305,8 @@ const Hero = () => {
 
                             <div className="px-4 md:px-8">
 
-                                <div className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed font-mono text-center">
-                                    I'm a frontend dev focused on building responsive, modern web apps that look good and feel smooth. I work with{' '}
+                                <div className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed font-mono text-center max-w-2xl mx-auto">
+                                    Frontend developer crafting polished, interactive web experiences with{' '}
 
                                     {/* Tech Stack Badges - Inline */}
                                     {personalInfo.techStack && personalInfo.techStack.map((tech, index) => (
@@ -319,7 +328,7 @@ const Hero = () => {
                                             </span>
                                         </span>
                                     ))}
-                                    {' '}and today's web tech to create fast, user-friendly experiences. Always learning, always experimenting, and always shipping projects that push design and functionality a step further.
+                                    .
                                 </div>
 
                             </div>

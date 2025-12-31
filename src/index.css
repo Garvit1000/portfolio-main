@@ -11,14 +11,37 @@
   --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Lenis smooth scroll - Required for butter-smooth scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 /* Only transition theme-related properties, not all properties */
 html {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  scroll-behavior: smooth;
   scroll-padding-top: 80px;
   overflow-x: hidden;
   overflow-y: scroll;
+  /* Smooth scroll for browsers without Lenis */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -31,7 +54,8 @@ body {
   font-size: 16px;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
 }
 
 @media (min-width: 768px) {
@@ -295,18 +319,6 @@ html {
   .tech-section {
     position: relative;
   }
-
-  .tech-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 49%, rgba(59, 130, 246, 0.03) 49%, rgba(59, 130, 246, 0.03) 51%, transparent 51%);
-    pointer-events: none;
-  }
-
 
 }
 

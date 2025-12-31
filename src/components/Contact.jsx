@@ -34,8 +34,14 @@ const Contact = () => {
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
                 }
             `}</style>
-            <section id="contact" className="py-20 tech-section" ref={sectionRef}>
-                <div className="container-xl">
+            <section id="contact" className="py-20 tech-section relative" ref={sectionRef}>
+                {/* Horizontal line at start of section */}
+                <div className="absolute top-0 left-0 right-0 pointer-events-none z-0">
+                    <div className="container-xl mx-auto">
+                        <div className="max-w-4xl mx-auto h-px bg-border/50"></div>
+                    </div>
+                </div>
+                <div className="container-xl relative" style={{ zIndex: 2 }}>
                     {/* Header */}
                     <div className="text-center mb-16">
                         <div className="mb-4">
