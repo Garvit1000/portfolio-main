@@ -116,23 +116,23 @@ export const experience = [
     company: "Founder Flow",
     position: "Founding Web Developer",
     period: "June 2025 - Sept 2025",
-    description: `• Developed and launched the company website, including a modern onboarding and landing page .
-• Built and deployed the site — hosted and managed production infrastructure to ensure high availability.
-• Built an admin panel to monitor user signups and engagement.
-• Integrated front-end with database and authentication systems to enable reliable data flow.
-• Translated Figma designs into pixel-perfect, responsive UI and iterated on UX with the design team.
-• Led the initial development team, prioritized features, and supported MVP delivery.`
+    description: `- Developed and launched the **company website**, including a **modern onboarding** and **landing page**.
+- Built and deployed the site hosted and managed **production infrastructure** to ensure **high availability**.
+- Built an **admin panel** to monitor user signups and engagement.
+- Integrated **front-end** with **database** and **authentication systems** to enable reliable data flow.
+- Translated **Figma designs** into **pixel-perfect, responsive UI** and iterated on UX with the design team.
+- Led the initial **development team**, prioritized features, and supported **MVP delivery**.`
   },
   {
     id: 1,
     company: "Dtodstint Services Pvt Ltd",
     position: "Frontend Developer",
     period: "Dec 2024 - March 2025",
-    description: `• Developed and launched the company website, including a modern onboarding and landing page .
-• Implemented “Add to Cart” functionality for an e-commerce module, increasing conversion readiness.
-• Designed and developed a dynamic services page to enhance user engagement and interaction.
-• Built the admin panel, enabling seamless client management of services.
-• Improved site responsiveness across devices; diagnosed and fixed critical frontend bugs.`
+    description: `- Developed and launched the **company website**, including a **modern onboarding** and **landing page**.
+- Implemented **“Add to Cart” functionality** for an **e-commerce module**, increasing conversion readiness.
+- Designed and developed a **dynamic services page** to enhance user engagement and interaction.
+- Built the **admin panel**, enabling seamless **client management** of services.
+- Improved **site responsiveness** across devices; diagnosed and fixed **critical frontend bugs**.`
   },
 
 ];

@@ -1,5 +1,8 @@
 /* Import Google Fonts - Robotic/Tech fonts */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+@import "tw-animate-css";
+
+@plugin "@tailwindcss/typography";
 
 @tailwind base;
 @tailwind components;
@@ -80,7 +83,7 @@ html {
 
 @layer base {
   :root {
-    --background: 223.8136 0.0005% 98.6829%;
+    --background: oklch(1 0 0);
     --foreground: 0 0% 0%;
     --card: 223.8136 -172.5242% 100.0000%;
     --card-foreground: 0 0% 0%;
@@ -90,13 +93,13 @@ html {
     --primary-foreground: 223.8136 -172.5242% 100.0000%;
     --secondary: 223.8136 0.0001% 92.1478%;
     --secondary-foreground: 0 0% 0%;
-    --muted: 223.8136 0.0002% 96.0587%;
-    --muted-foreground: 223.8136 0.0000% 32.3067%;
+    --muted: oklch(0.967 0.001 286.375);
+    --muted-foreground: oklch(0.552 0.016 285.938);
     --accent: 223.8136 0.0001% 92.1478%;
     --accent-foreground: 0 0% 0%;
     --destructive: 358.4334 74.9120% 59.7455%;
     --destructive-foreground: 223.8136 -172.5242% 100.0000%;
-    --border: 223.8136 0.0001% 89.5577%;
+    --border: oklch(0.92 0.004 286.32);
     --input: 223.8136 0.0001% 92.1478%;
     --ring: 0 0% 0%;
     --chart-1: 40.6655 100.2361% 50.9228%;
@@ -129,7 +132,7 @@ html {
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: oklch(0.141 0.005 285.823);
     --foreground: 223.8136 -172.5242% 100.0000%;
     --card: 223.8136 0.0000% 3.5452%;
     --card-foreground: 223.8136 -172.5242% 100.0000%;
@@ -139,13 +142,13 @@ html {
     --primary-foreground: 0 0% 0%;
     --secondary: 223.8136 0.0000% 13.1499%;
     --secondary-foreground: 223.8136 -172.5242% 100.0000%;
-    --muted: 223.8136 0.0000% 11.3040%;
-    --muted-foreground: 223.8136 0.0000% 64.4710%;
+    --muted: oklch(0.274 0.006 286.033);
+    --muted-foreground: oklch(0.705 0.015 286.067);
     --accent: 223.8136 0.0000% 19.8916%;
     --accent-foreground: 223.8136 -172.5242% 100.0000%;
     --destructive: 359.9132 100.2494% 67.8807%;
     --destructive-foreground: 0 0% 0%;
-    --border: 223.8136 0.0000% 14.0871%;
+    --border: oklch(0.274 0.006 286.033);
     --input: 223.8136 0.0000% 19.8916%;
     --ring: 223.8136 0.0000% 64.4710%;
     --chart-1: 40.6655 100.2361% 50.9228%;
@@ -424,5 +427,14 @@ html {
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

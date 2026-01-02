@@ -45,10 +45,7 @@ const Contact = () => {
                     {/* Header */}
                     <div className="text-center mb-16">
                         <div className="mb-4">
-                            <span className="text-primary font-mono text-lg flex items-center justify-center">
-                                <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
-                                {'>'} cat ~/contact.txt
-                            </span>
+
                         </div>
                         <div className="relative">
                             <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">

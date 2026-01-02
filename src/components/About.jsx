@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ComputerTerminalIcon, GithubIcon, Briefcase01Icon, CodeIcon, SparklesIcon, Rocket01Icon, Layers01Icon, DashboardSpeed01Icon } from '@hugeicons/core-free-icons';
 import { experience } from '../data/mock';
+import { WorkExperience } from './work-experience';
 
 const About = () => {
     const sectionRef = useRef(null);
@@ -57,10 +58,7 @@ const About = () => {
                     <div className="text-center mb-16">
                         <div className="space-y-6">
                             <div className="mb-4">
-                                <span className="text-primary font-mono text-lg flex items-center justify-center">
-                                    <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
-                                    {'>'} cat ~/about.md
-                                </span>
+
                             </div>
                             <div className="relative">
                                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
@@ -177,33 +175,25 @@ const About = () => {
                                 </p>
 
                                 <div className="space-y-10">
-                                    {experience.map((exp) => (
-                                        <div key={exp.id} className="space-y-4">
-                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                                                <div>
-                                                    <h4 className="font-mono font-bold text-lg sm:text-2xl text-foreground">
-                                                        {exp.position}
-                                                    </h4>
-                                                    <div className="text-primary font-medium font-mono text-sm sm:text-lg">
-                                                        {exp.company}
-                                                    </div>
-                                                </div>
-                                                <span className="text-xs font-mono text-muted-foreground bg-primary/10
-                                                         px-3 py-1 rounded border border-primary/20 w-fit">
-                                                    {exp.period}
-                                                </span>
-                                            </div>
-
-                                            <div className="space-y-2">
-                                                {exp.description.split('•').filter(item => item.trim()).map((item, idx) => (
-                                                    <div key={idx} className="flex items-start gap-2 text-muted-foreground text-sm sm:text-base font-mono leading-relaxed">
-                                                        <span className="text-primary mt-1 flex-shrink-0">▸</span>
-                                                        <span>{item.trim()}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
+                                    <WorkExperience
+                                        experiences={experience.map(exp => ({
+                                            id: exp.id.toString(),
+                                            companyName: exp.company,
+                                            // companyLogo: "", 
+                                            isCurrentEmployer: exp.period.toLowerCase().includes('present'),
+                                            positions: [
+                                                {
+                                                    id: `${exp.id}-1`,
+                                                    title: exp.position,
+                                                    employmentPeriod: exp.period,
+                                                    employmentType: "Full-time",
+                                                    description: exp.description,
+                                                    icon: "code",
+                                                    isExpanded: true
+                                                }
+                                            ]
+                                        }))}
+                                    />
                                 </div>
                             </div>
                         </div>
