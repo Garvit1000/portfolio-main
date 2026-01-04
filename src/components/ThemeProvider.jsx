@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children }) => {
   // Initialize theme mode (light/dark) synchronously to prevent flash
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'light';
-    
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       // Apply immediately to prevent flash
@@ -30,7 +30,7 @@ export const ThemeProvider = ({ children }) => {
   // Initialize current theme name
   const [currentTheme, setCurrentTheme] = useState(() => {
     if (typeof window === 'undefined') return DEFAULT_THEME;
-    
+
     const savedCurrentTheme = localStorage.getItem('currentTheme');
     return savedCurrentTheme || DEFAULT_THEME;
   });
@@ -39,29 +39,32 @@ export const ThemeProvider = ({ children }) => {
   const applyThemeVariables = (themeName, mode) => {
     const root = document.documentElement;
     const themeColors = getThemeColors(themeName, mode);
-    
+
     // Apply each CSS variable
     Object.entries(themeColors).forEach(([key, value]) => {
       root.style.setProperty(`--${key}`, value);
     });
+
+    // Set data-theme attribute for scoped styling
+    root.setAttribute('data-theme', themeName);
   };
 
   // Use useLayoutEffect for synchronous DOM updates before paint
   useLayoutEffect(() => {
     const root = document.documentElement;
-    
+
     // Check if View Transitions API is supported
     if (typeof document.startViewTransition === 'function') {
       // Add active class to disable other transitions
       root.classList.add('view-transition-active');
-      
+
       // Use View Transitions API for smooth circular animation
       const transition = document.startViewTransition(() => {
         root.classList.remove('light', 'dark');
         root.classList.add(theme);
         applyThemeVariables(currentTheme, theme);
       });
-      
+
       // Remove active class after transition
       transition.finished.finally(() => {
         root.classList.remove('view-transition-active');
@@ -72,7 +75,7 @@ export const ThemeProvider = ({ children }) => {
       root.classList.add(theme);
       applyThemeVariables(currentTheme, theme);
     }
-    
+
     // Save to localStorage
     localStorage.setItem('theme', theme);
     localStorage.setItem('currentTheme', currentTheme);
@@ -103,7 +106,7 @@ export const ThemeProvider = ({ children }) => {
       document.documentElement.style.setProperty('--x', '50%');
       document.documentElement.style.setProperty('--y', '50%');
     }
-    
+
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
