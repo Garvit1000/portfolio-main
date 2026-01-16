@@ -269,12 +269,12 @@ const Hero = () => {
                                                 <img
                                                     src={contributions.user.avatarUrl}
                                                     alt={personalInfo.name}
-                                                    className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-[2rem] border-4 border-primary/30 elegant-shadow transition-transform duration-500 hover:scale-105 hover:rotate-2"
+                                                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-[2rem] border-4 border-primary/30 elegant-shadow transition-transform duration-500 hover:scale-105 hover:rotate-2"
                                                 />
                                                 <div className="absolute inset-0 rounded-[2rem] border-4 border-primary/50 animate-pulse bg-transparent"></div>
                                             </>
                                         ) : (
-                                            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-[2rem] border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
+                                            <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-[2rem] border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"></div>
                                         )}
                                     </div>
                                 </div>
