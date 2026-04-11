@@ -55,6 +55,9 @@ export function useSmoothScroll() {
         return () => {
             document.removeEventListener('click', handleAnchorClick);
             lenis.destroy();
+            // Ensure lenis classes and overflow are fully removed from <html>
+            document.documentElement.className = document.documentElement.className.replace(/lenis(-\w+)?/g, '').trim();
+            document.documentElement.style.removeProperty('overflow');
         };
     }, []);
 

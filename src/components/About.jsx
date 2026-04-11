@@ -4,9 +4,13 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { ComputerTerminalIcon, GithubIcon, Briefcase01Icon, CodeIcon, SparklesIcon, Rocket01Icon, Layers01Icon, DashboardSpeed01Icon } from '@hugeicons/core-free-icons';
 import { experience } from '../data/mock';
 import { WorkExperience } from './work-experience';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const About = () => {
     const sectionRef = useRef(null);
+    const skillsRef = useScrollReveal({ staggerDelay: 40 });
+    const featuresRef = useScrollReveal({ staggerDelay: 60 });
+    const experienceRef = useScrollReveal();
 
 
     const features = [
@@ -34,25 +38,7 @@ const About = () => {
 
     return (
         <>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
-
-                .font-serif {
-                    font-family: 'Playfair Display', serif;
-                }
-
-                .elegant-shadow {
-                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
-                }
-            `}</style>
-
             <section id="about" className="py-20 tech-section relative" ref={sectionRef}>
-                {/* Horizontal line at start of section */}
-                <div className="absolute top-0 left-0 right-0 pointer-events-none z-0">
-                    <div className="container-xl mx-auto">
-                        <div className="max-w-4xl mx-auto h-px bg-border/50"></div>
-                    </div>
-                </div>
                 <div className="container-xl relative" style={{ zIndex: 2 }}>
                     {/* Header Section */}
                     <div className="text-center mb-16">
@@ -73,10 +59,10 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className="max-w-4xl mx-auto space-y-12">
+                    <div className="max-w-6xl mx-auto space-y-12">
 
                         {/* Skills Section */}
-                        <div>
+                        <div className="scroll-reveal" ref={skillsRef}>
                             <div className="px-4 md:px-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <HugeiconsIcon icon={CodeIcon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
@@ -108,8 +94,9 @@ const About = () => {
                                     ].map((tech) => (
                                         <div
                                             key={tech.name}
-                                            className="flex items-center gap-2 px-4 py-2 bg-card border border-border 
-                                                 rounded-lg hover:border-primary/50 hover:scale-105 transition-all duration-200
+                                            className="stagger-item flex items-center gap-2 px-4 py-2 bg-card border border-border
+                                                 rounded-lg hover:border-primary/50 hover-scale
+                                                 transition-[border-color] duration-200
                                                  cursor-default shadow-sm"
                                         >
                                             <img
@@ -125,7 +112,7 @@ const About = () => {
                         </div>
 
                         {/* What I Do Section */}
-                        <div className="blur-fade-in-element">
+                        <div className="scroll-reveal" ref={featuresRef}>
                             <div className="px-4 md:px-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <HugeiconsIcon icon={Rocket01Icon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
@@ -141,7 +128,7 @@ const About = () => {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     {features.map((feature, idx) => (
-                                        <div key={idx} className="space-y-2">
+                                        <div key={idx} className="stagger-item space-y-2">
                                             <div className="flex items-center gap-2">
                                                 <div className="text-primary">
                                                     {feature.icon}
@@ -160,7 +147,7 @@ const About = () => {
                         </div>
 
                         {/* Work Experience Section */}
-                        <div className="blur-fade-in-element">
+                        <div className="scroll-reveal" ref={experienceRef}>
                             <div className="px-4 md:px-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <HugeiconsIcon icon={Briefcase01Icon} className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
@@ -204,7 +191,7 @@ const About = () => {
                         <Button
                             variant="outline"
                             size="lg"
-                            className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
+                            className="rounded-lg font-mono border-primary/50 hover:border-primary px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg transition-[border-color] duration-200"
                         >
                             <HugeiconsIcon icon={GithubIcon} className="mr-2 h-5 w-5" />
                             git clone --about-me

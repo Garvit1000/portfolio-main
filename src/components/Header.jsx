@@ -24,17 +24,17 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 gpu-accelerated">
       <div className="container-xl">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between h-16">
             {/* Logo with tech styling */}
             <div className="flex-shrink-0">
-              <button
-                onClick={() => scrollToSection('hero')}
+              <Link
+                to="/"
                 className="text-xl font-bold text-foreground hover:text-primary transition-colors font-mono flex items-center"
               >
                 <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-5 w-5 text-primary" />
                 {'{'}Garvit{'}'}
-              </button>
+              </Link>
             </div>
 
             {/* Desktop Navigation with tech styling */}
@@ -46,21 +46,21 @@ const Header = () => {
                     className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
                   >
                     ./projects
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
                   </button>
                   <button
                     onClick={() => scrollToSection('about')}
                     className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
                   >
                     ./about
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
                   </button>
                   <button
                     onClick={() => scrollToSection('contact')}
                     className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
                   >
                     ./contact
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
                   </button>
                 </>
               ) : (
@@ -69,7 +69,7 @@ const Header = () => {
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
                 >
                   ./home
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
                 </Link>
               )}
               <Link
@@ -77,7 +77,7 @@ const Header = () => {
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
               >
                 ./blog
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
               </Link>
             </nav>
 
@@ -121,7 +121,7 @@ const Header = () => {
           {/* Mobile Navigation with tech styling */}
           {isMenuOpen && (
             <div className="md:hidden border-t border-primary/20 bg-background/95 backdrop-blur gpu-accelerated">
-              <div className="max-w-4xl mx-auto px-2 pt-2 pb-3 space-y-1">
+              <div className="max-w-6xl mx-auto px-2 pt-2 pb-3 space-y-1">
                 {!isOnBlogPage ? (
                   <>
                     <button

@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-primary/20 bg-muted/30 tech-section">
       <div className="container-xl py-12">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 text-left">
             {/* Left Side - Copyright with tech styling */}
             <div className="flex flex-col space-y-2">

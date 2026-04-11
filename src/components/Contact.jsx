@@ -3,9 +3,12 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { Mail01Icon, Location01Icon, GithubIcon, Linkedin01Icon, NewTwitterIcon, ComputerTerminalIcon, MailSend01Icon, MessageMultiple01Icon } from '@hugeicons/core-free-icons';
 import { Button } from './ui/button';
 import { personalInfo, socialLinks } from '../data/mock';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Contact = () => {
     const sectionRef = useRef(null);
+    const contactRef = useScrollReveal({ staggerDelay: 50 });
+    const statusRef = useScrollReveal();
 
 
     const getSocialIcon = (iconName) => {
@@ -23,24 +26,7 @@ const Contact = () => {
 
     return (
         <>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
-
-                .font-serif {
-                    font-family: 'Playfair Display', serif;
-                }
-
-                .elegant-shadow {
-                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
-                }
-            `}</style>
             <section id="contact" className="py-20 tech-section relative" ref={sectionRef}>
-                {/* Horizontal line at start of section */}
-                <div className="absolute top-0 left-0 right-0 pointer-events-none z-0">
-                    <div className="container-xl mx-auto">
-                        <div className="max-w-4xl mx-auto h-px bg-border/50"></div>
-                    </div>
-                </div>
                 <div className="container-xl relative" style={{ zIndex: 2 }}>
                     {/* Header */}
                     <div className="text-center mb-16">
@@ -59,10 +45,10 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-6xl mx-auto px-4 md:px-8">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                             {/* Left Side - Contact Info */}
-                            <div className="space-y-12">
+                            <div className="space-y-10 scroll-reveal" ref={contactRef}>
                                 {/* Description */}
                                 <div>
                                     <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed mb-2">
@@ -125,8 +111,9 @@ const Contact = () => {
                                                 href={social.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-muted-foreground hover:text-primary transition-colors
-                                                     p-3 border border-primary/20 hover:border-primary rounded-lg"
+                                                className="text-muted-foreground hover:text-primary
+                                                     p-3 border border-primary/20 hover:border-primary rounded-lg
+                                                     transition-[color,border-color] duration-200"
                                                 aria-label={social.name}
                                                 title={social.name}
                                             >
@@ -138,12 +125,12 @@ const Contact = () => {
                             </div>
 
                             {/* Right Side - Quick Stats / Info */}
-                            <div className="space-y-8">
+                            <div className="space-y-10 scroll-reveal" ref={statusRef}>
 
                                 {/* Current Status */}
-                                <div className="px-4 md:px-6">
+                                <div>
                                     <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                        <div className="w-3 h-3 bg-green-500 rounded-full pulse-subtle"></div>
                                         <h3 className="font-mono font-bold text-lg">
                                             Current Status
                                         </h3>
@@ -166,7 +153,7 @@ const Contact = () => {
                                 </div>
 
                                 {/* Interests */}
-                                <div className="px-4 md:px-6">
+                                <div>
                                     <div className="flex items-center gap-3 mb-4">
                                         <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
                                         <h3 className="font-mono font-bold text-lg">

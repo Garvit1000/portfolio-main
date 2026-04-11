@@ -1,6 +1,7 @@
 /* Import Google Fonts - Robotic/Tech fonts */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 @import "tw-animate-css";
 
 @plugin "@tailwindcss/typography";
@@ -13,6 +14,9 @@
 :root {
   --theme-transition-duration: 150ms;
   --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Emil Kowalski custom easing curves */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* Lenis smooth scroll - Required for butter-smooth scrolling */
@@ -223,11 +227,6 @@ html {
   .smooth-scroll {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-  }
-
-  /* Universal smooth transitions */
-  * {
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   /* Better button scaling */
@@ -446,4 +445,67 @@ html {
   [data-theme="cursor"] h3 {
     font-family: var(--font-serif);
   }
+
+  /* Font serif class (moved from inline styles) */
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+/* Button press feedback — Emil Kowalski: buttons must feel responsive */
+button,
+[role="button"],
+a.inline-block {
+  transition: transform 160ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+}
+
+button:active,
+[role="button"]:active {
+  transform: scale(0.97);
+}
+
+/* Guard hover animations for pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .hover-scale {
+    transition: transform 200ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Scroll-triggered reveal animation */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 400ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
+              transform 400ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children animation */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 300ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
+              transform 300ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+}
+
+.stagger-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle status pulse — replaces aggressive animate-pulse */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-subtle {
+  animation: subtle-pulse 2s ease-in-out infinite;
 }

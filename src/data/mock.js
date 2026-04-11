@@ -1,7 +1,8 @@
 // Mock data for Garvit's Portfolio
 import animbits from '../assets/animbits.png'
 import flexhunt from '../assets/flexhunt.png'
-import food from '../assets/food.png'
+// import food from '../assets/food.png'
+import nexus from '../assets/nexus.png'
 import freshstart from '../assets/freshstart.png'
 import mindflow from '../assets/mindflow.png'
 import cli from '../assets/cli.png'
@@ -11,7 +12,7 @@ export const personalInfo = {
   name: "Garvit Joshi",
   title: "Frontend Developer",
   email: "garvitjoshi543@gmail.com",
-  bio: "I’m a frontend dev focused on building responsive, modern web apps that look good and feel smooth. Constantly learning and growing.",
+  bio: "I’m a frontend dev focused on building responsive, modern web apps that look good and feel smooth. Constantly learning and growing. Currently Full stack developer at Advran",
   location: "India",
   yearsOfExperience: "1+",
   techStack: [
@@ -38,6 +39,16 @@ export const personalInfo = {
 };
 
 export const projects = [
+  {
+    id: 8,
+    title: "Nexus - AI-Powered Linux Assistant",
+    description: "An intelligent, terminal-based Linux assistant combining multiple AI models, memory systems, and automation capabilities. Features multi-brain AI architecture with specialized models, autonomous web browsing, persistent RAG memory via Supermemory, self-healing command execution with auto-failover across 5 LLM providers, smart context condensation, AST-validated security with rm -rf heuristics, ephemeral Azure sandboxing, and 198 automated tests with full CI.",
+    technologies: ["Python", "AI/ML", "CLI", "Node.js"],
+    liveUrl: "https://github.com/Garvit1000/nexus",
+    githubUrl: "https://github.com/Garvit1000/nexus",
+    image: nexus,
+    featured: true
+  },
   {
     id: 1,
     title: "AnimBits",
@@ -88,16 +99,16 @@ export const projects = [
     image: cli,
     featured: false
   },
-  {
-    id: 6,
-    title: "Food Delivery website",
-    description: "A full-stack food delivery web application built using the MERN (MongoDB, Express, React, Node.js) stack. This project allows users to browse menus, place orders, and track deliveries in real-time. Features include user authentication, payment gateway integration, and a admin dashboard for managing orders, restaurants, and menus.",
-    technologies: ["React", "CSS", "MongoDB", "Node.js", "Express"],
-    liveUrl: "https://github.com/Garvit1000/food-delivery-website.git",
-    githubUrl: "https://github.com/Garvit1000/food-delivery-website.git",
-    image: food,
-    featured: false
-  },
+  // {
+  //   id: 6,
+  //   title: "Food Delivery website",
+  //   description: "A full-stack food delivery web application built using the MERN (MongoDB, Express, React, Node.js) stack. This project allows users to browse menus, place orders, and track deliveries in real-time. Features include user authentication, payment gateway integration, and a admin dashboard for managing orders, restaurants, and menus.",
+  //   technologies: ["React", "CSS", "MongoDB", "Node.js", "Express"],
+  //   liveUrl: "https://github.com/Garvit1000/food-delivery-website.git",
+  //   githubUrl: "https://github.com/Garvit1000/food-delivery-website.git",
+  //   image: food,
+  //   featured: false
+  // },
   // {
   //   id: 7,
   //   title: "Mindflow App",

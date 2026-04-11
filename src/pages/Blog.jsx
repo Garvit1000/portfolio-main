@@ -112,7 +112,7 @@ const ContentRenderer = ({ content }) => {
 const BlogCard = ({ post }) => {
     return (
         <Link to={`/blog/${post.slug}`}>
-            <div className="group h-full border border-border rounded-lg p-6 hover:border-primary/50 transition-all duration-300 bg-card">
+            <div className="group h-full border border-border rounded-lg p-6 hover:border-primary/50 transition-[border-color] duration-200 bg-card">
                 {/* Category & Featured Badge */}
                 <div className="flex items-center gap-2 mb-4">
                     <Badge variant="outline" className="font-mono text-xs">
@@ -199,21 +199,23 @@ const BlogList = () => {
             {/* Geometric vertical guide lines */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
                 <div className="container-xl h-full mx-auto">
-                    <div className="max-w-4xl h-full mx-auto relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-px bg-border/50"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-px bg-border/50"></div>
+                    <div className="max-w-6xl h-full mx-auto relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-border"></div>
+                        <div className="absolute right-0 top-0 bottom-0 w-px bg-border"></div>
                     </div>
                 </div>
             </div>
 
             <div className="container-xl py-16 md:py-24 relative z-10">
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-6xl mx-auto px-4 md:px-8">
                     {/* Header */}
-                    <div className="mb-12">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-mono">
-                            <span className="text-muted-foreground/70">{'>'}</span> Blog
+                    <div className="mb-12 text-center">
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 font-serif tracking-tight">
+                            <span className="text-muted-foreground/70">{'>'}</span> The{' '}
+                            <span className="text-primary tech-text-glow inline-block">Blog</span>
                         </h1>
-                        <p className="text-lg md:text-xl text-muted-foreground font-mono">
+                        <p className="text-base md:text-lg text-muted-foreground font-mono max-w-2xl mx-auto">
+                            <span className="text-primary">{'// '}</span>
                             Thoughts on web development, programming, and technology.
                         </p>
                     </div>
@@ -269,7 +271,7 @@ const BlogList = () => {
 
                     {/* Posts Grid */}
                     {filteredPosts.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {filteredPosts.map(post => (
                                 <BlogCard key={post.id} post={post} />
                             ))}
@@ -313,15 +315,15 @@ const BlogDetail = () => {
             {/* Geometric vertical guide lines */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
                 <div className="container-xl h-full mx-auto">
-                    <div className="max-w-4xl h-full mx-auto relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-px bg-border/50"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-px bg-border/50"></div>
+                    <div className="max-w-6xl h-full mx-auto relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-border"></div>
+                        <div className="absolute right-0 top-0 bottom-0 w-px bg-border"></div>
                     </div>
                 </div>
             </div>
 
             <div className="container-xl py-16 md:py-24 relative z-10">
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-6xl mx-auto px-4 md:px-8">
                     {/* Back Button */}
                     <Button
                         onClick={() => navigate('/blog')}

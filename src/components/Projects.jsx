@@ -4,12 +4,14 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { GithubIcon, StarIcon, ComputerTerminalIcon, LinkSquare02Icon, ArrowDown01Icon, ArrowUp01Icon, CodeIcon, GitCommitIcon, Image01Icon } from '@hugeicons/core-free-icons';
 import { projects } from '../data/mock';
 import { Link } from 'react-router-dom';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
     const [expandedProjects, setExpandedProjects] = useState(new Set());
     const [activeProjectIndex, setActiveProjectIndex] = useState(0);
     const sectionRef = useRef(null);
+    const gridRef = useScrollReveal({ staggerDelay: 80 });
 
     const filteredProjects = filter === 'all'
         ? projects
@@ -44,25 +46,7 @@ const Projects = () => {
 
     return (
         <>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
-
-                .font-serif {
-                    font-family: 'Playfair Display', serif;
-                }
-
-                .elegant-shadow {
-                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
-                }
-            `}</style>
-
             <section id="projects" className="py-20 tech-section relative" ref={sectionRef}>
-                {/* Horizontal line at start of section */}
-                <div className="absolute top-0 left-0 right-0 pointer-events-none z-0">
-                    <div className="container-xl mx-auto">
-                        <div className="max-w-4xl mx-auto h-px bg-border/50"></div>
-                    </div>
-                </div>
                 <div className="container-xl relative" style={{ zIndex: 2 }}>
                     {/* Header Section */}
                     <div className="text-center mb-16">
@@ -88,7 +72,7 @@ const Projects = () => {
                         <Button
                             variant={filter === 'all' ? 'default' : 'outline'}
                             onClick={() => setFilter('all')}
-                            className="transition-all rounded-lg font-mono border-primary/50"
+                            className="rounded-lg font-mono border-primary/50 transition-[border-color,background-color,color] duration-200"
                         >
                             <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
                             --all
@@ -96,7 +80,7 @@ const Projects = () => {
                         <Button
                             variant={filter === 'featured' ? 'default' : 'outline'}
                             onClick={() => setFilter('featured')}
-                            className="transition-all rounded-lg font-mono border-primary/50"
+                            className="rounded-lg font-mono border-primary/50 transition-[border-color,background-color,color] duration-200"
                         >
                             <HugeiconsIcon icon={StarIcon} className="mr-2 h-4 w-4" />
                             --featured
@@ -104,7 +88,7 @@ const Projects = () => {
                     </div>
 
                     {/* Projects Grid - 2 Columns */}
-                    <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 md:px-8 scroll-reveal" ref={gridRef}>
                         {filteredProjects.map((project) => {
                             const expanded = isExpanded(project.id);
                             const needsTruncation = project.description.length > 120;
@@ -112,28 +96,25 @@ const Projects = () => {
                             return (
                                 <div
                                     key={project.id}
-                                    className="group bg-card/30 backdrop-blur-sm rounded-xl border border-border/30
-                                             hover:border-primary/20 transition-all duration-500 overflow-hidden
-                                             hover:-translate-y-1 hover:scale-[1.02] flex flex-col h-full"
+                                    className="stagger-item group bg-card/30 backdrop-blur-sm rounded-xl border border-border/30
+                                             hover:border-primary/30 overflow-hidden
+                                             flex flex-col h-full
+                                             transition-[border-color] duration-200"
                                 >
                                     {/* Project Image */}
                                     <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5
                                                   h-64 border-b border-border/30">
                                         {/* Corner Frame Brackets - Only visible on active project */}
                                         {filteredProjects.indexOf(project) === activeProjectIndex && (
-                                            <div className="absolute inset-0 pointer-events-none z-10 animate-in fade-in duration-700">
+                                            <div className="absolute inset-0 pointer-events-none z-10 animate-in fade-in duration-300">
                                                 {/* Top-left corner */}
-                                                <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary 
-                                                             transition-all duration-700 ease-out"></div>
+                                                <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary"></div>
                                                 {/* Top-right corner */}
-                                                <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-primary
-                                                             transition-all duration-700 ease-out"></div>
+                                                <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-primary"></div>
                                                 {/* Bottom-left corner */}
-                                                <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-primary
-                                                             transition-all duration-700 ease-out"></div>
+                                                <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-primary"></div>
                                                 {/* Bottom-right corner */}
-                                                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary
-                                                             transition-all duration-700 ease-out"></div>
+                                                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary"></div>
                                             </div>
                                         )}
 
@@ -143,12 +124,12 @@ const Projects = () => {
                                                     src={project.image}
                                                     alt={`${project.title} preview`}
                                                     className={`w-full h-full object-cover
-                                                             transition-all duration-700 ease-out
+                                                             transition-[filter] duration-300 ease-out
                                                              ${filteredProjects.indexOf(project) === activeProjectIndex ? '' : 'grayscale'}`}
                                                 />
                                                 {/* Gradient Overlay */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent
-                                                              opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                                              opacity-0 group-hover:opacity-100 transition-opacity duration-250"></div>
                                             </>
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center">
@@ -180,7 +161,7 @@ const Projects = () => {
                                                 <div className="flex items-center gap-2 mb-2">
                                                     <HugeiconsIcon icon={CodeIcon} className="h-5 w-5 text-primary flex-shrink-0" />
                                                     <h3 className="text-lg sm:text-2xl font-mono font-bold text-foreground
-                                                                 group-hover:text-primary transition-colors duration-300">
+                                                                 group-hover:text-primary transition-colors duration-200">
                                                         {project.title}
                                                     </h3>
                                                 </div>
@@ -194,7 +175,7 @@ const Projects = () => {
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground
-                                                                 transition-all duration-300 hover:scale-110"
+                                                                 transition-[background-color,color] duration-200 hover-scale"
                                                         title="View Live Demo"
                                                     >
                                                         <HugeiconsIcon icon={LinkSquare02Icon} className="h-4 w-4" />
@@ -205,7 +186,7 @@ const Projects = () => {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground
-                                                             transition-all duration-300 hover:scale-110"
+                                                             transition-[background-color,color] duration-200 hover-scale"
                                                     title="View Source Code"
                                                 >
                                                     <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
@@ -215,10 +196,10 @@ const Projects = () => {
 
                                         {/* Project Description */}
                                         <div className="mb-5 flex-grow group/desc">
-                                            <p className="text-muted-foreground/90 text-sm sm:text-base leading-relaxed 
-                                                         transition-all duration-300 group-hover/desc:text-foreground/80">
-                                                <span className="text-primary/70 font-mono text-xs sm:text-sm 
-                                                               group-hover/desc:text-primary transition-colors duration-300">
+                                            <p className="text-muted-foreground/90 text-sm sm:text-base leading-relaxed
+                                                         transition-colors duration-200 group-hover/desc:text-foreground/80">
+                                                <span className="text-primary/70 font-mono text-xs sm:text-sm
+                                                               group-hover/desc:text-primary transition-colors duration-200">
                                                     {'// '}
                                                 </span>
                                                 <span className="font-light tracking-wide">
@@ -289,8 +270,8 @@ const Projects = () => {
                                                         <div
                                                             key={index}
                                                             className="flex items-center gap-1.5 px-2.5 py-1.5 bg-background/50 border border-border/60
-                                                                     rounded-lg hover:border-primary/50 hover:bg-primary/5 hover:scale-105 
-                                                                     transition-all duration-200 cursor-default shadow-sm"
+                                                                     rounded-lg hover:border-primary/50 hover:bg-primary/5 hover-scale
+                                                                     transition-[border-color,background-color] duration-200 cursor-default shadow-sm"
                                                         >
                                                             <img
                                                                 src={`https://cdn.simpleicons.org/${techInfo.logo}/${techInfo.color}`}
@@ -303,8 +284,8 @@ const Projects = () => {
                                                         <span
                                                             key={index}
                                                             className="text-xs font-mono text-primary/80 bg-primary/10 px-2.5 py-1.5
-                                                                     rounded-lg border border-primary/20 hover:bg-primary/20 hover:scale-105
-                                                                     transition-all duration-200 cursor-default"
+                                                                     rounded-lg border border-primary/20 hover:bg-primary/20 hover-scale
+                                                                     transition-[background-color] duration-200 cursor-default"
                                                         >
                                                             {tech}
                                                         </span>
@@ -324,7 +305,7 @@ const Projects = () => {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="transition-all rounded-lg font-mono border-primary/50 hover:border-primary"
+                                className="rounded-lg font-mono border-primary/50 hover:border-primary transition-[border-color] duration-200"
                             >
                                 <HugeiconsIcon icon={GithubIcon} className="mr-2 h-4 w-4" />
                                 git clone --all-repos
