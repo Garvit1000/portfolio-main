@@ -19,12 +19,31 @@ const Projects = () => {
             ? projects.filter(project => project.featured)
             : projects;
 
-    // Auto-cycle through projects for grayscale animation
+    // Auto-cycle through projects — paused while user scrolls to avoid
+    // competing with scroll/reveal animations on the main thread.
     useEffect(() => {
-        const interval = setInterval(() => {
+        let interval;
+        let scrollTimeout;
+        let scrolling = false;
+
+        const tick = () => {
+            if (scrolling || document.hidden) return;
             setActiveProjectIndex((prev) => (prev + 1) % filteredProjects.length);
-        }, 3000); // Change every 3 seconds
-        return () => clearInterval(interval);
+        };
+
+        const onScroll = () => {
+            scrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => { scrolling = false; }, 200);
+        };
+
+        interval = setInterval(tick, 3000);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => {
+            clearInterval(interval);
+            clearTimeout(scrollTimeout);
+            window.removeEventListener('scroll', onScroll);
+        };
     }, [filteredProjects.length]);
 
     const toggleExpanded = (projectId) => {
@@ -96,7 +115,7 @@ const Projects = () => {
                             return (
                                 <div
                                     key={project.id}
-                                    className="stagger-item group bg-card/30 backdrop-blur-sm rounded-xl border border-border/30
+                                    className="stagger-item group bg-card/60 rounded-xl border border-border/30
                                              hover:border-primary/30 overflow-hidden
                                              flex flex-col h-full
                                              transition-[border-color] duration-200"
@@ -104,19 +123,19 @@ const Projects = () => {
                                     {/* Project Image */}
                                     <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5
                                                   h-64 border-b border-border/30">
-                                        {/* Corner Frame Brackets - Only visible on active project */}
-                                        {filteredProjects.indexOf(project) === activeProjectIndex && (
-                                            <div className="absolute inset-0 pointer-events-none z-10 animate-in fade-in duration-300">
-                                                {/* Top-left corner */}
-                                                <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary"></div>
-                                                {/* Top-right corner */}
-                                                <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-primary"></div>
-                                                {/* Bottom-left corner */}
-                                                <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-primary"></div>
-                                                {/* Bottom-right corner */}
-                                                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary"></div>
-                                            </div>
-                                        )}
+                                        {/* Corner Frame Brackets — always mounted, toggled via opacity */}
+                                        <div
+                                            className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-300 ease-out"
+                                            style={{
+                                                opacity: filteredProjects.indexOf(project) === activeProjectIndex ? 1 : 0,
+                                                willChange: 'opacity',
+                                            }}
+                                        >
+                                            <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary"></div>
+                                            <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-primary"></div>
+                                            <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-primary"></div>
+                                            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary"></div>
+                                        </div>
 
                                         {project.image ? (
                                             <>
@@ -124,8 +143,9 @@ const Projects = () => {
                                                     src={project.image}
                                                     alt={`${project.title} preview`}
                                                     className={`w-full h-full object-cover
-                                                             transition-[filter] duration-300 ease-out
-                                                             ${filteredProjects.indexOf(project) === activeProjectIndex ? '' : 'grayscale'}`}
+                                                             transition-opacity duration-300 ease-out
+                                                             ${filteredProjects.indexOf(project) === activeProjectIndex ? 'opacity-100' : 'opacity-70'}`}
+                                                    style={{ willChange: 'opacity' }}
                                                 />
                                                 {/* Gradient Overlay */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent

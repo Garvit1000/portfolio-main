@@ -1,104 +1,136 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Refresh01Icon } from '@hugeicons/core-free-icons';
 
 /**
- * Pull-to-Refresh component with smooth animations
- * Provides tactile feedback for mobile users
+ * Pull-to-Refresh with jank-free touch handling: transforms are written
+ * directly to DOM in a rAF loop; React state is only updated on gesture end.
  */
 const PullToRefresh = ({ children, onRefresh }) => {
-    const [pullDistance, setPullDistance] = useState(0);
     const [isRefreshing, setIsRefreshing] = useState(false);
-    const [isPulling, setIsPulling] = useState(false);
+    const [pulling, setPulling] = useState(false);
+
     const startY = useRef(0);
-    const containerRef = useRef(null);
-    const threshold = 80; // Pull distance needed to trigger refresh
+    const currentPull = useRef(0);
+    const pendingPull = useRef(0);
+    const rafId = useRef(null);
+
+    const contentRef = useRef(null);
+    const indicatorRef = useRef(null);
+    const iconWrapRef = useRef(null);
+
+    const threshold = 80;
     const maxPull = 120;
 
-    const handleTouchStart = useCallback((e) => {
-        // Only enable pull-to-refresh when at top of page
-        if (window.scrollY <= 0) {
-            startY.current = e.touches[0].clientY;
-            setIsPulling(true);
+    const applyTransforms = useCallback((distance) => {
+        const clamped = Math.min(distance, maxPull);
+        if (contentRef.current) {
+            contentRef.current.style.transform = `translate3d(0, ${clamped}px, 0)`;
+        }
+        if (indicatorRef.current) {
+            indicatorRef.current.style.transform =
+                `translate3d(-50%, ${clamped - 60}px, 0)`;
+            indicatorRef.current.style.opacity =
+                clamped > 10 ? String(Math.min(clamped / threshold, 1)) : '0';
+        }
+        if (iconWrapRef.current) {
+            iconWrapRef.current.style.transform = `rotate(${clamped * 3}deg)`;
         }
     }, []);
 
+    const scheduleFrame = useCallback(() => {
+        if (rafId.current != null) return;
+        rafId.current = requestAnimationFrame(() => {
+            rafId.current = null;
+            currentPull.current = pendingPull.current;
+            applyTransforms(currentPull.current);
+        });
+    }, [applyTransforms]);
+
+    const animateTo = useCallback((target, duration = 300) => {
+        const from = currentPull.current;
+        const start = performance.now();
+        const ease = (t) => 1 - Math.pow(1 - t, 3);
+        const step = (now) => {
+            const t = Math.min((now - start) / duration, 1);
+            const value = from + (target - from) * ease(t);
+            currentPull.current = value;
+            applyTransforms(value);
+            if (t < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }, [applyTransforms]);
+
+    const handleTouchStart = useCallback((e) => {
+        if (window.scrollY > 0) return;
+        startY.current = e.touches[0].clientY;
+        setPulling(true);
+    }, []);
+
     const handleTouchMove = useCallback((e) => {
-        if (!isPulling || isRefreshing) return;
-
-        const currentY = e.touches[0].clientY;
-        const diff = currentY - startY.current;
-
+        if (!pulling || isRefreshing) return;
+        const diff = e.touches[0].clientY - startY.current;
         if (diff > 0 && window.scrollY <= 0) {
-            // Apply resistance to pull
-            const resistance = Math.min(diff * 0.5, maxPull);
-            setPullDistance(resistance);
-
-            // Prevent default scroll when pulling
-            if (diff > 10) {
-                e.preventDefault();
-            }
+            pendingPull.current = Math.min(diff * 0.5, maxPull);
+            if (diff > 10) e.preventDefault();
+            scheduleFrame();
         }
-    }, [isPulling, isRefreshing]);
+    }, [pulling, isRefreshing, scheduleFrame]);
 
     const handleTouchEnd = useCallback(async () => {
-        if (!isPulling) return;
-        setIsPulling(false);
+        if (!pulling) return;
+        setPulling(false);
+        const finalPull = currentPull.current;
 
-        if (pullDistance >= threshold && !isRefreshing) {
+        if (finalPull >= threshold && !isRefreshing) {
             setIsRefreshing(true);
-            setPullDistance(60); // Hold at indicator position
-
+            animateTo(60);
             try {
-                // Trigger refresh callback or default behavior
-                if (onRefresh) {
-                    await onRefresh();
-                } else {
-                    // Default: reload the page after a delay
-                    await new Promise(resolve => setTimeout(resolve, 800));
+                if (onRefresh) await onRefresh();
+                else {
+                    await new Promise((r) => setTimeout(r, 800));
                     window.location.reload();
                 }
-            } catch (error) {
-                console.error('Refresh failed:', error);
+            } catch (err) {
+                console.error('Refresh failed:', err);
             }
-
             setIsRefreshing(false);
         }
+        pendingPull.current = 0;
+        animateTo(0);
+    }, [pulling, isRefreshing, onRefresh, animateTo]);
 
-        // Animate back to top
-        setPullDistance(0);
-    }, [isPulling, pullDistance, isRefreshing, onRefresh]);
+    useEffect(() => () => {
+        if (rafId.current != null) cancelAnimationFrame(rafId.current);
+    }, []);
 
     return (
         <div
-            ref={containerRef}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             className="relative"
-            style={{ touchAction: isPulling && pullDistance > 10 ? 'none' : 'auto' }}
+            style={{ touchAction: pulling ? 'pan-x' : 'auto' }}
         >
-            {/* Pull indicator */}
             <div
+                ref={indicatorRef}
                 className="fixed left-1/2 z-50 flex items-center justify-center pointer-events-none"
                 style={{
-                    transform: `translateX(-50%) translateY(${Math.min(pullDistance, maxPull) - 60}px)`,
-                    opacity: pullDistance > 10 ? Math.min(pullDistance / threshold, 1) : 0,
-                    transition: isPulling ? 'none' : 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transform: 'translate3d(-50%, -60px, 0)',
+                    opacity: 0,
                     top: '60px',
+                    willChange: 'transform, opacity',
                 }}
             >
                 <div
+                    ref={iconWrapRef}
                     className={`
                         w-12 h-12 rounded-full bg-primary/10 backdrop-blur-lg
                         border border-primary/20 flex items-center justify-center
                         shadow-lg shadow-primary/10
                         ${isRefreshing ? 'animate-pulse' : ''}
                     `}
-                    style={{
-                        transform: `rotate(${pullDistance * 3}deg)`,
-                        transition: isPulling ? 'none' : 'transform 0.3s ease-out',
-                    }}
+                    style={{ willChange: 'transform' }}
                 >
                     <HugeiconsIcon
                         icon={Refresh01Icon}
@@ -107,11 +139,11 @@ const PullToRefresh = ({ children, onRefresh }) => {
                 </div>
             </div>
 
-            {/* Content with pull transform */}
             <div
+                ref={contentRef}
                 style={{
-                    transform: `translateY(${pullDistance}px)`,
-                    transition: isPulling ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transform: 'translate3d(0, 0, 0)',
+                    willChange: pulling ? 'transform' : 'auto',
                 }}
             >
                 {children}

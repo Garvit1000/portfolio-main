@@ -26,14 +26,17 @@ export function useScrollReveal(options = {}) {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          // Reveal the container itself
-          entry.target.classList.add('revealed');
-
-          // Stagger children
+          // Stagger via CSS transition-delay so reveals run on the compositor
+          // in a single frame instead of N setTimeout callbacks between frames.
+          const step = options.staggerDelay || 50;
           const items = entry.target.querySelectorAll('.stagger-item');
           items.forEach((item, i) => {
-            const delay = (options.staggerDelay || 50) * i;
-            setTimeout(() => item.classList.add('revealed'), delay);
+            item.style.transitionDelay = `${step * i}ms`;
+          });
+
+          requestAnimationFrame(() => {
+            entry.target.classList.add('revealed');
+            items.forEach((item) => item.classList.add('revealed'));
           });
 
           observer.unobserve(entry.target);

@@ -48,8 +48,6 @@ html {
   scroll-padding-top: 80px;
   overflow-x: hidden;
   overflow-y: scroll;
-  /* Smooth scroll for browsers without Lenis */
-  scroll-behavior: smooth;
 }
 
 body {
@@ -457,11 +455,12 @@ button,
 [role="button"],
 a.inline-block {
   transition: transform 160ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+  backface-visibility: hidden;
 }
 
 button:active,
 [role="button"]:active {
-  transform: scale(0.97);
+  transform: translateZ(0) scale(0.97);
 }
 
 /* Guard hover animations for pointer devices only */
@@ -477,27 +476,33 @@ button:active,
 /* Scroll-triggered reveal animation */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translate3d(0, 12px, 0);
   transition: opacity 400ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
               transform 400ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .scroll-reveal.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 /* Stagger children animation */
 .stagger-item {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translate3d(0, 8px, 0);
   transition: opacity 300ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
               transform 300ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .stagger-item.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 /* Subtle status pulse — replaces aggressive animate-pulse */
