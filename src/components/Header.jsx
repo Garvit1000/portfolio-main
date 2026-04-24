@@ -2,13 +2,15 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Sun01Icon, Moon01Icon, Menu01Icon, Cancel01Icon, ComputerTerminalIcon } from '@hugeicons/core-free-icons';
+import { Sun01Icon, Moon01Icon, Menu01Icon, Cancel01Icon, ComputerTerminalIcon, VolumeHighIcon, VolumeMute02Icon } from '@hugeicons/core-free-icons';
 import { useTheme } from './ThemeProvider';
 import { useState } from 'react';
 import ThemeSelector from './ThemeSelector';
+import { useUiSounds } from './SoundProvider';
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
+  const { enabled: soundEnabled, toggleEnabled: toggleSound } = useUiSounds();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isOnBlogPage = location.pathname.startsWith('/blog');
@@ -85,6 +87,24 @@ const Header = () => {
             <div className="flex items-center space-x-2 lg:space-x-3">
               {/* Theme Selector */}
               <ThemeSelector />
+
+              {/* Sound Toggle */}
+              <Button
+                variant="ghost"
+                size="sm"
+                sound={false}
+                onClick={toggleSound}
+                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                aria-label={soundEnabled ? 'Mute interface sounds' : 'Enable interface sounds'}
+                aria-pressed={soundEnabled}
+                title={soundEnabled ? 'Sounds on' : 'Sounds off'}
+              >
+                {soundEnabled ? (
+                  <HugeiconsIcon icon={VolumeHighIcon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
+                ) : (
+                  <HugeiconsIcon icon={VolumeMute02Icon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
+                )}
+              </Button>
 
               {/* Light/Dark Mode Toggle */}
               <Button

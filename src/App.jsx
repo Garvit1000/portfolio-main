@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { SoundProvider } from "./components/SoundProvider";
 import { Toaster } from "./components/ui/toaster";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -74,19 +75,21 @@ const BlogLayout = () => {
 function App() {
   return (
     <ThemeProvider>
-      <div className="App">
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Portfolio />} />
-            <Route path="/blog" element={<BlogLayout />} />
-            <Route path="/blog/:slug" element={<BlogLayout />} />
-          </Routes>
-        </BrowserRouter>
-        <Toaster />
-        <SpeedInsights />
-        <Analytics />
-      </div>
+      <SoundProvider>
+        <div className="App">
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Portfolio />} />
+              <Route path="/blog" element={<BlogLayout />} />
+              <Route path="/blog/:slug" element={<BlogLayout />} />
+            </Routes>
+          </BrowserRouter>
+          <Toaster />
+          <SpeedInsights />
+          <Analytics />
+        </div>
+      </SoundProvider>
     </ThemeProvider>
   );
 }

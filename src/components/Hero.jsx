@@ -342,6 +342,7 @@ const Hero = () => {
                         <div className="flex flex-wrap gap-4 justify-center scroll-reveal" ref={ctaRef}>
                             <Button
                                 size="lg"
+                                sound="hover"
                                 onClick={() => scrollToSection('projects')}
                                 className="group stagger-item rounded-lg font-mono w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
                             >
@@ -356,6 +357,7 @@ const Hero = () => {
                                 <Button
                                     variant="outline"
                                     size="lg"
+                                    sound="hover"
                                     className="rounded-lg font-mono border-primary/50 hover:border-primary w-full px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg transition-[border-color] duration-200"
                                 >
                                     <HugeiconsIcon icon={Download01Icon} className="mr-2 h-5 w-5" />
