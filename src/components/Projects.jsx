@@ -19,6 +19,19 @@ const Projects = () => {
             ? projects.filter(project => project.featured)
             : projects;
 
+    useEffect(() => {
+        setActiveProjectIndex(0);
+
+        // Reveal any cards that mounted after the initial scroll-reveal fired.
+        // Without this, toggling the filter leaves remounted cards at opacity:0.
+        if (gridRef.current) {
+            gridRef.current.querySelectorAll('.stagger-item:not(.revealed)').forEach(item => {
+                item.style.transitionDelay = '0ms';
+                item.classList.add('revealed');
+            });
+        }
+    }, [filter]);
+
     // Auto-cycle through projects — paused while user scrolls to avoid
     // competing with scroll/reveal animations on the main thread.
     useEffect(() => {
@@ -107,7 +120,7 @@ const Projects = () => {
                     </div>
 
                     {/* Projects Grid - 2 Columns */}
-                    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 md:px-8 scroll-reveal" ref={gridRef}>
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 md:px-8" ref={gridRef}>
                         {filteredProjects.map((project) => {
                             const expanded = isExpanded(project.id);
                             const needsTruncation = project.description.length > 120;

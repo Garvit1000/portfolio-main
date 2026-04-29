@@ -67,7 +67,7 @@ export const projects = [
     liveUrl: "https://motionicons.dev",
     githubUrl: "https://github.com/Garvit1000/motion-icons",
     image: motion,
-    featured: true
+    featured: false
   },
   {
     id: 3,
@@ -77,7 +77,7 @@ export const projects = [
     liveUrl: "https://freshstartai-1.onrender.com/",
     githubUrl: "https://github.com/Garvit1000/freshstartAI",
     image: freshstart,
-    featured: true
+    featured: false
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ export const projects = [
     liveUrl: "https://www.flexhunt.co/",
     githubUrl: "https://github.com/Garvit1000/flexhunt.git",
     image: flexhunt,
-    featured: true
+    featured: false
   },
   {
     id: 5,
@@ -123,7 +123,15 @@ export const projects = [
 
 export const experience = [
   {
-    id: 1,
+    id: 3,
+    company: "Advran Inc",
+    position: "Full Stack Developer",
+    period: "Jan 2026 - Present",
+    description: `- Building and shipping **production features** end-to-end across the stack.
+- Driving **architecture decisions** and partnering with the team on **product direction**.`
+  },
+  {
+    id: 2,
     company: "Founder Flow",
     position: "Founding Web Developer",
     period: "June 2025 - Sept 2025",
