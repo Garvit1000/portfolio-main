@@ -94,7 +94,7 @@ const Header = () => {
                 size="sm"
                 sound={false}
                 onClick={toggleSound}
-                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
                 aria-label={soundEnabled ? 'Mute interface sounds' : 'Enable interface sounds'}
                 aria-pressed={soundEnabled}
                 title={soundEnabled ? 'Sounds on' : 'Sounds off'}
@@ -111,7 +111,7 @@ const Header = () => {
                 variant="ghost"
                 size="sm"
                 onClick={toggleTheme}
-                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? (
@@ -125,7 +125,7 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="md:hidden w-9 h-9 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                className="md:hidden w-9 h-9 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle mobile menu"
               >

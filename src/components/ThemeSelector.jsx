@@ -63,7 +63,7 @@ const ThemeSelector = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 hover:border-primary hover:bg-primary/10 gpu-accelerated transition-all duration-100 rounded-lg"
+                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
                 aria-label="Select theme"
             >
                 <HugeiconsIcon icon={ColorPickerIcon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
