@@ -48,12 +48,16 @@ export function SoundProvider({ children }) {
     }
   }, [enabled]);
 
-  const setEnabled = useCallback((value) => setEnabledState(Boolean(value)), []);
-  const toggleEnabled = useCallback(() => setEnabledState((v) => !v), []);
-
   const [playClickRaw] = useSound(clickSoftSound, { volume: 0.45, interrupt: true });
   const [playHoverRaw] = useSound(hoverTickSound, { volume: 0.25, interrupt: true });
   const [playPopRaw] = useSound(notificationPopSound, { volume: 0.55, interrupt: true });
+
+  const setEnabled = useCallback((value) => setEnabledState(Boolean(value)), []);
+  // Turning sound on plays a pop so it's obvious it worked
+  const toggleEnabled = useCallback(() => {
+    if (!enabled) playPopRaw();
+    setEnabledState(!enabled);
+  }, [enabled, playPopRaw]);
 
   const playClick = useCallback(() => {
     if (enabled) playClickRaw();
@@ -64,6 +68,31 @@ export function SoundProvider({ children }) {
   const playPop = useCallback(() => {
     if (enabled) playPopRaw();
   }, [enabled, playPopRaw]);
+
+  // One delegated listener so every button and link gets feedback,
+  // without wiring sounds into each component.
+  useEffect(() => {
+    if (!enabled) return;
+    const interactive = 'button, a[href], [role="button"], summary';
+    const hoverable = '.btn-ink, .btn-soft, [data-sound-hover]';
+    const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)').matches;
+
+    const onClick = (e) => {
+      const el = e.target.closest?.(interactive);
+      if (el && !el.disabled && !el.closest('[data-sound="off"]')) playClickRaw();
+    };
+    const onOver = (e) => {
+      const el = e.target.closest?.(hoverable);
+      if (el && !el.contains(e.relatedTarget)) playHoverRaw();
+    };
+
+    document.addEventListener('click', onClick, true);
+    if (finePointer) document.addEventListener('mouseover', onOver, true);
+    return () => {
+      document.removeEventListener('click', onClick, true);
+      document.removeEventListener('mouseover', onOver, true);
+    };
+  }, [enabled, playClickRaw, playHoverRaw]);
 
   const value = useMemo(
     () => ({ enabled, setEnabled, toggleEnabled, playClick, playHover, playPop }),

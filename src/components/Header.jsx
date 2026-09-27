@@ -1,188 +1,89 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from './ui/button';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Sun01Icon, Moon01Icon, Menu01Icon, Cancel01Icon, ComputerTerminalIcon, VolumeHighIcon, VolumeMute02Icon } from '@hugeicons/core-free-icons';
-import { useTheme } from './ThemeProvider';
-import { useState } from 'react';
-import ThemeSelector from './ThemeSelector';
+import { Menu01Icon, Cancel01Icon, VolumeHighIcon, VolumeMute02Icon } from '@hugeicons/core-free-icons';
 import { useUiSounds } from './SoundProvider';
 
+const sections = [
+  { id: 'projects', label: 'Projects' },
+  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' },
+];
+
 const Header = () => {
-  const { theme, toggleTheme } = useTheme();
   const { enabled: soundEnabled, toggleEnabled: toggleSound } = useUiSounds();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-  const isOnBlogPage = location.pathname.startsWith('/blog');
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
 
+  const linkClass = 'px-3 py-2 rounded-[10px] text-[15px] font-semibold text-foreground/80 hover:text-foreground hover:bg-white/70 transition-colors';
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 gpu-accelerated">
-      <div className="container-xl">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo with tech styling */}
-            <div className="flex-shrink-0">
-              <Link
-                to="/"
-                className="text-xl font-bold text-foreground hover:text-primary transition-colors font-mono flex items-center"
-              >
-                <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-5 w-5 text-primary" />
-                {'{'}Garvit{'}'}
-              </Link>
-            </div>
+    <header className="sticky top-3 z-50 px-4 pt-3">
+      <div className="nav-shell mx-auto max-w-[720px] px-2 py-2">
+        <div className="flex items-center justify-between gap-2">
+          <Link to="/" className="flex items-center gap-2.5 pl-1.5 pr-2 py-1" onClick={() => setIsMenuOpen(false)}>
+            <img src="/favicon.ico" alt="" className="brand-mark" width="32" height="32" />
+            <span className="font-display font-bold text-lg tracking-[-0.02em]">Garvit Joshi</span>
+          </Link>
 
-            {/* Desktop Navigation with tech styling */}
-            <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
-              {!isOnBlogPage ? (
-                <>
-                  <button
-                    onClick={() => scrollToSection('projects')}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-                  >
-                    ./projects
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('about')}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-                  >
-                    ./about
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('contact')}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-                  >
-                    ./contact
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/"
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-                >
-                  ./home
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
-                </Link>
-              )}
-              <Link
-                to="/blog"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-mono relative group"
-              >
-                ./blog
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-[width] duration-200 group-hover:w-full"></span>
-              </Link>
-            </nav>
+          <nav className="hidden md:flex items-center gap-1">
+            {sections.map((s) => (
+              <button key={s.id} onClick={() => scrollToSection(s.id)} className={linkClass}>
+                {s.label}
+              </button>
+            ))}
+          </nav>
 
-            {/* Theme Selector, Theme Toggle & Mobile Menu with sharp edges */}
-            <div className="flex items-center space-x-2 lg:space-x-3">
-              {/* Theme Selector */}
-              <ThemeSelector />
-
-              {/* Sound Toggle */}
-              <Button
-                variant="ghost"
-                size="sm"
-                sound={false}
-                onClick={toggleSound}
-                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
-                aria-label={soundEnabled ? 'Mute interface sounds' : 'Enable interface sounds'}
-                aria-pressed={soundEnabled}
-                title={soundEnabled ? 'Sounds on' : 'Sounds off'}
-              >
-                {soundEnabled ? (
-                  <HugeiconsIcon icon={VolumeHighIcon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-                ) : (
-                  <HugeiconsIcon icon={VolumeMute02Icon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-                )}
-              </Button>
-
-              {/* Light/Dark Mode Toggle */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleTheme}
-                className="w-9 h-9 lg:w-10 lg:h-10 xl:w-11 xl:h-11 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
-                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-              >
-                {theme === 'light' ? (
-                  <HugeiconsIcon icon={Moon01Icon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-                ) : (
-                  <HugeiconsIcon icon={Sun01Icon} className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6 transition-transform duration-100" />
-                )}
-              </Button>
-
-              {/* Mobile Menu Button */}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="md:hidden w-9 h-9 p-0 border border-primary/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary gpu-accelerated transition-all duration-100 rounded-lg"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle mobile menu"
-              >
-                {isMenuOpen ? (
-                  <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
-                ) : (
-                  <HugeiconsIcon icon={Menu01Icon} className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleSound}
+              className="grid place-items-center h-10 w-10 rounded-[10px] text-foreground/70 hover:text-foreground hover:bg-white/70 transition-colors"
+              aria-label={soundEnabled ? 'Mute interface sounds' : 'Enable interface sounds'}
+              aria-pressed={soundEnabled}
+              title={soundEnabled ? 'Sounds on' : 'Sounds off'}
+            >
+              <HugeiconsIcon icon={soundEnabled ? VolumeHighIcon : VolumeMute02Icon} className="h-[18px] w-[18px]" />
+            </button>
+            <a
+              href="https://drive.google.com/file/d/1OYbuD4SnNmj66oBbIUDphRdyuQofLS5t/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ink hidden sm:inline-flex px-4"
+            >
+              Résumé
+            </a>
+            <button
+              className="md:hidden grid place-items-center h-10 w-10 rounded-[10px] hover:bg-white/70 transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
+              <HugeiconsIcon icon={isMenuOpen ? Cancel01Icon : Menu01Icon} className="h-5 w-5" />
+            </button>
           </div>
-
-          {/* Mobile Navigation with tech styling */}
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-primary/20 bg-background/95 backdrop-blur gpu-accelerated">
-              <div className="max-w-6xl mx-auto px-2 pt-2 pb-3 space-y-1">
-                {!isOnBlogPage ? (
-                  <>
-                    <button
-                      onClick={() => scrollToSection('projects')}
-                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                    >
-                      <span className="text-primary">$ </span>cd ./projects
-                    </button>
-                    <button
-                      onClick={() => scrollToSection('about')}
-                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                    >
-                      <span className="text-primary">$ </span>cd ./about
-                    </button>
-                    <button
-                      onClick={() => scrollToSection('contact')}
-                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                    >
-                      <span className="text-primary">$ </span>cd ./contact
-                    </button>
-                  </>
-                ) : (
-                  <Link
-                    to="/"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                  >
-                    <span className="text-primary">$ </span>cd ./home
-                  </Link>
-                )}
-                <Link
-                  to="/blog"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors w-full text-left font-mono rounded-lg"
-                >
-                  <span className="text-primary">$ </span>cd ./blog
-                </Link>
-              </div>
-            </div>
-          )}
         </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden flex flex-col gap-1 pt-2 mt-2 border-t border-foreground/[0.06]">
+            {sections.map((s) => (
+              <button key={s.id} onClick={() => scrollToSection(s.id)} className={`${linkClass} text-left`}>
+                {s.label}
+              </button>
+            ))}
+            <a
+              href="https://drive.google.com/file/d/1OYbuD4SnNmj66oBbIUDphRdyuQofLS5t/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ink sm:hidden mt-1"
+            >
+              Résumé
+            </a>
+          </div>
+        )}
       </div>
     </header>
   );

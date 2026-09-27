@@ -38,10 +38,10 @@ const buttonVariants = cva(
 const Button = React.forwardRef(
   ({ className, variant, size, asChild = false, sound = true, onClick, onMouseEnter, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    const { playClick, playHover } = useUiSounds()
+    const { playHover } = useUiSounds()
 
+    // Click sounds come from SoundProvider's delegated listener
     const handleClick = (event) => {
-      if (sound && !props.disabled) playClick()
       onClick?.(event)
     }
 

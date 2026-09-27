@@ -1,353 +1,158 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from './ui/button';
+import React, { useState, useEffect } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { GithubIcon, StarIcon, ComputerTerminalIcon, LinkSquare02Icon, ArrowDown01Icon, ArrowUp01Icon, CodeIcon, GitCommitIcon, Image01Icon } from '@hugeicons/core-free-icons';
+import { GithubIcon, LinkSquare02Icon, ArrowRight01Icon, Image01Icon } from '@hugeicons/core-free-icons';
 import { projects } from '../data/mock';
-import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import Scribble from './Scribble';
+import TechPill from './TechPill';
+
+const FILTERS = [
+    { id: 'all', label: 'All' },
+    { id: 'featured', label: 'Featured' },
+];
+
+const ProjectCard = ({ project }) => {
+    const [expanded, setExpanded] = useState(false);
+    const needsTruncation = project.description.length > 140;
+    const description = expanded || !needsTruncation
+        ? project.description
+        : project.description.slice(0, 140).trimEnd() + '…';
+
+    return (
+        <article className="stagger-item surface lift flex flex-col p-2.5 pb-6">
+            <div className="relative overflow-hidden rounded-[14px] aspect-[16/10] bg-white">
+                {project.image ? (
+                    <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                    />
+                ) : (
+                    <div className="h-full w-full grid place-items-center text-muted-foreground">
+                        <HugeiconsIcon icon={Image01Icon} className="h-10 w-10" />
+                    </div>
+                )}
+                {project.featured && (
+                    <span className="pill absolute top-3 left-3 bg-white/85 backdrop-blur text-[13px]">Featured</span>
+                )}
+            </div>
+
+            <div className="flex flex-col flex-grow px-3.5 pt-5">
+                <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-2xl leading-[1.1]">{project.title}</h3>
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
+                        {project.liveUrl && project.liveUrl !== project.githubUrl && (
+                            <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-soft btn-icon h-9 w-9 rounded-[10px]"
+                                aria-label={`Open ${project.title}`}
+                                title="Live site"
+                            >
+                                <HugeiconsIcon icon={LinkSquare02Icon} className="h-4 w-4" />
+                            </a>
+                        )}
+                        <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-soft btn-icon h-9 w-9 rounded-[10px]"
+                            aria-label={`${project.title} source code`}
+                            title="Source code"
+                        >
+                            <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
+                        </a>
+                    </div>
+                </div>
+
+                <p className="mt-2.5 text-muted-foreground leading-6 flex-grow">
+                    {description}
+                    {needsTruncation && (
+                        <button
+                            onClick={() => setExpanded(!expanded)}
+                            className="ml-1.5 font-semibold text-foreground underline decoration-foreground/25 underline-offset-4 hover:decoration-foreground"
+                        >
+                            {expanded ? 'Show less' : 'Read more'}
+                        </button>
+                    )}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                    {project.technologies.map((tech) => (
+                        <TechPill key={tech} name={tech} className="text-[13px] px-2.5 py-1.5" />
+                    ))}
+                </div>
+            </div>
+        </article>
+    );
+};
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
-    const [expandedProjects, setExpandedProjects] = useState(new Set());
-    const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-    const sectionRef = useRef(null);
     const gridRef = useScrollReveal({ staggerDelay: 80 });
 
-    const filteredProjects = filter === 'all'
-        ? projects
-        : filter === 'featured'
-            ? projects.filter(project => project.featured)
-            : projects;
+    const filteredProjects = filter === 'featured'
+        ? projects.filter(project => project.featured)
+        : projects;
 
+    // Reveal cards that mount after the initial scroll-reveal already fired
     useEffect(() => {
-        setActiveProjectIndex(0);
-
-        // Reveal any cards that mounted after the initial scroll-reveal fired.
-        // Without this, toggling the filter leaves remounted cards at opacity:0.
-        if (gridRef.current) {
-            gridRef.current.querySelectorAll('.stagger-item:not(.revealed)').forEach(item => {
-                item.style.transitionDelay = '0ms';
-                item.classList.add('revealed');
-            });
-        }
+        gridRef.current?.querySelectorAll('.stagger-item:not(.revealed)').forEach(item => {
+            item.style.transitionDelay = '0ms';
+            item.classList.add('revealed');
+        });
     }, [filter]);
 
-    // Auto-cycle through projects — paused while user scrolls to avoid
-    // competing with scroll/reveal animations on the main thread.
-    useEffect(() => {
-        let interval;
-        let scrollTimeout;
-        let scrolling = false;
-
-        const tick = () => {
-            if (scrolling || document.hidden) return;
-            setActiveProjectIndex((prev) => (prev + 1) % filteredProjects.length);
-        };
-
-        const onScroll = () => {
-            scrolling = true;
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => { scrolling = false; }, 200);
-        };
-
-        interval = setInterval(tick, 3000);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => {
-            clearInterval(interval);
-            clearTimeout(scrollTimeout);
-            window.removeEventListener('scroll', onScroll);
-        };
-    }, [filteredProjects.length]);
-
-    const toggleExpanded = (projectId) => {
-        const newExpanded = new Set(expandedProjects);
-        if (newExpanded.has(projectId)) {
-            newExpanded.delete(projectId);
-        } else {
-            newExpanded.add(projectId);
-        }
-        setExpandedProjects(newExpanded);
-    };
-
-    const isExpanded = (projectId) => expandedProjects.has(projectId);
-
-    const truncateText = (text, maxLength = 120) => {
-        if (text.length <= maxLength) return text;
-        return text.slice(0, maxLength) + '...';
-    };
-
     return (
-        <>
-            <section id="projects" className="py-20 tech-section relative" ref={sectionRef}>
-                <div className="container-xl relative" style={{ zIndex: 2 }}>
-                    {/* Header Section */}
-                    <div className="text-center mb-16">
-                        <div className="space-y-6">
-                            <div className="mb-4">
+        <section id="projects" className="container-xl py-20 sm:py-28">
+            <div className="text-center mb-10">
+                <h2 className="section-title">
+                    Things I've <Scribble>shipped</Scribble>
+                </h2>
+                <p className="section-lede mt-4 max-w-xl mx-auto">
+                    Libraries, tools and products, built end to end and used by real people.
+                </p>
 
-                            </div>
-                            <div className="relative">
-                                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
-                                    Featured{' '}
-                                    <span className="text-primary tech-text-glow inline-block">
-                                        Projects
-                                    </span>
-                                </h2>
-                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
-                                              h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Filter Buttons */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-12">
-                        <Button
-                            variant={filter === 'all' ? 'default' : 'outline'}
-                            onClick={() => setFilter('all')}
-                            className="rounded-lg font-mono border-primary/50 transition-[border-color,background-color,color] duration-200"
+                <div className="mt-7 inline-flex p-1 rounded-[14px] bg-foreground/[0.05] shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)]">
+                    {FILTERS.map((f) => (
+                        <button
+                            key={f.id}
+                            onClick={() => setFilter(f.id)}
+                            aria-pressed={filter === f.id}
+                            className={`px-4 py-2 rounded-[10px] text-[15px] font-semibold transition-[background-color,color,box-shadow] duration-200 ${filter === f.id
+                                ? 'bg-white text-foreground shadow-[0_2px_1px_rgba(0,0,0,0.05),inset_0_-2px_2px_rgba(0,0,0,0.06)]'
+                                : 'text-muted-foreground hover:text-foreground'
+                                }`}
                         >
-                            <HugeiconsIcon icon={ComputerTerminalIcon} className="mr-2 h-4 w-4" />
-                            --all
-                        </Button>
-                        <Button
-                            variant={filter === 'featured' ? 'default' : 'outline'}
-                            onClick={() => setFilter('featured')}
-                            className="rounded-lg font-mono border-primary/50 transition-[border-color,background-color,color] duration-200"
-                        >
-                            <HugeiconsIcon icon={StarIcon} className="mr-2 h-4 w-4" />
-                            --featured
-                        </Button>
-                    </div>
-
-                    {/* Projects Grid - 2 Columns */}
-                    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 md:px-8" ref={gridRef}>
-                        {filteredProjects.map((project) => {
-                            const expanded = isExpanded(project.id);
-                            const needsTruncation = project.description.length > 120;
-
-                            return (
-                                <div
-                                    key={project.id}
-                                    className="stagger-item group bg-card/60 rounded-xl border border-border/30
-                                             hover:border-primary/30 overflow-hidden
-                                             flex flex-col h-full
-                                             transition-[border-color] duration-200"
-                                >
-                                    {/* Project Image */}
-                                    <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5
-                                                  h-64 border-b border-border/30">
-                                        {/* Corner Frame Brackets — always mounted, toggled via opacity */}
-                                        <div
-                                            className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-300 ease-out"
-                                            style={{
-                                                opacity: filteredProjects.indexOf(project) === activeProjectIndex ? 1 : 0,
-                                                willChange: 'opacity',
-                                            }}
-                                        >
-                                            <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary"></div>
-                                            <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-primary"></div>
-                                            <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-primary"></div>
-                                            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary"></div>
-                                        </div>
-
-                                        {project.image ? (
-                                            <>
-                                                <img
-                                                    src={project.image}
-                                                    alt={`${project.title} preview`}
-                                                    className={`w-full h-full object-cover
-                                                             transition-opacity duration-300 ease-out
-                                                             ${filteredProjects.indexOf(project) === activeProjectIndex ? 'opacity-100' : 'opacity-70'}`}
-                                                    style={{ willChange: 'opacity' }}
-                                                />
-                                                {/* Gradient Overlay */}
-                                                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent
-                                                              opacity-0 group-hover:opacity-100 transition-opacity duration-250"></div>
-                                            </>
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center">
-                                                <div className="text-center">
-                                                    <HugeiconsIcon icon={Image01Icon} className="mx-auto mb-2 text-primary/40 h-12 w-12" />
-                                                    <p className="text-sm font-mono text-primary/60">
-                                                        project preview
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {/* Featured Badge */}
-                                        {project.featured && (
-                                            <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground
-                                                          px-3 py-1.5 rounded-full text-xs font-mono font-semibold
-                                                          flex items-center gap-1.5 shadow-lg">
-                                                <HugeiconsIcon icon={StarIcon} className="h-3.5 w-3.5 fill-current" />
-                                                Featured
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Card Content */}
-                                    <div className="p-6 flex flex-col flex-grow">
-                                        {/* Project Header */}
-                                        <div className="flex items-start justify-between gap-4 mb-4">
-                                            <div className="flex-1">
-                                                <div className="flex items-center gap-2 mb-2">
-                                                    <HugeiconsIcon icon={CodeIcon} className="h-5 w-5 text-primary flex-shrink-0" />
-                                                    <h3 className="text-lg sm:text-2xl font-mono font-bold text-foreground
-                                                                 group-hover:text-primary transition-colors duration-200">
-                                                        {project.title}
-                                                    </h3>
-                                                </div>
-                                            </div>
-
-                                            {/* Action Links */}
-                                            <div className="flex items-center gap-2 flex-shrink-0">
-                                                {project.liveUrl && (
-                                                    <a
-                                                        href={project.liveUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground
-                                                                 transition-[background-color,color] duration-200 hover-scale"
-                                                        title="View Live Demo"
-                                                    >
-                                                        <HugeiconsIcon icon={LinkSquare02Icon} className="h-4 w-4" />
-                                                    </a>
-                                                )}
-                                                <a
-                                                    href={project.githubUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground
-                                                             transition-[background-color,color] duration-200 hover-scale"
-                                                    title="View Source Code"
-                                                >
-                                                    <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        {/* Project Description */}
-                                        <div className="mb-5 flex-grow group/desc">
-                                            <p className="text-muted-foreground/90 text-sm sm:text-base leading-relaxed
-                                                         transition-colors duration-200 group-hover/desc:text-foreground/80">
-                                                <span className="text-primary/70 font-mono text-xs sm:text-sm
-                                                               group-hover/desc:text-primary transition-colors duration-200">
-                                                    {'// '}
-                                                </span>
-                                                <span className="font-light tracking-wide">
-                                                    {expanded ? project.description : truncateText(project.description)}
-                                                </span>
-                                            </p>
-
-                                            {needsTruncation && (
-                                                <button
-                                                    onClick={() => toggleExpanded(project.id)}
-                                                    className="mt-2 text-xs font-mono text-primary hover:text-primary/80
-                                                             transition-colors flex items-center gap-1.5 group/btn"
-                                                >
-                                                    {expanded ? (
-                                                        <>
-                                                            <HugeiconsIcon icon={ArrowUp01Icon} className="h-3.5 w-3.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                                                            show less
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            <HugeiconsIcon icon={ArrowDown01Icon} className="h-3.5 w-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
-                                                            show more
-                                                        </>
-                                                    )}
-                                                </button>
-                                            )}
-                                        </div>
-
-                                        {/* Technologies */}
-                                        <div className="space-y-2">
-                                            <div className="flex items-center gap-2">
-                                                <HugeiconsIcon icon={GitCommitIcon} className="h-3.5 w-3.5 text-primary" />
-                                                <span className="text-xs font-mono text-muted-foreground font-semibold">
-                                                    Tech Stack
-                                                </span>
-                                            </div>
-                                            <div className="flex flex-wrap gap-2">
-                                                {project.technologies.map((tech, index) => {
-                                                    // Map tech names to logo identifiers
-                                                    const techMap = {
-                                                        'React': { logo: 'react', color: '61DAFB' },
-                                                        'JavaScript': { logo: 'javascript', color: 'F7DF1E' },
-                                                        'TypeScript': { logo: 'typescript', color: '3178C6' },
-                                                        'Typescript': { logo: 'typescript', color: '3178C6' },
-                                                        'Tailwind CSS': { logo: 'tailwindcss', color: '06B6D4' },
-                                                        'Shadcn': { logo: 'react', color: '000000' },
-                                                        'shadcn': { logo: 'react', color: '000000' },
-                                                        'shadcn/ui': { logo: 'react', color: '000000000' },
-                                                        'Node.js': { logo: 'nodedotjs', color: '339933' },
-                                                        'Express': { logo: 'express', color: '000000' },
-                                                        'MongoDB': { logo: 'mongodb', color: '47A248' },
-                                                        'PostgrSql': { logo: 'postgresql', color: '4169E1' },
-                                                        'PostgreSQL': { logo: 'postgresql', color: '4169E1' },
-                                                        'Firebase': { logo: 'firebase', color: 'FFCA28' },
-                                                        'CSS': { logo: 'css3', color: '1572B6' },
-                                                        'CSS3': { logo: 'css3', color: '1572B6' },
-                                                        'HTML5': { logo: 'html5', color: 'E34F26' },
-                                                        'HTML': { logo: 'html5', color: 'E34F26' },
-                                                        'CLI': { logo: 'gnubash', color: '4EAA25' },
-                                                        'REST API': { logo: 'fastapi', color: '009688' },
-                                                        'Expo': { logo: 'expo', color: '000020' },
-                                                        'ReactNative': { logo: 'react', color: '61DAFB' }
-                                                    };
-
-                                                    const techInfo = techMap[tech];
-
-                                                    return techInfo ? (
-                                                        <div
-                                                            key={index}
-                                                            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-background/50 border border-border/60
-                                                                     rounded-lg hover:border-primary/50 hover:bg-primary/5 hover-scale
-                                                                     transition-[border-color,background-color] duration-200 cursor-default shadow-sm"
-                                                        >
-                                                            <img
-                                                                src={`https://cdn.simpleicons.org/${techInfo.logo}/${techInfo.color}`}
-                                                                alt={tech}
-                                                                className="w-3.5 h-3.5"
-                                                            />
-                                                            <span className="text-xs font-medium text-foreground">{tech}</span>
-                                                        </div>
-                                                    ) : (
-                                                        <span
-                                                            key={index}
-                                                            className="text-xs font-mono text-primary/80 bg-primary/10 px-2.5 py-1.5
-                                                                     rounded-lg border border-primary/20 hover:bg-primary/20 hover-scale
-                                                                     transition-[background-color] duration-200 cursor-default"
-                                                        >
-                                                            {tech}
-                                                        </span>
-                                                    );
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* View More Button */}
-                    <div className="text-center mt-16">
-                        <Link to="https://github.com/Garvit1000">
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="rounded-lg font-mono border-primary/50 hover:border-primary transition-[border-color] duration-200"
-                            >
-                                <HugeiconsIcon icon={GithubIcon} className="mr-2 h-4 w-4" />
-                                git clone --all-repos
-                            </Button>
-                        </Link>
-                    </div>
+                            {f.label}
+                        </button>
+                    ))}
                 </div>
-            </section>
-        </>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5" ref={gridRef}>
+                {filteredProjects.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                ))}
+            </div>
+
+            <div className="text-center mt-12">
+                <a
+                    href="https://github.com/Garvit1000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ink btn-ink-lg"
+                >
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+                        <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3" />
+                    </svg>
+                    More on GitHub
+                    <HugeiconsIcon icon={ArrowRight01Icon} className="h-5 w-5" />
+                </a>
+            </div>
+        </section>
     );
 };
 

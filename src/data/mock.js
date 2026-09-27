@@ -1,18 +1,22 @@
 // Mock data for Garvit's Portfolio
-import animbits from '../assets/animbits.png'
-import flexhunt from '../assets/flexhunt.png'
+// Project screenshots: 1200px-wide WebP (cards render ~560px, so 2x for retina)
+import animbits from '../assets/animbits.webp'
+import flexhunt from '../assets/flexhunt.webp'
 // import food from '../assets/food.png'
-import nexus from '../assets/nexus.png'
-import freshstart from '../assets/freshstart.png'
-import mindflow from '../assets/mindflow.png'
-import cli from '../assets/cli.png'
-import motion from '../assets/motion.png'
+import nexus from '../assets/nexus.webp'
+import freshstart from '../assets/freshstart.webp'
+// import mindflow from '../assets/mindflow.png'
+import cli from '../assets/cli.webp'
+import motion from '../assets/motion.webp'
+import advranLogo from '../assets/logos/advran.png'
+import founderFlowLogo from '../assets/logos/founderflow.jpg'
+import dtodstintLogo from '../assets/logos/dtodstint-mark.png'
 
 export const personalInfo = {
   name: "Garvit Joshi",
-  title: "Frontend Developer",
+  title: "Full Stack Developer",
   email: "garvitjoshi543@gmail.com",
-  bio: "I’m a frontend dev focused on building responsive, modern web apps that look good and feel smooth. Constantly learning and growing. Currently Full stack developer at Advran",
+  bio: "I’m a full stack developer at Advran, building responsive, modern web apps that look good and feel smooth. Always learning, always shipping.",
   location: "India",
   yearsOfExperience: "1+",
   techStack: [
@@ -125,6 +129,7 @@ export const experience = [
   {
     id: 3,
     company: "Advran Inc",
+    logo: advranLogo,
     position: "Full Stack Developer",
     period: "Jan 2026 - Present",
     description: `- Building and shipping **production features** end-to-end across the stack.
@@ -133,6 +138,7 @@ export const experience = [
   {
     id: 2,
     company: "Founder Flow",
+    logo: founderFlowLogo,
     position: "Founding Web Developer",
     period: "June 2025 - Sept 2025",
     description: `- Developed and launched the **company website**, including a **modern onboarding** and **landing page**.
@@ -145,6 +151,7 @@ export const experience = [
   {
     id: 1,
     company: "Dtodstint Services Pvt Ltd",
+    logo: dtodstintLogo,
     position: "Frontend Developer",
     period: "Dec 2024 - March 2025",
     description: `- Developed and launched the **company website**, including a **modern onboarding** and **landing page**.
@@ -169,7 +176,7 @@ export const socialLinks = [
   },
   {
     name: "Twitter",
-    url: "https://tx.com/Garvit1000",
+    url: "https://x.com/Garvit1000",
     icon: "twitter"
   }
 ];

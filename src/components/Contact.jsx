@@ -1,185 +1,94 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Mail01Icon, Location01Icon, GithubIcon, Linkedin01Icon, NewTwitterIcon, ComputerTerminalIcon, MailSend01Icon, MessageMultiple01Icon } from '@hugeicons/core-free-icons';
-import { Button } from './ui/button';
-import { personalInfo, socialLinks } from '../data/mock';
+import { Mail01Icon, MailSend01Icon } from '@hugeicons/core-free-icons';
+import { personalInfo } from '../data/mock';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import SocialLinks from './SocialLinks';
+import Scribble from './Scribble';
+import { Stamp, Postmark } from './HeroStamps';
+
+// One ruled address line, written in "handwriting"
+const AddressLine = ({ children }) => (
+    <div className="border-b border-foreground/20 pb-1 pt-3 font-hand text-[26px] leading-none text-[#2f4db0] truncate">
+        {children}
+    </div>
+);
 
 const Contact = () => {
-    const sectionRef = useRef(null);
-    const contactRef = useScrollReveal({ staggerDelay: 50 });
-    const statusRef = useScrollReveal();
-
-
-    const getSocialIcon = (iconName) => {
-        switch (iconName) {
-            case 'github':
-                return <HugeiconsIcon icon={GithubIcon} className="h-5 w-5" />;
-            case 'linkedin':
-                return <HugeiconsIcon icon={Linkedin01Icon} className="h-5 w-5" />;
-            case 'twitter':
-                return <HugeiconsIcon icon={NewTwitterIcon} className="h-5 w-5" />;
-            default:
-                return null;
-        }
-    };
+    const cardRef = useScrollReveal();
 
     return (
-        <>
-            <section id="contact" className="py-20 tech-section relative" ref={sectionRef}>
-                <div className="container-xl relative" style={{ zIndex: 2 }}>
-                    {/* Header */}
-                    <div className="text-center mb-16">
-                        <div className="mb-4">
+        <section id="contact" className="container-xl py-20 sm:py-28">
+            <div className="scroll-reveal postcard-frame max-w-4xl mx-auto" ref={cardRef}>
+                <div className="postcard px-6 py-8 sm:px-10 sm:py-10">
+                    <p className="text-center font-display font-bold text-[13px] tracking-[0.5em] text-foreground/45 mb-8">
+                        POST CARD
+                    </p>
 
-                        </div>
-                        <div className="relative">
-                            <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight mb-6">
-                                Get In{' '}
-                                <span className="text-primary tech-text-glow inline-block">
-                                    Touch
-                                </span>
+                    <div className="grid md:grid-cols-[1.25fr_1fr] gap-10 md:gap-0">
+                        {/* Message side */}
+                        <div className="md:pr-10">
+                            <span className="pill">
+                                <span className="h-2 w-2 rounded-full bg-emerald-500 pulse-subtle" />
+                                Available for new projects
+                            </span>
+
+                            <h2 className="section-title mt-5 text-left">
+                                Let's build something <Scribble>together</Scribble>
                             </h2>
-                            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-28 md:w-36
-                                    h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-                        </div>
-                    </div>
 
-                    <div className="max-w-6xl mx-auto px-4 md:px-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                            {/* Left Side - Contact Info */}
-                            <div className="space-y-10 scroll-reveal" ref={contactRef}>
-                                {/* Description */}
-                                <div>
-                                    <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed mb-2">
-                                        <span className="text-primary">{'// '}</span>
-                                        I'm currently available for freelance work, collaborations, and full-time opportunities.
-                                    </p>
-                                    <p className="text-muted-foreground font-mono text-sm sm:text-base leading-relaxed">
-                                        <span className="text-primary">{'// '}</span>
-                                        Let's build something amazing together.
-                                    </p>
-                                </div>
+                            <p className="mt-4 text-[17px] leading-7 text-foreground/75">
+                                I'm open to freelance work, collaborations, and full-time roles.
+                                Write to me about what you're making. I read everything and reply within a day or two.
+                            </p>
 
-                                {/* Contact Info */}
-                                <div className="space-y-6">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <HugeiconsIcon icon={MailSend01Icon} className="h-5 w-5 text-primary" />
-                                        <h3 className="text-xl font-mono font-bold">
-                                            Contact Details
-                                        </h3>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        <div className="flex items-center gap-3">
-                                            <HugeiconsIcon icon={Mail01Icon} className="h-4 w-4 text-primary" />
-                                            <a
-                                                href={`mailto:${personalInfo.email}`}
-                                                className="font-mono text-base hover:text-primary transition-colors"
-                                            >
-                                                {personalInfo.email}
-                                            </a>
-                                        </div>
-
-                                        <div className="flex items-center gap-3">
-                                            <HugeiconsIcon icon={Location01Icon} className="h-4 w-4 text-primary" />
-                                            <span className="font-mono text-base text-muted-foreground">
-                                                {personalInfo.location}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Social Links */}
-                                <div className="space-y-6">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
-                                        <h3 className="text-xl font-mono font-bold">
-                                            Social Networks
-                                        </h3>
-                                    </div>
-
-                                    <p className="text-muted-foreground font-mono text-sm leading-relaxed">
-                                        <span className="text-primary">{'// '}</span>
-                                        Connect with me on various platforms
-                                    </p>
-
-                                    <div className="flex items-center gap-6">
-                                        {socialLinks.map((social) => (
-                                            <a
-                                                key={social.name}
-                                                href={social.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-muted-foreground hover:text-primary
-                                                     p-3 border border-primary/20 hover:border-primary rounded-lg
-                                                     transition-[color,border-color] duration-200"
-                                                aria-label={social.name}
-                                                title={social.name}
-                                            >
-                                                {getSocialIcon(social.icon)}
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div className="mt-7 flex flex-wrap items-center gap-3">
+                                <a href={`mailto:${personalInfo.email}`} className="btn-ink btn-ink-lg">
+                                    <HugeiconsIcon icon={Mail01Icon} className="h-5 w-5" />
+                                    Say hello
+                                </a>
+                                <SocialLinks size={46} />
                             </div>
 
-                            {/* Right Side - Quick Stats / Info */}
-                            <div className="space-y-10 scroll-reveal" ref={statusRef}>
+                            <p className="mt-8 font-hand text-[30px] leading-none text-[#2f4db0] -rotate-2">
+                                Cheers, Garvit
+                            </p>
+                            <p className="mt-3 font-hand text-[21px] leading-snug text-foreground/60">
+                                P.S. always up for chats about web dev, open source, startups &amp; SaaS.
+                            </p>
+                        </div>
 
-                                {/* Current Status */}
-                                <div>
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-3 h-3 bg-green-500 rounded-full pulse-subtle"></div>
-                                        <h3 className="font-mono font-bold text-lg">
-                                            Current Status
-                                        </h3>
-                                    </div>
+                        {/* Address side */}
+                        <div className="relative md:border-l md:border-foreground/15 md:pl-10 min-h-[330px]">
+                            <Stamp
+                                w={112} h={140} rot={5}
+                                className="right-0 top-0 z-10"
+                                art="linear-gradient(160deg, #ffa24c 0%, #ee5a1c 100%)"
+                                caption="Air mail" value="₹5"
+                            >
+                                <HugeiconsIcon icon={MailSend01Icon} className="h-11 w-11 text-white" strokeWidth={1.6} />
+                            </Stamp>
+                            <Postmark
+                                className="right-[64px] top-[62px] w-[170px] z-20"
+                                ring="POSTED WITH CARE ★ ANSWERED FAST ★ "
+                                center={['REPLY', 'PAID']}
+                            />
 
-                                    <div className="space-y-3">
-                                        <p className="text-muted-foreground font-mono text-sm leading-relaxed">
-                                            <span className="text-primary">{'// '}</span>
-                                            Available for new projects
-                                        </p>
-                                        <p className="text-muted-foreground font-mono text-sm leading-relaxed">
-                                            <span className="text-primary">{'// '}</span>
-                                            Open to freelance opportunities
-                                        </p>
-                                        <p className="text-muted-foreground font-mono text-sm leading-relaxed">
-                                            <span className="text-primary">{'// '}</span>
-                                            Interested in full-time roles
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Interests */}
-                                <div>
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <HugeiconsIcon icon={ComputerTerminalIcon} className="h-5 w-5 text-primary" />
-                                        <h3 className="font-mono font-bold text-lg">
-                                            Interested In
-                                        </h3>
-                                    </div>
-
-                                    <div className="flex flex-wrap gap-2">
-                                        {['Web Development', 'Open Source', 'Startups', 'SaaS'].map((interest) => (
-                                            <span
-                                                key={interest}
-                                                className="text-xs font-mono text-primary/80 bg-primary/10 px-3 py-2
-                                                     rounded border border-primary/20 hover:bg-primary/20
-                                                     transition-colors cursor-default"
-                                            >
-                                                {interest}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div className="pt-[178px]">
+                                <p className="text-[13px] font-semibold tracking-[0.2em] text-foreground/45 uppercase">To</p>
+                                <AddressLine>{personalInfo.name}</AddressLine>
+                                <AddressLine>
+                                    <a href={`mailto:${personalInfo.email}`} className="hover:text-[#ff7700] transition-colors">
+                                        {personalInfo.email}
+                                    </a>
+                                </AddressLine>
+                                <AddressLine>Full stack dev, {personalInfo.location}</AddressLine>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 };
 
