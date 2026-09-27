@@ -1,6 +1,5 @@
 /* Shelf-inspired single theme: warm off-white, charcoal ink, rounded type */
 @import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@400;700&family=Caveat:wght@500;600&family=Nunito:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-@import "tw-animate-css";
 
 @tailwind base;
 @tailwind components;
@@ -153,6 +152,27 @@
     padding: 0;
     width: 40px;
     height: 40px;
+  }
+
+  /* Text input / textarea */
+  .field {
+    width: 100%;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 10px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: hsl(var(--foreground));
+    box-shadow: var(--shadow-soft);
+    outline: none;
+    transition: box-shadow 160ms ease, background-color 160ms ease;
+  }
+  .field::placeholder { color: hsl(var(--muted-foreground) / 0.7); }
+  .field:focus-visible {
+    background: #fff;
+    box-shadow: 0 0 0 2px hsl(var(--orange));
+    outline: none;
   }
 
   /* Pill tag */

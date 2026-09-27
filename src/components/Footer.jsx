@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowUp01Icon } from '@hugeicons/core-free-icons';
 import { personalInfo } from '../data/mock';
@@ -11,6 +12,9 @@ const Footer = () => {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
         <p>© {currentYear} {personalInfo.name}. Made with React & Tailwind.</p>
         <div className="flex items-center gap-1">
+          <Link to="/lab" className="px-3 py-2 rounded-[10px] font-semibold hover:text-foreground hover:bg-white/70 transition-colors">
+            Lab
+          </Link>
           <a href="https://github.com/Garvit1000" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-[10px] font-semibold hover:text-foreground hover:bg-white/70 transition-colors">
             GitHub
           </a>

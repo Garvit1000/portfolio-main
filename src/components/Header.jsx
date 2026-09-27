@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Menu01Icon, Cancel01Icon, VolumeHighIcon, VolumeMute02Icon } from '@hugeicons/core-free-icons';
 import { useUiSounds } from './SoundProvider';
@@ -14,10 +14,29 @@ const Header = () => {
   const { enabled: soundEnabled, toggleEnabled: toggleSound } = useUiSounds();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  // On the homepage, scroll; elsewhere (e.g. the Lab), go home to that section
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+    if (pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      return;
+    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const labLink = (extra = '') => (
+    <Link
+      to="/lab"
+      onClick={() => setIsMenuOpen(false)}
+      className={`${linkClass} ${extra} inline-flex items-center gap-1.5 ${pathname.startsWith('/lab') ? 'text-foreground bg-white/70' : ''}`}
+    >
+      Lab
+      <span className="rounded-full bg-[hsl(var(--orange))] px-1.5 py-[1px] text-[10px] font-bold leading-4 text-white">new</span>
+    </Link>
+  );
 
   const linkClass = 'px-3 py-2 rounded-[10px] text-[15px] font-semibold text-foreground/80 hover:text-foreground hover:bg-white/70 transition-colors';
 
@@ -36,6 +55,7 @@ const Header = () => {
                 {s.label}
               </button>
             ))}
+            {labLink()}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -74,6 +94,7 @@ const Header = () => {
                 {s.label}
               </button>
             ))}
+            {labLink('text-left')}
             <a
               href="https://drive.google.com/file/d/1OYbuD4SnNmj66oBbIUDphRdyuQofLS5t/view?usp=sharing"
               target="_blank"

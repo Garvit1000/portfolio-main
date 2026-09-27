@@ -1,234 +1,119 @@
-# Portfolio Website - TweakCN Inspired
+# Garvit Joshi · Portfolio
 
-A modern, responsive portfolio website for **Garvit Joshi** built with React, Vite, and TailwindCSS. Features a comprehensive theming system inspired by TweakCN with multiple theme variants and seamless dark/light mode switching.
+The personal site of **Garvit Joshi**, full stack developer. A warm, postal-themed portfolio with a small **Lab** of free tools people can use in their browser.
 
-## Live Demo
+**Live:** [garvit.me](https://www.garvit.me/)
 
-Visit the live portfolio at [https://www.garvit.me/](#)
+![Preview](public/og-image.png)
 
-## Features
+## What's inside
 
-### Advanced Theming System
-- **8 Unique Themes**: Default, Amber-Minimal, Supabase, Darkmatter, Soft Pop, Candyland, and Twitter
-- **Dark/Light Mode**: Automatic system preference detection with manual toggle
-- **Dynamic CSS Variables**: Real-time theme switching without page refresh
-- **TweakCN Integration**: Complete shadcn/ui component library with custom theme variants
+### Portfolio
+- **Postage-stamp hero.** Perforated stamps drawn in pure CSS (two masks unioned), a postmark with curved ring text, and a hand-drawn scribble that circles a word as it scrolls into view.
+- **Projects** with brand-coloured tech pills and 1200px WebP screenshots.
+- **How I work** cards with illustrated SVG visuals, a **GitHub card**, and an **experience timeline** with company logos.
+- **Air-mail postcard** contact section with a handwritten address and a "REPLY PAID" postmark.
+- **UI sounds** on every button and link through one delegated listener, with a mute toggle.
+- One single theme: warm off-white paper, charcoal ink, Averia Sans Libre headings and rounded body type.
 
-### Modern Design
-- **Fully Responsive**: Mobile-first design with optimized layouts for all devices
-- **GPU Accelerated Animations**: Smooth transitions and hover effects
-- **Tech-Inspired UI**: Terminal-style elements, monospace fonts, and developer aesthetics
-- **Glass Morphism Effects**: Modern backdrop blur and transparency effects
+### Lab
+Free tools that run entirely in the browser. No sign-up and nothing uploaded.
 
-### Developer Features
-- **GitHub Integration**: Live contribution graph from GitHub API
-- **Project Showcase**: Dynamic project cards with live links and technologies
-- **Skills Display**: Organized skill categorization with visual indicators
+- **Postmarked** (`/lab/stamp`). Turn a trip photo into an engraved postage stamp, postmarked from where and when it was taken.
+  - **Engraving:** the photo is redrawn as one-ink line engraving (carmine, ultramarine, olive, sepia or black), with auto-levels and partial histogram equalisation so dark photos keep their detail.
+  - **Self-postmarking:** the capture date and GPS are read from the photo's EXIF in the browser, and the place name comes from an offline list of about 370 cities (`src/data/places.js`). Both are editable, and photos without location data ask you to type it.
+  - **Tear to download:** drag the stamp off the sheet and it rips free with a synthesised paper-tear sound, then saves as a 900 × 1140 PNG with transparent perforations.
+  - **Sheets:** add up to six photos for a sheet of stamps that share perforations, each with its own postmark.
 
-### Technical Stack
-- **Frontend**: React 19, Vite, TailwindCSS
-- **UI Components**: shadcn/ui (complete component library)
-- **Routing**: React Router DOM
-- **Icons**: Lucide React
-- **Animations**: TailwindCSS Animate
-- **Theme Management**: Context API with localStorage persistence
+Lab pages are lazy-loaded, so they add nothing to the homepage bundle.
 
-## Project Structure
+## Tech stack
 
-```
-portfolio-main/
-├── src/
-│   ├── components/          # Reusable React components
-│   │   ├── ui/             # shadcn/ui component library
-│   │   ├── Header.jsx      # Navigation header with theme selector
-│   │   ├── Hero.jsx        # Main hero section with GitHub integration
-│   │   ├── About.jsx       # About section with skills
-│   │   ├── Projects.jsx    # Project showcase grid
-│   │   ├── Contact.jsx     # Contact form
-│   │   ├── Footer.jsx      # Footer with social links
-│   │   ├── ThemeProvider.jsx # Theme context provider
-│   │   └── ThemeSelector.jsx # Theme switching component
-│   ├── data/
-│   │   ├── mock.js         # Portfolio data (projects, experience, etc.)
-│   │   └── themes.js       # Complete theme definitions
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # Utility functions
-│   ├── App.jsx             # Main application component
-│   └── index.jsx           # Application entry point
-├── public/                 # Static assets
-├── components.json         # shadcn/ui configuration
-├── tailwind.config.js      # TailwindCSS configuration
-├── vite.config.js         # Vite build configuration
-└── package.json           # Dependencies and scripts
-```
+| | |
+|---|---|
+| Framework | React 19, React Router 7 |
+| Build | Vite 8 |
+| Styling | Tailwind CSS 3 with CSS variables |
+| Icons | Hugeicons, Simple Icons (CDN) |
+| Scrolling | Lenis |
+| Analytics | Vercel Analytics and Speed Insights |
 
-## Installation & Setup
+## Getting started
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Git
+Requires **Node 20.19+** (or 22.12+).
 
-### Clone & Install
 ```bash
-# Clone the repository
 git clone https://github.com/Garvit1000/portfolio-main.git
 cd portfolio-main
-
-# Install dependencies
-npm install --legacy-peer-deps
-
-# Start development server
+npm install
 npm run dev
 ```
 
-### Environment Configuration
-Create a `.env` file in the root directory:
+The dev server runs at <http://localhost:5173>.
+
+### GitHub card (optional)
+
+With a token, the GitHub card shows the full contribution graph. Without one, it falls back to the public API and shows repo, follower and account-age stats.
 
 ```env
+# .env
 VITE_GITHUB_TOKEN=your_github_personal_access_token
 ```
 
-**Note**: GitHub token is required for the contribution graph feature. Generate one at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+A classic token with no scopes is enough, since it only reads public data. Note that `VITE_` variables are bundled into the client, so never give this token write access.
 
-## Theme System
+## Scripts
 
-### Available Themes
-1. **Default** - Clean and minimal
-2. **Amber-Minimal** - Warm amber accents
-3. **Supabase** - Green-inspired professional
-4. **Darkmatter** - Creative and modern purple
-5. **Soft Pop** - Warm and energetic orange
-6. **Candyland** - Soft and elegant pastels
-7. **Twitter** - Social media inspired with curved elements
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the production build locally |
 
-### Adding Custom Themes
-Add new themes to [`src/data/themes.js`](src/data/themes.js):
+## Project structure
 
-```javascript
-export const themes = {
-  customTheme: {
-    name: "Custom Theme",
-    description: "Your theme description",
-    light: {
-      background: "0 0% 100%",
-      foreground: "0 0% 0%",
-      primary: "your-hsl-values",
-      // ... other CSS variables
-    },
-    dark: {
-      // Dark mode variants
-    }
-  }
-}
+```
+src/
+├── App.jsx                 # Routes: /, /lab, /lab/og-image (others redirect home)
+├── index.css               # Design tokens, surfaces, buttons, stamps, postcard
+├── data/mock.js            # All portfolio content: bio, projects, experience, links
+├── components/
+│   ├── Hero.jsx, HeroStamps.jsx, stamp-art.jsx   # Hero, stamps, postmark, stamp artwork
+│   ├── Projects.jsx, About.jsx, Experience.jsx, Contact.jsx
+│   ├── Scribble.jsx        # Hand-drawn circle highlight
+│   ├── SocialLinks.jsx, TechPill.jsx, GitHubCard.jsx
+│   └── SoundProvider.jsx   # UI sounds
+├── pages/
+│   ├── Lab.jsx             # Lab index (tool cards)
+│   └── StampTool.jsx       # Postmarked: stamp tool UI and tear-off interaction
+├── data/places.js          # Offline city list for turning GPS into a place name
+└── lib/
+    ├── stamp-render.js     # Engraving, stamp layout, postmark and sheet renderer
+    ├── exif.js             # Minimal EXIF reader (capture date + GPS)
+    ├── tear-sound.js       # Synthesised paper-tear sound
+    └── sound-engine.js …   # Synthesised UI sounds
 ```
 
-## Features Breakdown
+## Editing content
 
-### GitHub Integration
-- **Live Contribution Graph**: Fetches real-time data from GitHub API
-- **Repository Stats**: Shows total repositories, followers, and following
-- **Dynamic Visualization**: Interactive contribution calendar
+Almost everything you'd want to change lives in [`src/data/mock.js`](src/data/mock.js): name, title, bio, projects (with images in `src/assets/`), work experience (with logos in `src/assets/logos/`) and social links.
 
-### Project Showcase
-- **Featured Projects**: Highlighted projects with detailed descriptions
-- **Technology Stack**: Visual technology badges for each project
-- **Live Links**: Direct links to deployed projects and GitHub repositories
-- **Responsive Grid**: Adaptive layout for different screen sizes
+Project screenshots should be about 1200px wide WebP files. Anything larger is wasted, because cards render at around 560px.
 
-### Contact System
-- **Multiple Contact Methods**: Email, social links
-- **Social Integration**: LinkedIn, GitHub, and Twitter links
+## Adding to the Lab
 
-## Development Scripts
+To add a new tool, create a page in `src/pages/`, add a lazy route in `App.jsx`, and add an entry (with a `Preview` component for the card) to the `TOOLS` array in [`src/pages/Lab.jsx`](src/pages/Lab.jsx).
 
-```bash
-# Start development server
-npm run dev
+## Deployment
 
-# Build for production
-npm run build
+Deployed on Vercel. `vercel.json` rewrites all routes to `index.html` so deep links like `/lab/og-image` work on refresh.
 
-# Preview production build
-npm run preview
-
-# Run tests
-npm run test
-```
-
-## Responsive Design
-
-- **Mobile First**: Optimized for mobile devices (320px+)
-- **Tablet Support**: Enhanced layouts for tablet sizes (768px+)
-- **Desktop Optimization**: Full desktop experience (1024px+)
-- **Ultra-wide Support**: Support for ultra-wide monitors (1920px+)
-
-## Performance Features
-
-- **Code Splitting**: Lazy loading of components
-- **Optimized Assets**: Compressed images and fonts
-- **Fast Refresh**: Hot module replacement during development
-- **Tree Shaking**: Eliminated unused code in production builds
-
-## Key Components
-
-### ThemeProvider
-Advanced theme management with:
-- Context-based state management
-- Local storage persistence
-- System theme detection
-- Smooth theme transitions
-
-### Hero Section
-- Terminal-style animations
-- Dynamic typing effects
-- GitHub contribution visualization
-- Responsive social links
-
-
-## Security Features
-
-- **Environment Variables**: Secure API key management
-- **Input Validation**: Client-side form validation
-- **External Link Safety**: `rel="noopener noreferrer"` on external links
-
-## Future Enhancements
-
-- [ ] Blog integration with markdown support
-- [ ] Advanced animations with Framer Motion
-- [ ] Progressive Web App (PWA) features
-- [ ] Multi-language support (i18n)
-- [ ] Analytics integration
-- [ ] SEO optimization with meta tags
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+When you change `public/og-image.png`, bump the `?v=` query on the `og:image` URLs in `index.html`. Link previews on Discord, Slack and LinkedIn are cached by URL.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- **shadcn/ui** - For the comprehensive component library
-- **TweakCN** - For theming inspiration and CSS variable system
-- **Lucide React** - For beautiful, consistent icons
-- **Tailwind CSS** - For utility-first CSS framework
-- **Radix UI** - For accessible, unstyled UI primitives
+MIT. See [LICENSE](LICENSE).
 
 ## Contact
 
-**Garvit Joshi**
-- Email: [garvitjoshi543@gmail.com](mailto:garvitjoshi543@gmail.com)
-- LinkedIn: [linkedin.com/in/garvit-joshi1](https://linkedin.com/in/garvit-joshi1)
-- GitHub: [github.com/Garvit1000](https://github.com/Garvit1000)
-- Portfolio: [https://www.garvit.me/](#)
-
----
-
-Built with ❤️ by [Garvit Joshi](https://github.com/Garvit1000)
+**Garvit Joshi** · [garvitjoshi543@gmail.com](mailto:garvitjoshi543@gmail.com) · [LinkedIn](https://linkedin.com/in/garvit-joshi1) · [GitHub](https://github.com/Garvit1000) · [X](https://x.com/Garvit1000)
