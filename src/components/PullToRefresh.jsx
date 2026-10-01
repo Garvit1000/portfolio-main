@@ -25,7 +25,8 @@ const PullToRefresh = ({ children, onRefresh }) => {
     const applyTransforms = useCallback((distance) => {
         const clamped = Math.min(distance, maxPull);
         if (contentRef.current) {
-            contentRef.current.style.transform = `translate3d(0, ${clamped}px, 0)`;
+            // no transform at rest: an idle one would trap the sticky nav's z-index
+            contentRef.current.style.transform = clamped > 0.5 ? `translate3d(0, ${clamped}px, 0)` : '';
         }
         if (indicatorRef.current) {
             indicatorRef.current.style.transform =
@@ -141,10 +142,7 @@ const PullToRefresh = ({ children, onRefresh }) => {
 
             <div
                 ref={contentRef}
-                style={{
-                    transform: 'translate3d(0, 0, 0)',
-                    willChange: pulling ? 'transform' : 'auto',
-                }}
+                style={{ willChange: pulling ? 'transform' : 'auto' }}
             >
                 {children}
             </div>

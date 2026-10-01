@@ -1,6 +1,7 @@
 import React from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { AiBrain01Icon } from '@hugeicons/core-free-icons';
+import { useWorld } from './WorldProvider';
 
 // Simple Icons slug + brand colour for each tech name used in the data
 const TECH_ICONS = {
@@ -31,10 +32,13 @@ const TECH_ICONS = {
 
 const TechPill = ({ name, className = '' }) => {
     const icon = TECH_ICONS[name];
+    const { world } = useWorld();
+    // marks drawn in ink (Express, Vercel, shadcn...) would vanish on black
+    const color = icon && world === 'space' && icon[1] === '3C3A38' ? 'ECE9DC' : icon?.[1];
     return (
         <span className={`pill ${className}`}>
             {icon ? (
-                <img src={`https://cdn.simpleicons.org/${icon[0]}/${icon[1]}`} alt="" className="h-3.5 w-3.5" loading="lazy" />
+                <img src={`https://cdn.simpleicons.org/${icon[0]}/${color}`} alt="" className="h-3.5 w-3.5" loading="lazy" />
             ) : (
                 <HugeiconsIcon icon={AiBrain01Icon} className="h-3.5 w-3.5 text-[#ff7700]" />
             )}

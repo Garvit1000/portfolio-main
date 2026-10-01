@@ -4,6 +4,9 @@ import { Mail01Icon, MailSend01Icon } from '@hugeicons/core-free-icons';
 import { personalInfo } from '../data/mock';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import SocialLinks from './SocialLinks';
+import SpaceContact from './space/SpaceContact';
+import SpaceBlackHole from './space/SpaceBlackHole';
+import { useWorld } from './WorldProvider';
 import Scribble from './Scribble';
 import { Stamp, Postmark } from './HeroStamps';
 
@@ -15,6 +18,11 @@ const AddressLine = ({ children }) => (
 );
 
 const Contact = () => {
+    const { world } = useWorld();
+    return world === 'space' ? <><SpaceBlackHole /><SpaceContact /></> : <PaperContact />;
+};
+
+const PaperContact = () => {
     const cardRef = useScrollReveal();
 
     return (

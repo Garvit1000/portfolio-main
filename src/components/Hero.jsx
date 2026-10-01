@@ -5,8 +5,13 @@ import { personalInfo } from '../data/mock';
 import SocialLinks from './SocialLinks';
 import Scribble from './Scribble';
 import HeroStamps from './HeroStamps';
+import SpaceHero from './space/SpaceHero';
+import { useWorld } from './WorldProvider';
 
 const Hero = () => {
+    const { world } = useWorld();
+    if (world === 'space') return <SpaceHero />;
+
     const scrollToProjects = () => {
         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     };

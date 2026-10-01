@@ -4,6 +4,8 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import GitHubCard from './GitHubCard';
 import Scribble from './Scribble';
 import TechPill from './TechPill';
+import SpaceAbout from './space/SpaceAbout';
+import { useWorld } from './WorldProvider';
 
 /* ---------- Card illustrations ---------- */
 
@@ -131,6 +133,11 @@ const skills = [
 ];
 
 const About = () => {
+    const { world } = useWorld();
+    return world === 'space' ? <SpaceAbout /> : <PaperAbout />;
+};
+
+const PaperAbout = () => {
     const featuresRef = useScrollReveal({ staggerDelay: 70 });
     const githubRef = useScrollReveal();
     const skillsRef = useScrollReveal({ staggerDelay: 30 });

@@ -13,6 +13,16 @@
         <link rel="canonical" href="https://garvit.me/" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
+        <!-- Apply the saved world (paper/space) before first paint -->
+        <script>
+            try {
+                if (localStorage.getItem('portfolio.world') === 'space') {
+                    document.documentElement.classList.add('space');
+                    document.documentElement.style.colorScheme = 'dark';
+                }
+            } catch (e) {}
+        </script>
+
         <!-- Open Graph -->
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Garvit Joshi" />

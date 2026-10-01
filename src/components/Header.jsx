@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Menu01Icon, Cancel01Icon, VolumeHighIcon, VolumeMute02Icon } from '@hugeicons/core-free-icons';
+import { Menu01Icon, Cancel01Icon, VolumeHighIcon, VolumeMute02Icon, VrGlassesIcon } from '@hugeicons/core-free-icons';
 import { useUiSounds } from './SoundProvider';
+import { useWorld } from './WorldProvider';
 
 const sections = [
   { id: 'projects', label: 'Projects' },
@@ -13,6 +14,7 @@ const sections = [
 const Header = () => {
   const { enabled: soundEnabled, toggleEnabled: toggleSound } = useUiSounds();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { world, vr, toggleVr } = useWorld();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -38,15 +40,15 @@ const Header = () => {
     </Link>
   );
 
-  const linkClass = 'px-3 py-2 rounded-[10px] text-[15px] font-semibold text-foreground/80 hover:text-foreground hover:bg-white/70 transition-colors';
+  const linkClass = 'nav-link px-3 py-2 rounded-[10px] text-[15px] font-semibold text-foreground/80 hover:text-foreground hover:bg-white/70 transition-colors';
 
   return (
-    <header className="sticky top-3 z-50 px-4 pt-3">
+    <header className="site-header sticky top-3 z-50 px-4 pt-3">
       <div className="nav-shell mx-auto max-w-[720px] px-2 py-2">
         <div className="flex items-center justify-between gap-2">
           <Link to="/" className="flex items-center gap-2.5 pl-1.5 pr-2 py-1" onClick={() => setIsMenuOpen(false)}>
             <img src="/favicon.ico" alt="" className="brand-mark" width="32" height="32" />
-            <span className="font-display font-bold text-lg tracking-[-0.02em]">Garvit Joshi</span>
+            <span className="brand-name font-display font-bold text-lg tracking-[-0.02em]">Garvit Joshi</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -59,6 +61,17 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2">
+            {world === 'space' && (
+              <button
+                onClick={toggleVr}
+                className={`vr-toggle hidden md:grid place-items-center h-10 w-10 rounded-[10px] transition-colors ${vr ? 'text-foreground bg-white/10' : 'text-foreground/70 hover:text-foreground hover:bg-white/70'}`}
+                aria-label={vr ? 'Take off the VR headset' : 'Look through a VR headset'}
+                aria-pressed={vr}
+                title={vr ? 'VR view on' : 'VR view'}
+              >
+                <HugeiconsIcon icon={VrGlassesIcon} className="h-[19px] w-[19px]" />
+              </button>
+            )}
             <button
               onClick={toggleSound}
               className="grid place-items-center h-10 w-10 rounded-[10px] text-foreground/70 hover:text-foreground hover:bg-white/70 transition-colors"
@@ -72,7 +85,7 @@ const Header = () => {
               href="https://drive.google.com/file/d/1OYbuD4SnNmj66oBbIUDphRdyuQofLS5t/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ink hidden sm:inline-flex px-4"
+              className="nav-resume btn-ink hidden sm:inline-flex px-4"
             >
               Résumé
             </a>

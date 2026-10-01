@@ -2,6 +2,9 @@ import React, { useEffect, lazy, Suspense } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { SoundProvider } from "./components/SoundProvider";
+import { WorldProvider, useWorld } from "./components/WorldProvider";
+import SpacePhysics from "./components/space/SpacePhysics";
+import PeelCorner from "./components/PeelCorner";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
@@ -16,6 +19,9 @@ import { Analytics } from "@vercel/analytics/react";
 // Lab pages load on demand so the homepage bundle stays small
 const Lab = lazy(() => import("./pages/Lab"));
 const StampTool = lazy(() => import("./pages/StampTool"));
+
+// Physics and the porthole frame, space world only
+const SpaceLayer = () => (useWorld().world === "space" ? <SpacePhysics /> : null);
 
 // Reset scroll position on route change
 const ScrollToTop = () => {
@@ -74,20 +80,25 @@ const LabLayout = ({ children }) => {
 function App() {
   return (
     <SoundProvider>
-      <div className="App">
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Portfolio />} />
-            <Route path="/lab" element={<LabLayout><Lab /></LabLayout>} />
-            <Route path="/lab/stamp" element={<LabLayout><StampTool /></LabLayout>} />
-            {/* Old links (e.g. the removed /blog) land on the homepage */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </BrowserRouter>
-        <SpeedInsights />
-        <Analytics />
-      </div>
+      <WorldProvider>
+        <div className="App">
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Portfolio />} />
+              <Route path="/lab" element={<LabLayout><Lab /></LabLayout>} />
+              <Route path="/lab/stamp" element={<LabLayout><StampTool /></LabLayout>} />
+              {/* Old links (e.g. the removed /blog) land on the homepage */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </BrowserRouter>
+          {/* Outside the page wrappers so transforms there can't trap it */}
+          <PeelCorner />
+          <SpaceLayer />
+          <SpeedInsights />
+          <Analytics />
+        </div>
+      </WorldProvider>
     </SoundProvider>
   );
 }

@@ -19,7 +19,7 @@ const markdownComponents = {
     ul: ({ children }) => <ul className="space-y-2">{children}</ul>,
     li: ({ children }) => (
         <li className="relative pl-5 text-[15px] leading-6 text-muted-foreground">
-            <span className="absolute left-1 top-[9px] h-1.5 w-1.5 rounded-full bg-[#ff7700]/70" />
+            <span className="exp-bullet absolute left-1 top-[9px] h-1.5 w-1.5 rounded-full bg-[#ff7700]/70" />
             {children}
         </li>
     ),

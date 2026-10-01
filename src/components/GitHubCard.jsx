@@ -3,12 +3,15 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
 import { socialLinks } from '../data/mock';
 import { BrandIcon } from './SocialLinks';
+import { useWorld } from './WorldProvider';
 
 const githubUrl = socialLinks.find(link => link.icon === 'github')?.url || 'https://github.com/Garvit1000';
 const USERNAME = githubUrl.match(/github\.com\/([^/]+)/)?.[1] || 'Garvit1000';
 
 // GitHub's own contribution palette
 const LEVEL_COLORS = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+// In space the graph reads like a star chart: brighter means busier
+const SPACE_LEVEL_COLORS = ['rgba(255,255,255,0.05)', 'rgba(255,240,220,0.24)', 'rgba(255,240,220,0.46)', 'rgba(255,244,228,0.7)', 'rgba(255,248,238,0.95)'];
 const LEVELS = { NONE: 0, FIRST_QUARTILE: 1, SECOND_QUARTILE: 2, THIRD_QUARTILE: 3, FOURTH_QUARTILE: 4 };
 
 const QUERY = `
@@ -79,7 +82,7 @@ async function fetchGitHub() {
 
 const Stat = ({ value, label }) => (
     <div className="text-center">
-        <div className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.05em]">{value}</div>
+        <div className="gh-stat font-display font-bold text-3xl sm:text-4xl tracking-[-0.05em]">{value}</div>
         <div className="text-sm text-muted-foreground mt-1">{label}</div>
     </div>
 );
@@ -98,10 +101,12 @@ const GitHubCard = () => {
     }, [data]);
 
     const years = data ? new Date().getFullYear() - data.since : null;
+    const { world } = useWorld();
+    const levelColors = world === 'space' ? SPACE_LEVEL_COLORS : LEVEL_COLORS;
 
     return (
         <article className="surface p-2.5 pb-6">
-            <div className="rounded-[14px] bg-white shadow-[inset_0_0_0_1px_rgba(60,58,56,0.06)] px-4 py-6 sm:px-7 sm:py-7">
+            <div className="gh-panel rounded-[14px] bg-white shadow-[inset_0_0_0_1px_rgba(60,58,56,0.06)] px-4 py-6 sm:px-7 sm:py-7">
                 {data?.weeks ? (
                     <>
                         <div ref={graphRef} className="overflow-x-auto" data-lenis-prevent>
@@ -112,7 +117,7 @@ const GitHubCard = () => {
                                             <div
                                                 key={day.date}
                                                 className="h-[11px] w-[11px] rounded-[2.5px] shadow-[inset_0_0_0_1px_rgba(27,31,35,0.06)]"
-                                                style={{ backgroundColor: LEVEL_COLORS[LEVELS[day.contributionLevel] ?? 0] }}
+                                                style={{ backgroundColor: levelColors[LEVELS[day.contributionLevel] ?? 0] }}
                                                 title={`${day.contributionCount} contributions on ${day.date}`}
                                             />
                                         ))}
@@ -124,7 +129,7 @@ const GitHubCard = () => {
                             <span>{data.totalContributions} contributions in the last year</span>
                             <span className="hidden sm:flex items-center gap-1.5">
                                 Less
-                                {LEVEL_COLORS.map((color) => (
+                                {levelColors.map((color) => (
                                     <span key={color} className="h-[11px] w-[11px] rounded-[2.5px]" style={{ backgroundColor: color }} />
                                 ))}
                                 More

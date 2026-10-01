@@ -5,6 +5,9 @@ import { projects } from '../data/mock';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import Scribble from './Scribble';
 import TechPill from './TechPill';
+import SpaceProjects from './space/SpaceProjects';
+import SpaceJourney from './space/SpaceJourney';
+import { useWorld } from './WorldProvider';
 
 const FILTERS = [
     { id: 'all', label: 'All' },
@@ -90,6 +93,11 @@ const ProjectCard = ({ project }) => {
 };
 
 const Projects = () => {
+    const { world } = useWorld();
+    return world === 'space' ? <><SpaceJourney /><SpaceProjects /></> : <PaperProjects />;
+};
+
+const PaperProjects = () => {
     const [filter, setFilter] = useState('all');
     const gridRef = useScrollReveal({ staggerDelay: 80 });
 

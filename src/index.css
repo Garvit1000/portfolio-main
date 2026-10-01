@@ -1,5 +1,5 @@
 /* Shelf-inspired single theme: warm off-white, charcoal ink, rounded type */
-@import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@400;700&family=Caveat:wght@500;600&family=Nunito:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@400;700&family=Caveat:wght@500;600&family=Nunito:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -44,6 +44,36 @@
     --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   }
 
+  /* Space world (dark mode). Same token names, so every component follows. */
+  .space {
+    --background: 0 0% 0%;             /* true black, like the sky in the photos */
+    --foreground: 48 22% 91%;          /* #ece9dc */
+    --card: 225 30% 7%;
+    --card-foreground: 48 22% 91%;
+    --primary: 48 22% 91%;
+    --primary-foreground: 225 44% 4%;
+    --muted: 225 20% 11%;
+    --muted-foreground: 225 8% 64%;
+    --accent: 225 20% 11%;
+    --accent-foreground: 48 22% 91%;
+    --border: 225 14% 16%;
+    --input: 225 14% 16%;
+    --ring: 32 100% 64%;
+    --orange: 32 100% 64%;
+
+    --ink: #ece9dc;
+    --glass: rgba(255, 255, 255, 0.035);
+    --shadow-surface: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 48px -28px rgba(0, 0, 0, 0.9);
+    --shadow-soft: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --shadow-ink: 0 0 0 1px rgba(255, 255, 255, 0.25), 0 8px 24px -8px rgba(255, 220, 170, 0.25);
+
+    --font-display: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  .space body { font-weight: 400; letter-spacing: 0; }
+  .space h1, .space h2, .space h3, .space h4 { font-weight: 500; letter-spacing: -0.035em; }
+  .space ::selection { background-color: rgba(255, 194, 119, 0.3); color: #fff; }
+
   * {
     @apply border-border;
   }
@@ -52,7 +82,7 @@
     background-color: hsl(var(--background));
     color-scheme: light;
     scroll-padding-top: 96px;
-    overflow-x: hidden;
+    overflow-x: clip;
     overflow-y: scroll;
   }
 
@@ -66,7 +96,7 @@
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
     overscroll-behavior: none;
   }
 
@@ -387,6 +417,750 @@
     animation: scribble-draw 1100ms cubic-bezier(0.22, 1, 0.36, 1) 150ms forwards;
   }
 }
+
+/* ================= Space world ================= */
+
+/* Existing components, re-skinned for space */
+.space .nav-shell {
+  background: rgba(8, 10, 18, 0.62);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 12px 32px -16px rgba(0, 0, 0, 0.8);
+}
+/* Nav in space: wide wordmark, light links, quiet résumé button */
+.space .brand-name {
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+.space .nav-link {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: rgba(236, 233, 220, 0.62);
+}
+.space .nav-link:hover { color: #ece9dc; }
+.space .nav-resume.btn-ink {
+  height: 36px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ece9dc;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.space .nav-resume.btn-ink:hover { background: rgba(255, 255, 255, 0.14); }
+.space .btn-ink { background: #ece9dc; color: #000; }
+.space .btn-ink:hover { background: #fff; }
+.space .btn-soft { background: rgba(255, 247, 245, 0.08); color: #ece9dc; }
+.space .btn-soft:hover { background: rgba(255, 247, 245, 0.14); }
+.space .pill { background: rgba(255, 255, 255, 0.05); }
+.space .icon-tile { background: rgba(255, 255, 255, 0.06); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1); }
+.space .field { background: rgba(255, 255, 255, 0.05); color: #ece9dc; }
+/* Interim: solid-white utilities from paper mode become glass until each
+   section gets its own space design */
+.space .bg-white,
+.space .bg-white\/85,
+.space .bg-white\/70 { background-color: rgba(255, 255, 255, 0.09); }
+.space .hover\:bg-white\/70:hover { background-color: rgba(255, 255, 255, 0.08); }
+
+/* Sections in space */
+.space-h2 {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+  color: #ece9dc;
+}
+.space h3 { font-weight: 400; letter-spacing: -0.03em; }
+/* photos sit in a hairline frame and brighten slightly on hover */
+.space-shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  aspect-ratio: 16 / 10;
+  background: #0b0d14;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.space-shot img {
+  transition: transform 900ms var(--ease-out-strong), filter 600ms ease;
+  filter: brightness(0.92);
+}
+.group:hover .space-shot img,
+.space-shot:hover img { transform: scale(1.025); filter: brightness(1); }
+.space-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: rgba(236, 233, 220, 0.6);
+  transition: color 160ms ease;
+}
+.space-link:hover { color: #ece9dc; }
+.space-tab {
+  padding-bottom: 4px;
+  color: rgba(236, 233, 220, 0.45);
+  box-shadow: inset 0 -1px 0 transparent;
+  transition: color 160ms ease, box-shadow 160ms ease;
+}
+.space-tab:hover { color: rgba(236, 233, 220, 0.8); }
+.space-tab.is-active { color: #ece9dc; box-shadow: inset 0 -1px 0 #ece9dc; }
+
+/* Side missions: names only. The one at the centre of the screen lights up.
+   Behind them, Saturn backlit by the Sun (Cassini, 2013), held in view while
+   the list scrolls and drawing slowly closer as you go. */
+.missions-section { position: relative; isolation: isolate; }
+.missions-sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.missions-sky-view {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+}
+.missions-sky-view img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(118vw, 170svh);
+  height: auto;
+  max-width: none;
+  opacity: 0.75;
+  transform: translate3d(-42%, -50%, 0) scale(calc(0.92 + var(--sp, 0) * 0.16));
+  user-select: none;
+}
+/* keep the names readable: darker behind the list, lighter towards the right */
+.missions-sky-view::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.3) 100%),
+    radial-gradient(ellipse at 58% 50%, transparent 30%, #000 85%);
+}
+.mission {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: baseline;
+  padding: clamp(14px, 2.6vh, 28px) 0;
+  border-top: 1px solid rgba(236, 233, 220, 0.07);
+  cursor: default;
+}
+.mission:last-child { border-bottom: 1px solid rgba(236, 233, 220, 0.07); }
+.mission > :not(.mission-index) { grid-column: 2; }
+.mission-index {
+  font-size: 13px;
+  color: rgba(236, 233, 220, 0.25);
+  transition: color 600ms ease;
+}
+.mission-name {
+  font-size: clamp(40px, 6.4vw, 100px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  color: rgba(236, 233, 220, 0.2);
+  transition: color 700ms ease;
+}
+.mission.is-active .mission-index { color: rgba(236, 233, 220, 0.7); }
+.mission.is-active .mission-name { color: #ece9dc; }
+.mission-detail {
+  position: sticky;
+  top: calc(50vh - 150px);
+  display: grid;
+}
+.mission-panel {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 300ms ease, transform 300ms ease, filter 300ms ease;
+}
+.mission-panel.is-active {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  pointer-events: auto;
+  transition: opacity 700ms ease 150ms, transform 900ms cubic-bezier(0.16, 1, 0.3, 1) 150ms, filter 700ms ease 150ms;
+}
+.mission-stat {
+  font-size: clamp(56px, 6vw, 92px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #ece9dc;
+}
+.mission-unit {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: rgba(236, 233, 220, 0.5);
+}
+@media (max-width: 767px) {
+  .mission > div { opacity: 0.35; transition: opacity 600ms ease; }
+  .mission.is-active > div { opacity: 1; }
+  .mission-stat { font-size: 48px; }
+}
+
+/* Journey: a pinned stage. --z opens the window from a framed photo to the
+   full screen; --c0..--cN are each chapter's reading progress (0..1). */
+.journey { position: relative; background: #000; }
+.journey-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+.journey-intro {
+  position: absolute;
+  inset: max(104px, 13svh) 0 auto;
+  z-index: 2;
+  text-align: center;
+  opacity: calc(1 - var(--z, 0) * 2.4);
+  transform: translate3d(0, calc(var(--z, 0) * -70px), 0);
+}
+.journey-intro p { margin-inline: auto; max-width: 28rem; }
+.journey-window {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0b0d14;
+  clip-path: inset(
+    calc((1 - var(--z, 0)) * 40svh)
+    calc((1 - var(--z, 0)) * max(16px, 50vw - 360px))
+    calc((1 - var(--z, 0)) * 7svh)
+    round calc((1 - var(--z, 0)) * 14px)
+  );
+  will-change: clip-path;
+}
+.journey-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* starts pushed in while framed, settles as it opens, then drifts closer while you read */
+  transform: scale(calc(1.22 - var(--z, 0) * 0.22 + var(--k, 0) * 0.09));
+  transition: opacity 1100ms ease;
+  will-change: transform, opacity;
+}
+.journey-photo.is-active { opacity: 1; }
+.journey-veil {
+  position: absolute;
+  inset: 0;
+  opacity: var(--z, 0);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0) 75%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 45%);
+}
+.journey-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  align-content: end;
+  padding-bottom: max(32px, 6svh);
+  opacity: calc((var(--z, 0) - 0.82) * 5.5);
+}
+.journey-chapter {
+  grid-row: 1;
+  grid-column: 1;
+  align-self: end;
+  pointer-events: none;
+}
+.journey-chapter.is-active { pointer-events: auto; }
+.journey-line { overflow: hidden; }
+.journey-line > span {
+  display: inline-block;
+  transform: translate3d(0, 110%, 0);
+  transition: transform 450ms cubic-bezier(0.7, 0, 0.84, 0);
+}
+.journey-chapter.is-active .journey-line > span {
+  transform: none;
+  transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1) 250ms;
+}
+.journey-chapter.is-active h3.journey-line > span { transition-delay: 330ms; }
+.journey-title {
+  padding-bottom: 0.08em;
+  font-size: clamp(46px, 7.4vw, 104px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  color: #ece9dc;
+}
+.journey-fade {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  filter: blur(6px);
+  transition: opacity 350ms ease, transform 350ms ease, filter 350ms ease;
+}
+.journey-chapter.is-active .journey-fade {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: opacity 900ms ease 480ms, transform 1100ms cubic-bezier(0.16, 1, 0.3, 1) 480ms, filter 900ms ease 480ms;
+}
+@media (max-width: 767px) {
+  .journey-veil {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.1) 80%);
+  }
+}
+
+
+/* Black hole: a pinned approach. --p is scroll progress through the scene. */
+.bh { position: relative; height: 340svh; background: #000; }
+.bh-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #000;
+  --out: calc(1 - clamp(0, (var(--p, 0) - 0.86) / 0.12, 1));
+}
+.bh-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(92vmin, 900px);
+  height: auto;
+  aspect-ratio: 1;
+  max-width: none;
+  transform: translate3d(-50%, -50%, 0) scale(calc(0.22 + var(--p, 0) * 1.25));
+  opacity: calc(clamp(0, var(--p, 0) / 0.14, 1) * (1 - clamp(0, (var(--p, 0) - 0.3) / 0.3, 1) * 0.6) * var(--out));
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 71%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 71%);
+  will-change: transform, opacity;
+  pointer-events: none;
+  user-select: none;
+}
+.bh-copy { position: relative; z-index: 1; text-align: center; }
+.bh-step {
+  --s: clamp(0, (var(--p, 0) - var(--from, 0)) / 0.08, 1);
+  opacity: calc(var(--s) * var(--out));
+  transform: translate3d(0, calc((1 - var(--s)) * 18px), 0);
+  filter: blur(calc((1 - var(--s)) * 8px));
+}
+.bh-title {
+  margin-top: 18px;
+  font-size: clamp(64px, 13vw, 168px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: #ece9dc;
+}
+
+/* The site chrome steps back while a full-screen scene owns the view */
+.site-header,
+.peel-dock { transition: opacity 500ms ease, transform 500ms ease; }
+.immersed .site-header { opacity: 0; transform: translateY(-14px); pointer-events: none; }
+.immersed .peel-dock { opacity: 0; pointer-events: none; }
+
+/* Porthole: the space world is seen through a curved window. Rounded
+   corners, a soft vignette, and a deeper one that rises with scroll speed
+   (--speed is set by the physics loop). Opacity only, so it stays cheap. */
+.porthole {
+  position: fixed;
+  inset: 0;
+  z-index: 61;
+  pointer-events: none;
+  border-radius: 22px;
+  box-shadow: 0 0 0 60px #000;
+}
+.porthole::before,
+.porthole::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.porthole::before {
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(236, 233, 220, 0.05);
+}
+.porthole::after {
+  background: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+  opacity: var(--speed, 0);
+}
+@media (max-width: 767px) {
+  .porthole { border-radius: 0; box-shadow: none; }
+  .porthole::before { box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.45); }
+}
+
+/* Zero gravity: the mission names drift, each on its own slow cycle */
+@media (prefers-reduced-motion: no-preference) {
+  .mission-name { animation: zero-g 7s ease-in-out infinite alternate; }
+  .mission:nth-child(2n) .mission-name { animation-duration: 9s; animation-delay: -3s; }
+  .mission:nth-child(3n) .mission-name { animation-duration: 11s; animation-delay: -6s; }
+}
+@keyframes zero-g {
+  0% { transform: translate3d(0, -3px, 0) rotate(-0.25deg); }
+  50% { transform: translate3d(4px, 1px, 0) rotate(0.1deg); }
+  100% { transform: translate3d(-2px, 3px, 0) rotate(0.25deg); }
+}
+
+/* VR headset view (html.vr, desktop): you look out through two lenses.
+   --lens animates 0 -> 1 when the headset goes on, opening the lenses. */
+@property --lens {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+.vr-view {
+  --rx: calc(var(--lens) * 35vw);
+  --ry: calc(var(--lens) * 47vh);
+  position: fixed;
+  inset: 0;
+  z-index: 49; /* under the nav, which floats in the headset like a panel */
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: --lens 1300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease, visibility 0s linear 1300ms;
+}
+.vr-view > div { position: absolute; inset: 0; }
+/* the shell: black everywhere except the two lens openings */
+.vr-shell {
+  background: #000;
+  -webkit-mask-image:
+    radial-gradient(ellipse var(--rx) var(--ry) at 31% 50%, transparent 93%, #000 100%),
+    radial-gradient(ellipse var(--rx) var(--ry) at 69% 50%, transparent 93%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(ellipse var(--rx) var(--ry) at 31% 50%, transparent 93%, #000 100%),
+    radial-gradient(ellipse var(--rx) var(--ry) at 69% 50%, transparent 93%, #000 100%);
+  mask-composite: intersect;
+}
+/* the glass: darker towards the rim, and the slight colour fringe real
+   lenses have at the edge */
+.vr-lens {
+  background:
+    radial-gradient(ellipse var(--rx) var(--ry) at var(--cx) 50%, transparent 62%, rgba(0, 0, 0, 0.55) 93%, transparent 100%),
+    radial-gradient(ellipse var(--rx) var(--ry) at var(--cx) 50%, transparent 86%, rgba(90, 150, 255, 0.07) 89.5%, rgba(255, 110, 70, 0.06) 92%, transparent 94%);
+  /* only where this lens isn't overlapped by the other one, so the inner
+     rims never cross the middle of the view (your eyes fuse that part) */
+  -webkit-mask-image:
+    radial-gradient(ellipse var(--rx) var(--ry) at var(--cx) 50%, #000 92%, transparent 94%),
+    radial-gradient(ellipse var(--rx) var(--ry) at var(--ox) 50%, transparent 80%, #000 96%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(ellipse var(--rx) var(--ry) at var(--cx) 50%, #000 92%, transparent 94%),
+    radial-gradient(ellipse var(--rx) var(--ry) at var(--ox) 50%, transparent 80%, #000 96%);
+  mask-composite: intersect;
+}
+.vr-lens.is-left { --cx: 31%; --ox: 69%; }
+.vr-lens.is-right { --cx: 69%; --ox: 31%; }
+/* Real lenses are only sharp in a sweet spot. Outside it the view softens,
+   then smears into the blind zone at the rim. Two blur layers, each masked
+   to everything outside a sweet spot shared by both lenses. */
+.vr-blur {
+  --sx: calc(var(--rx) * var(--spot));
+  --sy: calc(var(--ry) * var(--spot));
+  -webkit-backdrop-filter: blur(var(--amount)) brightness(var(--dim));
+  backdrop-filter: blur(var(--amount)) brightness(var(--dim));
+  -webkit-mask-image:
+    radial-gradient(ellipse var(--sx) var(--sy) at 31% 50%, transparent 55%, #000 100%),
+    radial-gradient(ellipse var(--sx) var(--sy) at 69% 50%, transparent 55%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(ellipse var(--sx) var(--sy) at 31% 50%, transparent 55%, #000 100%),
+    radial-gradient(ellipse var(--sx) var(--sy) at 69% 50%, transparent 55%, #000 100%);
+  mask-composite: intersect;
+}
+.vr-blur.is-soft { --spot: 0.72; --amount: 2.5px; --dim: 0.92; }
+.vr-blur.is-deep { --spot: 0.95; --amount: 9px; --dim: 0.7; }
+/* screen-door effect: the faint grid between the display's pixels */
+.vr-pixels {
+  opacity: 0.045;
+  background:
+    repeating-linear-gradient(0deg, #000 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+}
+
+/* the nose bridge, rising into the view between the lenses */
+.vr-nose {
+  background: radial-gradient(ellipse calc(var(--lens) * 9vw) calc(var(--lens) * 20vh) at 50% 104%, #000 70%, transparent 100%);
+}
+@media (min-width: 768px) {
+  .space.vr .vr-view {
+    --lens: 1;
+    opacity: 1;
+    visibility: visible;
+    transition: --lens 1300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease, visibility 0s;
+  }
+  .space.vr .porthole { opacity: 0; }
+  .space.vr main { transition: none; }
+}
+
+/* Aurora band: copy on the dark side of the sky */
+.craft-veil {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.1) 80%),
+    linear-gradient(180deg, #000 0%, transparent 22%, transparent 78%, #000 100%);
+}
+@media (max-width: 767px) {
+  .craft-veil { background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.35) 22%, rgba(0, 0, 0, 0.6) 55%, #000 100%); }
+}
+
+.space-contact { background: #000; }
+/* darken the left side for the copy, keep the station and Earth on the right */
+.space-contact-veil {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.82) 38%, rgba(0, 0, 0, 0.2) 75%),
+    linear-gradient(180deg, #000 0%, transparent 18%, transparent 82%, #000 100%);
+}
+
+/* Paper-only flourishes switch off in space */
+.space .scribble > svg { display: none; }
+.space .scribble { margin: 0; }
+.space .exp-bullet { background-color: rgba(236, 233, 220, 0.3); }
+
+/* Quieter components */
+.space .surface {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.space .pill {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  font-weight: 400;
+  color: rgba(236, 233, 220, 0.75);
+}
+/* Inter Tight's semibold is heavy next to the light space type */
+.space .font-semibold,
+.space strong { font-weight: 500; }
+.space .gh-panel.bg-white { background: transparent; box-shadow: none; }
+.space .gh-stat { font-weight: 300; letter-spacing: -0.04em; }
+.space .footer-link { font-weight: 400; }
+.space .footer-mark { font-weight: 300; letter-spacing: -0.06em; color: rgba(236, 233, 220, 0.05); }
+
+/* Type */
+.metal-text {
+  background: linear-gradient(180deg, #8f8f8c 0%, #f1f0e4 68%, #b4b3ad 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Buttons */
+.space-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #ece9dc;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out-strong);
+}
+.space-btn:hover { background: rgba(255, 255, 255, 0.12); }
+.space-btn-primary { background: #ece9dc; color: #0a0b10; box-shadow: none; }
+.space-btn-primary:hover { background: #fff; }
+
+/* Hero */
+.space-hero {
+  min-height: max(100svh, 640px);
+  margin-top: -84px;            /* run under the sticky header */
+  padding-top: 84px;
+  background: #000;
+  --sy: 0;
+}
+/* fade the horizon into the page instead of ending on a hard edge */
+.space-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 22%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
+  pointer-events: none;
+  z-index: 0;
+}
+.space-hero-copy {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(40px, 14vh, 180px);
+  transform: translate3d(0, calc(var(--sy) * -0.1px), 0);
+  opacity: calc(1 - var(--sy) / 700);
+}
+.space-title {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(42px, 8.4vw, 104px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+.space-lede {
+  margin-top: 22px;
+  max-width: 34ch;
+  font-size: clamp(16px, 1.6vw, 19px);
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(236, 233, 220, 0.62);
+}
+/* Earthset (NASA, Artemis II). Its sky is true black, the same as the page,
+   so it needs no blending. Sized off the viewport width and positioned so
+   the lunar horizon (53% down the photo) sits 76% down the hero, with Earth
+   rising just below the copy. Settles in with a slow 1.06x -> 1x scale. */
+.space-earthset {
+  --w: max(100vw, 1100px);
+  position: absolute;
+  left: 50%;
+  top: calc(76% - var(--w) * 0.3553);
+  width: var(--w);
+  height: calc(var(--w) * 0.6667);
+  max-width: none;
+  object-fit: cover;
+  transform: translate3d(-50%, calc(var(--sy) * 0.22px), 0);
+  transform-origin: 47% 53%;
+  animation: earthset-in 3.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  pointer-events: none;
+  user-select: none;
+}
+@keyframes earthset-in {
+  from { opacity: 0; scale: 1.06; }
+  to { opacity: 1; scale: 1; }
+}
+.space-in {
+  animation: space-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes space-in {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ================= Peel toggle ================= */
+
+.peel-corner {
+  position: relative;
+  transition: width 460ms cubic-bezier(0.22, 1, 0.36, 1), height 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+}
+.peel-corner:active { transform: none; }
+.peel-gap,
+.peel-gap::after,
+.peel-flap-shadow,
+.peel-dogear {
+  position: absolute;
+  inset: 0;
+}
+
+/* The gap below the fold (the square's diagonal; 50% in a 135deg gradient).
+   Paper side: a real glimpse of the Earthset photo. Space side: the paper
+   underneath, kept dim because the black sheet is shading it. */
+.peel-gap { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.peel-gap.is-space {
+  background-color: #000;
+  background-size: 400% auto;
+  background-position: 38.7% 35.2%;   /* lands the Earth inside the gap */
+  background-repeat: no-repeat;
+}
+.peel-gap.is-paper { background: #ddd6c8; }
+/* shadow the folded flap casts into the gap, strongest at the crease */
+.peel-gap::after {
+  content: '';
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.12) 64%, transparent 80%);
+}
+.peel-gap.is-paper::after {
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.62) 50%, rgba(0, 0, 0, 0.34) 72%, rgba(0, 0, 0, 0.26) 100%);
+}
+
+/* The flap: the back of the page folded flat over the corner. Lightest at
+   its tip, shading toward the crease; a fine highlight along its free edges
+   reads as paper thickness. */
+.peel-flap-shadow {
+  filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.28)) drop-shadow(-2px -2px 4px rgba(0, 0, 0, 0.07));
+}
+.peel-dogear { clip-path: polygon(0 0, 100% 0, 0 100%); }
+.peel-dogear.is-paper {
+  background: linear-gradient(135deg, #f8f4ec 0%, #efe9dd 28%, #e3dccc 44%, #d3cab6 49.4%, #c4baa4 50%);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.85);
+}
+.peel-dogear.is-space {
+  background: linear-gradient(135deg, #25272e 0%, #1a1c21 28%, #111216 44%, #0a0b0e 49.4%, #050506 50%);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.09);
+}
+.peel-hint {
+  font-size: 13px;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+
+/* The full-page peel, driven by --peel-* custom properties from WorldProvider */
+.peel-flap,
+.peel-shade {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+.peel-shade { view-transition-name: peel-shade; }
+.peel-flap { view-transition-name: peel-flap; }
+
+@keyframes peel-hold { from { opacity: 1; } to { opacity: 1; } }
+
+html.peeling::view-transition-old(root),
+html.peeling::view-transition-new(root) {
+  animation: peel-hold 1.3s linear both;
+  mix-blend-mode: normal;
+}
+html.peeling::view-transition-old(root) { z-index: 2; clip-path: var(--peel-old); }
+html.peeling::view-transition-new(root) { z-index: 1; }
+
+html.peeling::view-transition-group(peel-shade),
+html.peeling::view-transition-group(peel-flap) { animation: none; }
+html.peeling::view-transition-group(peel-shade) { z-index: 3; }
+html.peeling::view-transition-group(peel-flap) {
+  z-index: 4;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+}
+
+/* shadow the lifted sheet casts on the newly revealed world, right by the fold */
+html.peeling::view-transition-new(peel-shade) {
+  animation: peel-hold 1.3s linear both;
+  clip-path: var(--peel-hole);
+  background: linear-gradient(135deg,
+    transparent 0,
+    rgba(0, 0, 0, 0.5) var(--peel-fold),
+    rgba(0, 0, 0, 0.18) calc(var(--peel-fold) + 4%),
+    transparent calc(var(--peel-fold) + 14%));
+}
+
+/* the back of the sheet: brightest along the curl, falling off away from it */
+html.peeling::view-transition-new(peel-flap) {
+  animation: peel-hold 1.3s linear both;
+  clip-path: var(--peel-flap);
+  background: linear-gradient(135deg,
+    #c9bfa8 calc(var(--peel-fold) - 34%),
+    #e6ddc8 calc(var(--peel-fold) - 14%),
+    #fbf7ee calc(var(--peel-fold) - 2.5%),
+    #e2d9c4 var(--peel-fold));
+}
+html.peeling[data-peel-from="space"]::view-transition-new(peel-flap) {
+  background: linear-gradient(135deg,
+    #000 calc(var(--peel-fold) - 34%),
+    #121521 calc(var(--peel-fold) - 14%),
+    #2c3140 calc(var(--peel-fold) - 2.5%),
+    #1a1d28 var(--peel-fold));
+}
+html.peeling::view-transition-old(peel-flap),
+html.peeling::view-transition-old(peel-shade) { display: none; }
 
 @keyframes scribble-draw {
   to { stroke-dashoffset: 0; }
